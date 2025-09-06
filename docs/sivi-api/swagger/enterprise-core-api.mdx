@@ -1,0 +1,20 @@
+---
+title: Enterprise Core API - Testing
+description: Enterprise API Swagger Testing
+sidebar_position: 4
+---
+
+import React from 'react'
+import SwaggerUI from 'swagger-ui-react'
+import 'swagger-ui-react/swagger-ui.css'
+
+<!-- import ThemedSwaggerUI from '@site/src/components/ThemedSwaggerUI'; -->
+
+# Enterprise Core API - Interactive Testing
+
+<SwaggerUI 
+  url="/openapi/sivi-enterprise-api-core-openapi.json" 
+  tryItOutEnabled={false} 
+  docExpansion="list"
+  defaultModelsExpandDepth={-1}
+/>

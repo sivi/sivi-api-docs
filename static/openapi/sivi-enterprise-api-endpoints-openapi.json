@@ -1,0 +1,1331 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Sivi Enterprise API Endpoints - OpenAPI 3.1",
+    "description": "Sivi is an AI designer that helps you generate product banners, ads, and other visual content according to your brand guidelines.",
+    "termsOfService": "https://sivi.ai/terms-of-service",
+    "contact": {
+      "email": "support@sivi.ai"
+    },
+    "version": "2.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://connect.sivi.ai/api/staging/v2"
+    },
+    {
+      "url": "https://connect.sivi.ai/api/prod/v2"
+    }
+  ],
+  "tags": [
+    {
+      "name": "account-management",
+      "description": "Account management endpoints"
+    },
+    {
+      "name": "brand-management",
+      "description": "Brand management endpoints"
+    },
+    {
+      "name": "data-management",
+      "description": "Data management endpoints"
+    }
+  ],
+  "paths": {
+    "/enterprise/login-user": {
+      "post": {
+        "tags": [
+          "account-management"
+        ],
+        "summary": "Login User",
+        "description": "Login user with abstract user ID",
+        "operationId": "loginUser",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "requestBody": {
+          "description": "User login parameters",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginUserRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "body": {
+                      "type": "object",
+                      "properties": {
+                        "accessToken": {
+                          "type": "string",
+                          "example": "97026520-1f1b-11f0-ada0-01392001fe46",
+                          "description": "JWT token for API authentication, valid for 1 hour"
+                        },
+                        "refreshToken": {
+                          "type": "string",
+                          "example": "2342342-1f1b-11f0-ada0-01392001fe46",
+                          "description": "Token that can be used to obtain a new access token"
+                        },
+                        "workspaceId": {
+                          "type": "string",
+                          "example": "765634-2322-34i44sd3-dkfjgdkjf292",
+                          "description": "Unique identifier for the workspace"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid Input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InputError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/enterprise/delete-user": {
+      "post": {
+        "tags": [
+          "account-management"
+        ],
+        "summary": "Delete User",
+        "description": "Delete an existing user and their associated workspace from your enterprise account",
+        "operationId": "deleteUser",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "requestBody": {
+          "description": "User deletion parameters",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteUserRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "body": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "example": "Successfully deleted the user"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 404
+                    },
+                    "body": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "example": "User not found"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/enterprise/reactivate-user": {
+      "post": {
+        "tags": [
+          "account-management"
+        ],
+        "summary": "Reactivate User",
+        "description": "Reactivate a previously deleted user account",
+        "operationId": "reactivateUser",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "requestBody": {
+          "description": "User reactivation parameters",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "abstractUserId"
+                ],
+                "properties": {
+                  "abstractUserId": {
+                    "type": "string",
+                    "example": "user123",
+                    "description": "Identifier for the user in your system"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "body": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "example": "User reactivated successfully"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 404
+                    },
+                    "body": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "example": "User not found"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/enterprise/update-user-plan": {
+      "post": {
+        "tags": [
+          "account-management"
+        ],
+        "summary": "Update User Plan",
+        "description": "Update a user's subscription plan",
+        "operationId": "updateUserPlan",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "requestBody": {
+          "description": "User plan update parameters",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUserPlanRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "body": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "example": "User plan updated successfully"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 404
+                    },
+                    "body": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "example": "User not found"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/enterprise/extract-brand": {
+      "post": {
+        "tags": [
+          "brand-management"
+        ],
+        "summary": "Extract Brand",
+        "description": "Extract brand information from provided assets",
+        "operationId": "extractBrand",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "requestBody": {
+          "description": "Brand extraction parameters",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExtractBrandRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "body": {
+                      "type": "object",
+                      "properties": {
+                        "brandName": {
+                          "type": "string",
+                          "example": "Sivi",
+                          "description": "Extracted name of the brand"
+                        },
+                        "brandDescription": {
+                          "type": "string",
+                          "example": "AI design generator for brands and layered vector based design generation",
+                          "description": "Extracted description or tagline"
+                        },
+                        "brandUrl": {
+                          "type": "string",
+                          "example": "https://sivi.ai",
+                          "description": "Original URL provided in the request"
+                        },
+                        "brandLogo": {
+                          "type": "string",
+                          "example": "https://sivi.ai/sivi-logo.png",
+                          "description": "URL to the extracted logo image"
+                        },
+                        "brandColors": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "example": ["#5662EC", "#EF9AB2"],
+                          "description": "List of extracted brand colors in hex format"
+                        },
+                        "brandFonts": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "example": [],
+                          "description": "List of detected fonts (may be empty if fonts cannot be determined)"
+                        },
+                        "brandPersona": {
+                          "type": "object",
+                          "description": "Brand persona details",
+                          "properties": {
+                            "emotions": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              },
+                              "example": ["happy"],
+                              "description": "List of detected emotions"
+                            },
+                            "industry": {
+                              "type": "string",
+                              "example": "games",
+                              "description": "Detected industry"
+                            },
+                            "audience": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              },
+                              "example": ["working mom", "working dad"],
+                              "description": "List of detected target audience"
+                            },
+                            "designTags": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              },
+                              "example": ["minimal", "time management", "productivity", "health"],
+                              "description": "List of detected design tags"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid Input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InputError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/enterprise/set-brand": {
+      "post": {
+        "tags": [
+          "brand-management"
+        ],
+        "summary": "Set Brand",
+        "description": "Configure and set brand identity settings for a specific user or workspace, including brand colors, fonts, logo",
+        "operationId": "setBrand",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "requestBody": {
+          "description": "Brand setup parameters",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetBrandRequest"
+              }
+            }
+          }
+        }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "body": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "example": "Successfully set the brand details"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid Input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InputError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerError"
+                }
+              }
+            }
+          }
+        }
+    },
+    "/enterprise/account-analysis": {
+      "post": {
+        "tags": [
+          "data-management"
+        ],
+        "summary": "Account Analysis API",
+        "description": "Analyze usage data for specific users, providing valuable insights into platform usage, design generation, and resource consumption",
+        "operationId": "accountAnalysis",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "requestBody": {
+          "description": "Analysis parameters",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AccountAnalysisRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "body": {
+                      "type": "object",
+                      "properties": {
+                        "yearlyAnalysis": {
+                          "type": "object",
+                          "properties": {
+                            "numberOfGeneratedDesignVariations": {
+                              "type": "integer",
+                              "example": 254,
+                              "description": "Total number of design variations generated in the past year"
+                            },
+                            "numberOfEditedDesigns": {
+                              "type": "integer",
+                              "example": 46,
+                              "description": "Total number of designs that were edited"
+                            },
+                            "numberOfDownloadedDesigns": {
+                              "type": "integer",
+                              "example": 24,
+                              "description": "Total number of designs that were downloaded"
+                            },
+                            "numberOfMedia": {
+                              "type": "integer",
+                              "example": 25,
+                              "description": "Number of media items uploaded/used"
+                            },
+                            "mediaSize": {
+                              "type": "string",
+                              "example": "25Mb",
+                              "description": "Total size of media in storage"
+                            }
+                          }
+                        },
+                        "monthlyAnalysis": {
+                          "type": "array",
+                          "description": "Contains monthly breakdown of the same metrics found in YearlyAnalysis",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "numberOfGeneratedDesignVariations": {
+                                "type": "integer",
+                                "example": 54
+                              },
+                              "numberOfEditedDesigns": {
+                                "type": "integer",
+                                "example": 16
+                              },
+                              "numberOfDownloadedDesigns": {
+                                "type": "integer",
+                                "example": 4
+                              },
+                              "numberOfMedia": {
+                                "type": "integer",
+                                "example": 250
+                              },
+                              "mediaSize": {
+                                "type": "string",
+                                "example": "2Mb"
+                              }
+                            }
+                          }
+                        },
+                        "creditBalance": {
+                          "type": "object",
+                          "properties": {
+                            "availableCredits": {
+                              "type": "integer",
+                              "example": 100,
+                              "description": "Number of credits available for the account"
+                            },
+                            "usedCredits": {
+                              "type": "integer",
+                              "example": 20,
+                              "description": "Number of credits consumed"
+                            }
+                          }
+                        },
+                        "lastAccessed": {
+                          "type": "integer",
+                          "example": 1325312222,
+                          "description": "Timestamp of last access"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "User Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 400
+                    },
+                    "body": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "example": "User does not exist"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid Input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InputError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/enterprise/export-data": {
+      "post": {
+        "tags": [
+          "data-management"
+        ],
+        "summary": "Export Data API",
+        "description": "Export design variations, media, and content for specific users within a specified date range",
+        "operationId": "exportData",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "requestBody": {
+          "description": "Export parameters",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExportDataRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "body": {
+                      "type": "object",
+                      "properties": {
+                        "variants": {
+                          "type": "array",
+                          "description": "List of design variants created within the date range",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "variantImageUrl": {
+                                "type": "string",
+                                "example": "https://resources.hellosivi.com/user-data/e5ef6aa0-8d6c-11ec-bd33-8d2f1bec7c21/generated/sg0yMSZzNnU--97026520-1f1b-11f0-ada0-01392001fe46--sh0V7MlzOPm.jpg",
+                                "description": "URL to the generated design image"
+                              },
+                              "variantEditLink": {
+                                "type": "string",
+                                "example": "https://instant.sivi.ai/#/variant/sh0V7MlzOPm/independent-design-editor?type=edited",
+                                "description": "Link to edit the design in Sivi's editor"
+                              },
+                              "variantId": {
+                                "type": "string",
+                                "example": "sh0V7MlzOPm",
+                                "description": "Unique identifier for the variant"
+                              }
+                            }
+                          }
+                        },
+                        "media": {
+                          "type": "array",
+                          "description": "List of media assets uploaded/used within the date range",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "url": {
+                                "type": "string",
+                                "example": "https://resources.hellosivi.com/user-data/e5ef6aa0-8d6c-11ec-bd33-8d2f1bec7c21/generated/media-1.jpg",
+                                "description": "URL to the media asset"
+                              },
+                              "type": {
+                                "type": "string",
+                                "example": "photo",
+                                "description": "Type of media (e.g., 'photo', 'illustration')"
+                              }
+                            }
+                          }
+                        },
+                        "content": {
+                          "type": "array",
+                          "description": "List of content snippets created within the date range",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "title": {
+                                "type": "string",
+                                "example": "heading",
+                                "description": "Content title or heading"
+                              },
+                              "subtitle": {
+                                "type": "string",
+                                "example": "subtitle for this snippet",
+                                "description": "Content subtitle"
+                              },
+                              "bulletlist": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                },
+                                "example": ["1", "2"],
+                                "description": "Array of bullet points"
+                              }
+                            }
+                          }
+                        },
+                        "next": {
+                          "type": "integer",
+                          "example": 0,
+                          "description": "Indicates if more data is available (0 = no more data, 1 = more data available)"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "User Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 400
+                    },
+                    "body": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "example": "User does not exist"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid Input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InputError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "sivi-api-key",
+        "description": "API key authentication"
+      }
+    },
+    "schemas": {
+      "LoginUserRequest": {
+        "type": "object",
+        "required": [
+          "abstractUserId"
+        ],
+        "properties": {
+          "abstractUserId": {
+            "type": "string",
+            "example": "281743-2322-34i44sd3-dkfjgdkjf292",
+            "description": "Unique identifier for the user"
+          },
+          "planId": {
+            "type": "string",
+            "example": "ent-01",
+            "description": "Plan identifier to assign to the user"
+          },
+          "brand": {
+            "type": "object",
+            "description": "Brand details",
+            "properties": {
+              "brandName": {
+                "type": "string",
+                "example": "Sivi",
+                "description": "Brand name"
+              },
+              "brandDescription": {
+                "type": "string",
+                "example": "AI design generator for brands and layered vector based design generation",
+                "description": "Brand description"
+              },
+              "brandUrl": {
+                "type": "string",
+                "example": "https://sivi.ai",
+                "description": "Brand URL"
+              },
+              "brandLogo": {
+                "type": "string",
+                "example": "https://sivi.ai/sivi-logo.png",
+                "description": "Brand logo URL"
+              },
+              "brandColors": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "example": ["#5662EC", "#EF9AB2"],
+                "description": "List of brand colors"
+              },
+              "brandFonts": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "example": ["Inter", "Roboto"],
+                "description": "List of brand fonts"
+              }
+            }
+          }
+        }
+      },
+      "DeleteUserRequest": {
+        "type": "object",
+        "required": [
+          "abstractUserId"
+        ],
+        "properties": {
+          "abstractUserId": {
+            "type": "string",
+            "example": "281743-2322-34i44sd3-dkfjgdkjf292",
+            "description": "Unique identifier for the user to delete"
+          }
+        }
+      },
+      "ReactivateUserRequest": {
+        "type": "object",
+        "required": [
+          "abstractUserId"
+        ],
+        "properties": {
+          "abstractUserId": {
+            "type": "string",
+            "example": "281743-2322-34i44sd3-dkfjgdkjf292",
+            "description": "Unique identifier for the user to reactivate"
+          }
+        }
+      },
+      "UpdateUserPlanRequest": {
+        "type": "object",
+        "required": [
+          "abstractUserId",
+          "planId"
+        ],
+        "properties": {
+          "abstractUserId": {
+            "type": "string",
+            "example": "281743-2322-34i44sd3-dkfjgdkjf292",
+            "description": "Unique identifier for the user"
+          },
+          "planId": {
+            "type": "string",
+            "example": "ent-01",
+            "description": "Plan identifier to assign to the user"
+          }
+        }
+      },
+      "ExtractBrandRequest": {
+        "type": "object",
+        "required": [
+          "abstractUserId"
+        ],
+        "properties": {
+          "abstractUserId": {
+            "type": "string",
+            "example": "281743-2322-34i44sd3-dkfjgdkjf292",
+            "description": "Unique identifier for the user"
+          },
+          "url": {
+            "type": "string",
+            "example": "https://sivi.ai",
+            "description": "Brand website URL"
+          }
+        }
+      },
+      "SetBrandRequest": {
+        "type": "object",
+        "required": [
+          "abstractUserId",
+          "brand"
+        ],
+        "properties": {
+          "abstractUserId": {
+            "type": "string",
+            "example": "281743-2322-34i44sd3-dkfjgdkjf292",
+            "description": "Unique identifier for the user"
+          },
+          "brand": {
+            "type": "object",
+            "description": "Brand details",
+            "properties": {
+              "brandName": {
+                "type": "string",
+                "example": "Sivi",
+                "description": "Brand name"
+              },
+              "brandDescription": {
+                "type": "string",
+                "example": "AI design generator for brands and layered vector based design generation",
+                "description": "Brand description"
+              },
+              "brandUrl": {
+                "type": "string",
+                "example": "https://sivi.ai",
+                "description": "Brand URL"
+              },
+              "brandLogo": {
+                "type": "string",
+                "example": "https://sivi.ai/sivi-logo.png",
+                "description": "Brand logo URL"
+              },
+              "brandColors": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "example": ["#5662EC", "#EF9AB2"],
+                "description": "List of brand colors"
+              },
+              "brandFonts": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "example": ["Inter", "Roboto"],
+                "description": "List of brand fonts"
+              }
+            }
+          }
+        }
+      },
+      "AccountAnalysisRequest": {
+        "type": "object",
+        "required": [
+          "abstractUserId"
+        ],
+        "properties": {
+          "abstractUserId": {
+            "type": "string",
+            "example": "281743-2322-34i44sd3-dkfjgdkjf292",
+            "description": "Unique identifier for the user"
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date",
+            "example": "2023-01-01",
+            "description": "Start date for account analysis"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date",
+            "example": "2023-12-31",
+            "description": "End date for account analysis"
+          }
+        }
+      },
+      "ExportDataRequest": {
+        "type": "object",
+        "required": [
+          "abstractUserId"
+        ],
+        "properties": {
+          "abstractUserId": {
+            "type": "string",
+            "example": "281743-2322-34i44sd3-dkfjgdkjf292",
+            "description": "Unique identifier for the user"
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date",
+            "example": "2023-01-01",
+            "description": "Start date for data export"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date",
+            "example": "2023-12-31",
+            "description": "End date for data export"
+          },
+          "exportType": {
+            "type": "string",
+            "enum": ["designs", "all"],
+            "default": "all",
+            "example": "all",
+            "description": "Type of data to export"
+          }
+        }
+      },
+      "AuthError": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "example": 401
+          },
+          "body": {
+            "type": "object",
+            "properties": {
+              "message": {
+                "type": "string",
+                "example": "Failed to authenticate request. Please add sivi-api-key header in request"
+              }
+            }
+          }
+        }
+      },
+      "InputError": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "example": 422
+          },
+          "body": {
+            "type": "object",
+            "properties": {
+              "message": {
+                "type": "string",
+                "example": "Invalid input"
+              }
+            }
+          }
+        }
+      },
+      "ServerError": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "example": 500
+          },
+          "body": {
+            "type": "object",
+            "properties": {
+              "message": {
+                "type": "string",
+                "example": "Server internal error"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

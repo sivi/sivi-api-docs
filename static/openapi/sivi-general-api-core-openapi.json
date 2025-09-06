@@ -1,0 +1,3759 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Sivi General API Core - OpenAPI 3.1",
+    "description": "Sivi is an AI designer that helps you generate product banners, ads, and other visual content according to your brand guidelines.",
+    "termsOfService": "https://sivi.ai/terms-of-service",
+    "contact": {
+      "email": "support@sivi.ai"
+    },
+    "version": "2.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://connect.sivi.ai/api/staging/v2"
+    },
+    {
+      "url": "https://connect.sivi.ai/api/prod/v2"
+    }
+  ],
+  "tags": [
+    {
+      "name": "designs-from-prompt",
+      "description": "Generate designs using natural language prompts"
+    },
+    {
+      "name": "designs-from-content",
+      "description": "Generate designs using structured content"
+    },
+    {
+      "name": "content-from-prompt",
+      "description": "Generate content from prompts"
+    },
+    {
+      "name": "get-design-variants",
+      "description": "Retrieve design variants"
+    },
+    {
+      "name": "get-request-status",
+      "description": "Check status of generation requests"
+    }
+  ],
+  "paths": {
+    "/general/designs-from-content": {
+      "get": {
+        "tags": [
+          "designs-from-content"
+        ],
+        "summary": "Generate designs from content (GET)",
+        "description": "Generate designs directly from your structured content, including titles, descriptions, brand assets, and images",
+        "operationId": "getDesignsFromContent",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "queryParams",
+            "in": "query",
+            "description": "JSON object containing all parameters for the request (must be URL-encoded as a single JSON string)",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DesignsFromContentRequest"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "body": {
+                      "type": "object",
+                      "properties": {
+                        "queueWaitTime": {
+                          "type": "integer",
+                          "example": 0
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "example": "sbhMkIZKCPp"
+                        },
+                        "designId": {
+                          "type": "string",
+                          "example": "97026520-1f1b-11f0-ada0-01392001fe46"
+                        },
+                        "link": {
+                          "type": "string",
+                          "example": "https://instant.sivi.ai/#/design/97026520-1f1b-11f0-ada0-01392001fe46"
+                        },
+                        "shareLink": {
+                          "type": "string",
+                          "example": "https://instant.sivi.ai/#/results/97026520-1f1b-11f0-ada0-01392001fe46"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthError"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Insufficient Credits",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreditError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid Input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InputError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "designs-from-content"
+        ],
+        "summary": "Generate designs from content (POST)",
+        "description": "Generate designs directly from your structured content, including titles, descriptions, brand assets, and images",
+        "operationId": "postDesignsFromContent",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "requestBody": {
+          "description": "Design generation parameters with structured content",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DesignsFromContentRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "body": {
+                      "type": "object",
+                      "properties": {
+                        "queueWaitTime": {
+                          "type": "integer",
+                          "example": 0
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "example": "sbhMkIZKCPp"
+                        },
+                        "designId": {
+                          "type": "string",
+                          "example": "97026520-1f1b-11f0-ada0-01392001fe46"
+                        },
+                        "link": {
+                          "type": "string",
+                          "example": "https://instant.sivi.ai/#/design/97026520-1f1b-11f0-ada0-01392001fe46"
+                        },
+                        "shareLink": {
+                          "type": "string",
+                          "example": "https://instant.sivi.ai/#/results/97026520-1f1b-11f0-ada0-01392001fe46"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthError"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Insufficient Credits",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreditError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid Input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InputError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/general/designs-from-prompt": {
+      "get": {
+        "tags": [
+          "designs-from-prompt"
+        ],
+        "summary": "Generate designs from prompt (GET)",
+        "description": "Create designs using natural language prompts that describe your design needs",
+        "operationId": "getDesignsFromPrompt",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "queryParams",
+            "in": "query",
+            "description": "JSON object containing all parameters for the request (must be URL-encoded as a single JSON string)",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DesignsFromPromptRequest"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "body": {
+                      "type": "object",
+                      "properties": {
+                        "queueWaitTime": {
+                          "type": "integer",
+                          "example": 0
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "example": "sbhMkIZKCPp"
+                        },
+                        "designId": {
+                          "type": "string",
+                          "example": "97026520-1f1b-11f0-ada0-01392001fe46"
+                        },
+                        "link": {
+                          "type": "string",
+                          "example": "https://instant.sivi.ai/#/design/97026520-1f1b-11f0-ada0-01392001fe46"
+                        },
+                        "shareLink": {
+                          "type": "string",
+                          "example": "https://instant.sivi.ai/#/results/97026520-1f1b-11f0-ada0-01392001fe46"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 401
+                    },
+                    "body": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "example": "Failed to authenticate request. Please add sivi-api-key header in request"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Insufficient Credits",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 402
+                    },
+                    "body": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "example": "Not enough credits to complete the transaction"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid Input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 422
+                    },
+                    "body": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "example": "Invalid input"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 500
+                    },
+                    "body": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "example": "Server internal error"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "designs-from-prompt"
+        ],
+        "summary": "Generate designs from prompt (POST)",
+        "description": "Create designs using natural language prompts that describe your design needs",
+        "operationId": "postDesignsFromPrompt",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "requestBody": {
+          "description": "Design generation parameters",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DesignsFromPromptRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "body": {
+                      "type": "object",
+                      "properties": {
+                        "queueWaitTime": {
+                          "type": "integer",
+                          "example": 0
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "example": "sbhMkIZKCPp"
+                        },
+                        "designId": {
+                          "type": "string",
+                          "example": "97026520-1f1b-11f0-ada0-01392001fe46"
+                        },
+                        "link": {
+                          "type": "string",
+                          "example": "https://instant.sivi.ai/#/design/97026520-1f1b-11f0-ada0-01392001fe46"
+                        },
+                        "shareLink": {
+                          "type": "string",
+                          "example": "https://instant.sivi.ai/#/results/97026520-1f1b-11f0-ada0-01392001fe46"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthError"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Insufficient Credits",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreditError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid Input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InputError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/general/content-from-prompt": {
+      "get": {
+        "tags": [
+          "content-from-prompt"
+        ],
+        "summary": "Generate content suggestions (GET)",
+        "description": "Generate content suggestions based on natural language prompts",
+        "operationId": "getContentFromPrompt",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "queryParams",
+            "in": "query",
+            "description": "JSON object containing all parameters for the request (must be URL-encoded as a single JSON string)",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContentFromPromptRequest"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "contentSuggestions": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "title": {
+                            "type": "string",
+                            "example": "T-shirts for summer"
+                          },
+                          "offer": {
+                            "type": "string",
+                            "example": "Limited Time: Up to 20% Off"
+                          },
+                          "bulletlist": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            },
+                            "example": ["100% cotton", "Easy wash", "Double stitch"]
+                          }
+                        }
+                      }
+                    },
+                    "assetSuggestions": {
+                      "type": "object",
+                      "properties": {
+                        "images": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "url": {
+                                "type": "string",
+                                "example": "https://images.hellosivi.com/fit-in/800x800/photos/sKN0gtrFJn4.jpg"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid Input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InputError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "content-from-prompt"
+        ],
+        "summary": "Generate content suggestions (POST)",
+        "description": "Generate content suggestions based on natural language prompts",
+        "operationId": "postContentFromPrompt",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "requestBody": {
+          "description": "Content generation parameters",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContentFromPromptRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "contentSuggestions": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "title": {
+                            "type": "string",
+                            "example": "T-shirts for summer"
+                          },
+                          "offer": {
+                            "type": "string",
+                            "example": "Limited Time: Up to 20% Off"
+                          },
+                          "bulletlist": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            },
+                            "example": ["100% cotton", "Easy wash", "Double stitch"]
+                          }
+                        }
+                      }
+                    },
+                    "assetSuggestions": {
+                      "type": "object",
+                      "properties": {
+                        "images": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "url": {
+                                "type": "string",
+                                "example": "https://images.hellosivi.com/fit-in/800x800/photos/sKN0gtrFJn4.jpg"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid Input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InputError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/general/get-request-status": {
+      "get": {
+        "tags": [
+          "get-request-status"
+        ],
+        "summary": "Check design generation request status",
+        "description": "Check the status of a design generation request and retrieve the generated design URLs",
+        "operationId": "getRequestStatus",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "queryParams",
+            "in": "query",
+            "description": "JSON object containing all parameters for the request (must be URL-encoded as a single JSON string)",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RequestStatusRequest"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "body": {
+                      "type": "object",
+                      "properties": {
+                        "queueWaitTime": {
+                          "type": "integer",
+                          "example": 0
+                        },
+                        "status": {
+                          "type": "string",
+                          "enum": ["pending", "processing", "complete", "failed"],
+                          "example": "complete"
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "example": "sbhMkIZKCPp"
+                        },
+                        "designId": {
+                          "type": "string",
+                          "example": "97026520-1f1b-11f0-ada0-01392001fe46"
+                        },
+                        "link": {
+                          "type": "string",
+                          "example": "https://instant.sivi.ai/#/design/97026520-1f1b-11f0-ada0-01392001fe46"
+                        },
+                        "shareLink": {
+                          "type": "string",
+                          "example": "https://instant.sivi.ai/#/results/97026520-1f1b-11f0-ada0-01392001fe46"
+                        },
+                        "progress": {
+                          "type": "integer",
+                          "example": 45,
+                          "description": "Progress percentage for in-progress requests"
+                        },
+                        "reason": {
+                          "type": "string",
+                          "example": "Image url invalid",
+                          "description": "Reason for failure (only present in failed responses)"
+                        },
+                        "result": {
+                          "type": "object",
+                          "nullable": true,
+                          "description": "Contains generated design URLs and variants (null for pending/failed jobs)",
+                          "properties": {
+                            "variations": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "variantImageUrl": {
+                                    "type": "string",
+                                    "example": "https://resources.hellosivi.com/user-data/e5ef6aa0-8d6c-11ec-bd33-8d2f1bec7c21/generated/sg0yMSZzNnU--97026520-1f1b-11f0-ada0-01392001fe46--sh0V7MlzOPm.jpg"
+                                  },
+                                  "variantEditLink": {
+                                    "type": "string",
+                                    "example": "https://instant.sivi.ai/#/variant/sh0V7MlzOPm/independent-design-editor?type=edited"
+                                  },
+                                  "variantId": {
+                                    "type": "string",
+                                    "example": "sh0V7MlzOPm"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid Input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InputError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/general/get-design-variants": {
+      "get": {
+        "tags": [
+          "get-design-variants"
+        ],
+        "summary": "Retrieve design variants (GET)",
+        "description": "Retrieve design variants created from a specific design, idea, or workspace",
+        "operationId": "getDesignVariants",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "queryParams",
+            "in": "query",
+            "description": "JSON object containing all parameters for the request (must be URL-encoded as a single JSON string)",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DesignVariantsRequest"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "body": {
+                      "type": "object",
+                      "properties": {
+                        "designId": {
+                          "type": "string",
+                          "example": "97026520-1f1b-11f0-ada0-01392001fe46"
+                        },
+                        "variations": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "variantImageUrl": {
+                                "type": "string",
+                                "example": "https://resources.hellosivi.com/user-data/e5ef6aa0-8d6c-11ec-bd33-8d2f1bec7c21/generated/sg0yMSZzNnU--97026520-1f1b-11f0-ada0-01392001fe46--sh0V7MlzOPm.jpg"
+                              },
+                              "variantEditLink": {
+                                "type": "string",
+                                "example": "https://instant.sivi.ai/#/variant/sh0V7MlzOPm/independent-design-editor?type=edited"
+                              },
+                              "variantId": {
+                                "type": "string",
+                                "example": "sh0V7MlzOPm"
+                              }
+                            }
+                          }
+                        },
+                        "cursor": {
+                          "type": "string",
+                          "example": "kef3ryfg3ruyfr"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid Input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InputError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "get-design-variants"
+        ],
+        "summary": "Retrieve design variants (POST)",
+        "description": "Retrieve design variants created from a specific design, idea, or workspace",
+        "operationId": "postDesignVariants",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "requestBody": {
+          "description": "Parameters for retrieving design variants",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DesignVariantsRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "body": {
+                      "type": "object",
+                      "properties": {
+                        "designId": {
+                          "type": "string",
+                          "example": "97026520-1f1b-11f0-ada0-01392001fe46"
+                        },
+                        "variations": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "variantImageUrl": {
+                                "type": "string",
+                                "example": "https://resources.hellosivi.com/user-data/e5ef6aa0-8d6c-11ec-bd33-8d2f1bec7c21/generated/sg0yMSZzNnU--97026520-1f1b-11f0-ada0-01392001fe46--sh0V7MlzOPm.jpg"
+                              },
+                              "variantEditLink": {
+                                "type": "string",
+                                "example": "https://instant.sivi.ai/#/variant/sh0V7MlzOPm/independent-design-editor?type=edited"
+                              },
+                              "variantId": {
+                                "type": "string",
+                                "example": "sh0V7MlzOPm"
+                              }
+                            }
+                          }
+                        },
+                        "cursor": {
+                          "type": "string",
+                          "example": "kef3ryfg3ruyfr"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid Input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InputError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/enterprise/designs-from-content": {
+      "get": {
+        "tags": [
+          "designs-from-content"
+        ],
+        "summary": "Generate designs from content (GET)",
+        "description": "Generate designs directly from your structured content, including titles, descriptions, brand assets, and images",
+        "operationId": "getEnterpriseDesignsFromContent",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "queryParams",
+            "in": "query",
+            "description": "JSON object containing all parameters for the request (must be URL-encoded as a single JSON string)",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DesignsFromContentRequest"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "body": {
+                      "type": "object",
+                      "properties": {
+                        "queueWaitTime": {
+                          "type": "integer",
+                          "example": 0
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "example": "sbhMkIZKCPp"
+                        },
+                        "designId": {
+                          "type": "string",
+                          "example": "97026520-1f1b-11f0-ada0-01392001fe46"
+                        },
+                        "link": {
+                          "type": "string",
+                          "example": "https://instant.sivi.ai/#/design/97026520-1f1b-11f0-ada0-01392001fe46"
+                        },
+                        "shareLink": {
+                          "type": "string",
+                          "example": "https://instant.sivi.ai/#/results/97026520-1f1b-11f0-ada0-01392001fe46"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthError"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Insufficient Credits",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreditError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid Input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InputError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "designs-from-content"
+        ],
+        "summary": "Generate designs from content (POST)",
+        "description": "Generate designs directly from your structured content, including titles, descriptions, brand assets, and images",
+        "operationId": "postEnterpriseDesignsFromContent",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "requestBody": {
+          "description": "Design generation parameters with structured content",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DesignsFromContentRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "body": {
+                      "type": "object",
+                      "properties": {
+                        "queueWaitTime": {
+                          "type": "integer",
+                          "example": 0
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "example": "sbhMkIZKCPp"
+                        },
+                        "designId": {
+                          "type": "string",
+                          "example": "97026520-1f1b-11f0-ada0-01392001fe46"
+                        },
+                        "link": {
+                          "type": "string",
+                          "example": "https://instant.sivi.ai/#/design/97026520-1f1b-11f0-ada0-01392001fe46"
+                        },
+                        "shareLink": {
+                          "type": "string",
+                          "example": "https://instant.sivi.ai/#/results/97026520-1f1b-11f0-ada0-01392001fe46"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthError"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Insufficient Credits",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreditError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid Input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InputError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/enterprise/designs-from-prompt": {
+      "get": {
+        "tags": [
+          "designs-from-prompt"
+        ],
+        "summary": "Generate designs from prompt (GET)",
+        "description": "Create designs using natural language prompts that describe your design needs",
+        "operationId": "getEnterpriseDesignsFromPrompt",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "queryParams",
+            "in": "query",
+            "description": "JSON object containing all parameters for the request (must be URL-encoded as a single JSON string)",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DesignsFromPromptRequest"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "body": {
+                      "type": "object",
+                      "properties": {
+                        "queueWaitTime": {
+                          "type": "integer",
+                          "example": 0
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "example": "sbhMkIZKCPp"
+                        },
+                        "designId": {
+                          "type": "string",
+                          "example": "97026520-1f1b-11f0-ada0-01392001fe46"
+                        },
+                        "link": {
+                          "type": "string",
+                          "example": "https://instant.sivi.ai/#/design/97026520-1f1b-11f0-ada0-01392001fe46"
+                        },
+                        "shareLink": {
+                          "type": "string",
+                          "example": "https://instant.sivi.ai/#/results/97026520-1f1b-11f0-ada0-01392001fe46"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 401
+                    },
+                    "body": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "example": "Failed to authenticate request. Please add sivi-api-key header in request"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Insufficient Credits",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 402
+                    },
+                    "body": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "example": "Not enough credits to complete the transaction"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid Input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 422
+                    },
+                    "body": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "example": "Invalid input"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 500
+                    },
+                    "body": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "example": "Server internal error"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "designs-from-prompt"
+        ],
+        "summary": "Generate designs from prompt (POST)",
+        "description": "Create designs using natural language prompts that describe your design needs",
+        "operationId": "postEnterpriseDesignsFromPrompt",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "requestBody": {
+          "description": "Design generation parameters",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DesignsFromPromptRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "body": {
+                      "type": "object",
+                      "properties": {
+                        "queueWaitTime": {
+                          "type": "integer",
+                          "example": 0
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "example": "sbhMkIZKCPp"
+                        },
+                        "designId": {
+                          "type": "string",
+                          "example": "97026520-1f1b-11f0-ada0-01392001fe46"
+                        },
+                        "link": {
+                          "type": "string",
+                          "example": "https://instant.sivi.ai/#/design/97026520-1f1b-11f0-ada0-01392001fe46"
+                        },
+                        "shareLink": {
+                          "type": "string",
+                          "example": "https://instant.sivi.ai/#/results/97026520-1f1b-11f0-ada0-01392001fe46"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthError"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Insufficient Credits",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreditError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid Input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InputError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/enterprise/content-from-prompt": {
+      "get": {
+        "tags": [
+          "content-from-prompt"
+        ],
+        "summary": "Generate content suggestions (GET)",
+        "description": "Generate content suggestions based on natural language prompts",
+        "operationId": "getEnterpriseContentFromPrompt",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "queryParams",
+            "in": "query",
+            "description": "JSON object containing all parameters for the request (must be URL-encoded as a single JSON string)",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContentFromPromptRequest"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "contentSuggestions": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "title": {
+                            "type": "string",
+                            "example": "T-shirts for summer"
+                          },
+                          "offer": {
+                            "type": "string",
+                            "example": "Limited Time: Up to 20% Off"
+                          },
+                          "bulletlist": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            },
+                            "example": ["100% cotton", "Easy wash", "Double stitch"]
+                          }
+                        }
+                      }
+                    },
+                    "assetSuggestions": {
+                      "type": "object",
+                      "properties": {
+                        "images": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "url": {
+                                "type": "string",
+                                "example": "https://images.hellosivi.com/fit-in/800x800/photos/sKN0gtrFJn4.jpg"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid Input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InputError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "content-from-prompt"
+        ],
+        "summary": "Generate content suggestions (POST)",
+        "description": "Generate content suggestions based on natural language prompts",
+        "operationId": "postEnterpriseContentFromPrompt",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "requestBody": {
+          "description": "Content generation parameters",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContentFromPromptRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "contentSuggestions": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "title": {
+                            "type": "string",
+                            "example": "T-shirts for summer"
+                          },
+                          "offer": {
+                            "type": "string",
+                            "example": "Limited Time: Up to 20% Off"
+                          },
+                          "bulletlist": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            },
+                            "example": ["100% cotton", "Easy wash", "Double stitch"]
+                          }
+                        }
+                      }
+                    },
+                    "assetSuggestions": {
+                      "type": "object",
+                      "properties": {
+                        "images": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "url": {
+                                "type": "string",
+                                "example": "https://images.hellosivi.com/fit-in/800x800/photos/sKN0gtrFJn4.jpg"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid Input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InputError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/enterprise/get-request-status": {
+      "get": {
+        "tags": [
+          "get-request-status"
+        ],
+        "summary": "Check design generation request status",
+        "description": "Check the status of a design generation request and retrieve the generated design URLs",
+        "operationId": "getEnterpriseRequestStatus",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "queryParams",
+            "in": "query",
+            "description": "JSON object containing all parameters for the request (must be URL-encoded as a single JSON string)",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RequestStatusRequest"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "body": {
+                      "type": "object",
+                      "properties": {
+                        "queueWaitTime": {
+                          "type": "integer",
+                          "example": 0
+                        },
+                        "status": {
+                          "type": "string",
+                          "enum": ["pending", "processing", "complete", "failed"],
+                          "example": "complete"
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "example": "sbhMkIZKCPp"
+                        },
+                        "designId": {
+                          "type": "string",
+                          "example": "97026520-1f1b-11f0-ada0-01392001fe46"
+                        },
+                        "link": {
+                          "type": "string",
+                          "example": "https://instant.sivi.ai/#/design/97026520-1f1b-11f0-ada0-01392001fe46"
+                        },
+                        "shareLink": {
+                          "type": "string",
+                          "example": "https://instant.sivi.ai/#/results/97026520-1f1b-11f0-ada0-01392001fe46"
+                        },
+                        "progress": {
+                          "type": "integer",
+                          "example": 45,
+                          "description": "Progress percentage for in-progress requests"
+                        },
+                        "reason": {
+                          "type": "string",
+                          "example": "Image url invalid",
+                          "description": "Reason for failure (only present in failed responses)"
+                        },
+                        "result": {
+                          "type": "object",
+                          "nullable": true,
+                          "description": "Contains generated design URLs and variants (null for pending/failed jobs)",
+                          "properties": {
+                            "variations": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "variantImageUrl": {
+                                    "type": "string",
+                                    "example": "https://resources.hellosivi.com/user-data/e5ef6aa0-8d6c-11ec-bd33-8d2f1bec7c21/generated/sg0yMSZzNnU--97026520-1f1b-11f0-ada0-01392001fe46--sh0V7MlzOPm.jpg"
+                                  },
+                                  "variantEditLink": {
+                                    "type": "string",
+                                    "example": "https://instant.sivi.ai/#/variant/sh0V7MlzOPm/independent-design-editor?type=edited"
+                                  },
+                                  "variantId": {
+                                    "type": "string",
+                                    "example": "sh0V7MlzOPm"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid Input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InputError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/enterprise/get-design-variants": {
+      "get": {
+        "tags": [
+          "get-design-variants"
+        ],
+        "summary": "Retrieve design variants (GET)",
+        "description": "Retrieve design variants created from a specific design, idea, or workspace",
+        "operationId": "getEnterpriseDesignVariants",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "queryParams",
+            "in": "query",
+            "description": "JSON object containing all parameters for the request (must be URL-encoded as a single JSON string)",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DesignVariantsRequest"
+                },
+                "type": {
+                  "type": "string",
+                  "enum": ["all", "generated", "edited"],
+                  "default": "all",
+                  "example": "all",
+                  "description": "Type of variants to retrieve"
+                },
+                "cursor": {
+                  "type": "string",
+                  "default": null,
+                  "example": "iuregfurygfefioei3",
+                  "description": "Page number for paginated results"
+                },
+                "limit": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 100,
+                  "default": 30,
+                  "example": 30,
+                  "description": "Number of variants to return per page (1-100)"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "body": {
+                      "type": "object",
+                      "properties": {
+                        "designId": {
+                          "type": "string",
+                          "example": "97026520-1f1b-11f0-ada0-01392001fe46"
+                        },
+                        "variations": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "variantImageUrl": {
+                                "type": "string",
+                                "example": "https://resources.hellosivi.com/user-data/e5ef6aa0-8d6c-11ec-bd33-8d2f1bec7c21/generated/sg0yMSZzNnU--97026520-1f1b-11f0-ada0-01392001fe46--sh0V7MlzOPm.jpg"
+                              },
+                              "variantEditLink": {
+                                "type": "string",
+                                "example": "https://instant.sivi.ai/#/variant/sh0V7MlzOPm/independent-design-editor?type=edited"
+                              },
+                              "variantId": {
+                                "type": "string",
+                                "example": "sh0V7MlzOPm"
+                              }
+                            }
+                          }
+                        },
+                        "cursor": {
+                          "type": "string",
+                          "example": "kfjebfhrveurefyrg"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid Input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InputError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "get-design-variants"
+        ],
+        "summary": "Retrieve design variants (POST)",
+        "description": "Retrieve design variants created from a specific design, idea, or workspace",
+        "operationId": "postEnterpriseDesignVariants",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "requestBody": {
+          "description": "Parameters for retrieving design variants",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DesignVariantsRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "body": {
+                      "type": "object",
+                      "properties": {
+                        "designId": {
+                          "type": "string",
+                          "example": "97026520-1f1b-11f0-ada0-01392001fe46"
+                        },
+                        "variations": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "variantImageUrl": {
+                                "type": "string",
+                                "example": "https://resources.hellosivi.com/user-data/e5ef6aa0-8d6c-11ec-bd33-8d2f1bec7c21/generated/sg0yMSZzNnU--97026520-1f1b-11f0-ada0-01392001fe46--sh0V7MlzOPm.jpg"
+                              },
+                              "variantEditLink": {
+                                "type": "string",
+                                "example": "https://instant.sivi.ai/#/variant/sh0V7MlzOPm/independent-design-editor?type=edited"
+                              },
+                              "variantId": {
+                                "type": "string",
+                                "example": "sh0V7MlzOPm"
+                              }
+                            }
+                          }
+                        },
+                        "cursor": {
+                          "type": "string",
+                          "example": "rbvri3b2enocklnewfiv3"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid Input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InputError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/super/designs-from-content": {
+      "get": {
+        "tags": [
+          "designs-from-content"
+        ],
+        "summary": "Generate designs from content (GET)",
+        "description": "Generate designs directly from your structured content, including titles, descriptions, brand assets, and images",
+        "operationId": "getEnterpriseDesignsFromContent",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "queryParams",
+            "in": "query",
+            "description": "JSON object containing all parameters for the request (must be URL-encoded as a single JSON string)",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DesignsFromContentRequest"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "body": {
+                      "type": "object",
+                      "properties": {
+                        "queueWaitTime": {
+                          "type": "integer",
+                          "example": 0
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "example": "sbhMkIZKCPp"
+                        },
+                        "designId": {
+                          "type": "string",
+                          "example": "97026520-1f1b-11f0-ada0-01392001fe46"
+                        },
+                        "link": {
+                          "type": "string",
+                          "example": "https://instant.sivi.ai/#/design/97026520-1f1b-11f0-ada0-01392001fe46"
+                        },
+                        "shareLink": {
+                          "type": "string",
+                          "example": "https://instant.sivi.ai/#/results/97026520-1f1b-11f0-ada0-01392001fe46"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthError"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Insufficient Credits",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreditError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid Input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InputError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "designs-from-content"
+        ],
+        "summary": "Generate designs from content (POST)",
+        "description": "Generate designs directly from your structured content, including titles, descriptions, brand assets, and images",
+        "operationId": "postEnterpriseDesignsFromContent",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "requestBody": {
+          "description": "Design generation parameters with structured content",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DesignsFromContentRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "body": {
+                      "type": "object",
+                      "properties": {
+                        "queueWaitTime": {
+                          "type": "integer",
+                          "example": 0
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "example": "sbhMkIZKCPp"
+                        },
+                        "designId": {
+                          "type": "string",
+                          "example": "97026520-1f1b-11f0-ada0-01392001fe46"
+                        },
+                        "link": {
+                          "type": "string",
+                          "example": "https://instant.sivi.ai/#/design/97026520-1f1b-11f0-ada0-01392001fe46"
+                        },
+                        "shareLink": {
+                          "type": "string",
+                          "example": "https://instant.sivi.ai/#/results/97026520-1f1b-11f0-ada0-01392001fe46"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthError"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Insufficient Credits",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreditError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid Input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InputError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/super/designs-from-prompt": {
+      "get": {
+        "tags": [
+          "designs-from-prompt"
+        ],
+        "summary": "Generate designs from prompt (GET)",
+        "description": "Create designs using natural language prompts that describe your design needs",
+        "operationId": "getEnterpriseDesignsFromPrompt",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "queryParams",
+            "in": "query",
+            "description": "JSON object containing all parameters for the request (must be URL-encoded as a single JSON string)",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DesignsFromPromptRequest"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "body": {
+                      "type": "object",
+                      "properties": {
+                        "queueWaitTime": {
+                          "type": "integer",
+                          "example": 0
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "example": "sbhMkIZKCPp"
+                        },
+                        "designId": {
+                          "type": "string",
+                          "example": "97026520-1f1b-11f0-ada0-01392001fe46"
+                        },
+                        "link": {
+                          "type": "string",
+                          "example": "https://instant.sivi.ai/#/design/97026520-1f1b-11f0-ada0-01392001fe46"
+                        },
+                        "shareLink": {
+                          "type": "string",
+                          "example": "https://instant.sivi.ai/#/results/97026520-1f1b-11f0-ada0-01392001fe46"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 401
+                    },
+                    "body": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "example": "Failed to authenticate request. Please add sivi-api-key header in request"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Insufficient Credits",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 402
+                    },
+                    "body": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "example": "Not enough credits to complete the transaction"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid Input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 422
+                    },
+                    "body": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "example": "Invalid input"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 500
+                    },
+                    "body": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "example": "Server internal error"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "designs-from-prompt"
+        ],
+        "summary": "Generate designs from prompt (POST)",
+        "description": "Create designs using natural language prompts that describe your design needs",
+        "operationId": "postEnterpriseDesignsFromPrompt",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "requestBody": {
+          "description": "Design generation parameters",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DesignsFromPromptRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "body": {
+                      "type": "object",
+                      "properties": {
+                        "queueWaitTime": {
+                          "type": "integer",
+                          "example": 0
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "example": "sbhMkIZKCPp"
+                        },
+                        "designId": {
+                          "type": "string",
+                          "example": "97026520-1f1b-11f0-ada0-01392001fe46"
+                        },
+                        "link": {
+                          "type": "string",
+                          "example": "https://instant.sivi.ai/#/design/97026520-1f1b-11f0-ada0-01392001fe46"
+                        },
+                        "shareLink": {
+                          "type": "string",
+                          "example": "https://instant.sivi.ai/#/results/97026520-1f1b-11f0-ada0-01392001fe46"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthError"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Insufficient Credits",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreditError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid Input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InputError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/super/content-from-prompt": {
+      "get": {
+        "tags": [
+          "content-from-prompt"
+        ],
+        "summary": "Generate content suggestions (GET)",
+        "description": "Generate content suggestions based on natural language prompts",
+        "operationId": "getEnterpriseContentFromPrompt",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "queryParams",
+            "in": "query",
+            "description": "JSON object containing all parameters for the request (must be URL-encoded as a single JSON string)",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContentFromPromptRequest"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "contentSuggestions": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "title": {
+                            "type": "string",
+                            "example": "T-shirts for summer"
+                          },
+                          "offer": {
+                            "type": "string",
+                            "example": "Limited Time: Up to 20% Off"
+                          },
+                          "bulletlist": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            },
+                            "example": ["100% cotton", "Easy wash", "Double stitch"]
+                          }
+                        }
+                      }
+                    },
+                    "assetSuggestions": {
+                      "type": "object",
+                      "properties": {
+                        "images": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "url": {
+                                "type": "string",
+                                "example": "https://images.hellosivi.com/fit-in/800x800/photos/sKN0gtrFJn4.jpg"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid Input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InputError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "content-from-prompt"
+        ],
+        "summary": "Generate content suggestions (POST)",
+        "description": "Generate content suggestions based on natural language prompts",
+        "operationId": "postEnterpriseContentFromPrompt",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "requestBody": {
+          "description": "Content generation parameters",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContentFromPromptRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "contentSuggestions": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "title": {
+                            "type": "string",
+                            "example": "T-shirts for summer"
+                          },
+                          "offer": {
+                            "type": "string",
+                            "example": "Limited Time: Up to 20% Off"
+                          },
+                          "bulletlist": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            },
+                            "example": ["100% cotton", "Easy wash", "Double stitch"]
+                          }
+                        }
+                      }
+                    },
+                    "assetSuggestions": {
+                      "type": "object",
+                      "properties": {
+                        "images": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "url": {
+                                "type": "string",
+                                "example": "https://images.hellosivi.com/fit-in/800x800/photos/sKN0gtrFJn4.jpg"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid Input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InputError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/super/get-request-status": {
+      "get": {
+        "tags": [
+          "get-request-status"
+        ],
+        "summary": "Check design generation request status",
+        "description": "Check the status of a design generation request and retrieve the generated design URLs",
+        "operationId": "getEnterpriseRequestStatus",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "queryParams",
+            "in": "query",
+            "description": "JSON object containing all parameters for the request (must be URL-encoded as a single JSON string)",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RequestStatusRequest"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "body": {
+                      "type": "object",
+                      "properties": {
+                        "queueWaitTime": {
+                          "type": "integer",
+                          "example": 0
+                        },
+                        "status": {
+                          "type": "string",
+                          "enum": ["pending", "processing", "complete", "failed"],
+                          "example": "complete"
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "example": "sbhMkIZKCPp"
+                        },
+                        "designId": {
+                          "type": "string",
+                          "example": "97026520-1f1b-11f0-ada0-01392001fe46"
+                        },
+                        "link": {
+                          "type": "string",
+                          "example": "https://instant.sivi.ai/#/design/97026520-1f1b-11f0-ada0-01392001fe46"
+                        },
+                        "shareLink": {
+                          "type": "string",
+                          "example": "https://instant.sivi.ai/#/results/97026520-1f1b-11f0-ada0-01392001fe46"
+                        },
+                        "progress": {
+                          "type": "integer",
+                          "example": 45,
+                          "description": "Progress percentage for in-progress requests"
+                        },
+                        "reason": {
+                          "type": "string",
+                          "example": "Image url invalid",
+                          "description": "Reason for failure (only present in failed responses)"
+                        },
+                        "result": {
+                          "type": "object",
+                          "nullable": true,
+                          "description": "Contains generated design URLs and variants (null for pending/failed jobs)",
+                          "properties": {
+                            "variations": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "variantImageUrl": {
+                                    "type": "string",
+                                    "example": "https://resources.hellosivi.com/user-data/e5ef6aa0-8d6c-11ec-bd33-8d2f1bec7c21/generated/sg0yMSZzNnU--97026520-1f1b-11f0-ada0-01392001fe46--sh0V7MlzOPm.jpg"
+                                  },
+                                  "variantEditLink": {
+                                    "type": "string",
+                                    "example": "https://instant.sivi.ai/#/variant/sh0V7MlzOPm/independent-design-editor?type=edited"
+                                  },
+                                  "variantId": {
+                                    "type": "string",
+                                    "example": "sh0V7MlzOPm"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid Input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InputError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/super/get-design-variants": {
+      "get": {
+        "tags": [
+          "get-design-variants"
+        ],
+        "summary": "Retrieve design variants (GET)",
+        "description": "Retrieve design variants created from a specific design, idea, or workspace",
+        "operationId": "getEnterpriseDesignVariants",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "queryParams",
+            "in": "query",
+            "description": "JSON object containing all parameters for the request (must be URL-encoded as a single JSON string)",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DesignVariantsRequest"
+                },
+                "type": {
+                  "type": "string",
+                  "enum": ["all", "generated", "edited"],
+                  "default": "all",
+                  "example": "all",
+                  "description": "Type of variants to retrieve"
+                },
+                "cursor": {
+                  "type": "string",
+                  "default": null,
+                  "example": "iuregfurygfefioei3",
+                  "description": "Page number for paginated results"
+                },
+                "limit": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 100,
+                  "default": 30,
+                  "example": 30,
+                  "description": "Number of variants to return per page (1-100)"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "body": {
+                      "type": "object",
+                      "properties": {
+                        "designId": {
+                          "type": "string",
+                          "example": "97026520-1f1b-11f0-ada0-01392001fe46"
+                        },
+                        "variations": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "variantImageUrl": {
+                                "type": "string",
+                                "example": "https://resources.hellosivi.com/user-data/e5ef6aa0-8d6c-11ec-bd33-8d2f1bec7c21/generated/sg0yMSZzNnU--97026520-1f1b-11f0-ada0-01392001fe46--sh0V7MlzOPm.jpg"
+                              },
+                              "variantEditLink": {
+                                "type": "string",
+                                "example": "https://instant.sivi.ai/#/variant/sh0V7MlzOPm/independent-design-editor?type=edited"
+                              },
+                              "variantId": {
+                                "type": "string",
+                                "example": "sh0V7MlzOPm"
+                              }
+                            }
+                          }
+                        },
+                        "cursor": {
+                          "type": "string",
+                          "example": "kfjebfhrveurefyrg"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid Input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InputError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "get-design-variants"
+        ],
+        "summary": "Retrieve design variants (POST)",
+        "description": "Retrieve design variants created from a specific design, idea, or workspace",
+        "operationId": "postEnterpriseDesignVariants",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "requestBody": {
+          "description": "Parameters for retrieving design variants",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DesignVariantsRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "body": {
+                      "type": "object",
+                      "properties": {
+                        "designId": {
+                          "type": "string",
+                          "example": "97026520-1f1b-11f0-ada0-01392001fe46"
+                        },
+                        "variations": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "variantImageUrl": {
+                                "type": "string",
+                                "example": "https://resources.hellosivi.com/user-data/e5ef6aa0-8d6c-11ec-bd33-8d2f1bec7c21/generated/sg0yMSZzNnU--97026520-1f1b-11f0-ada0-01392001fe46--sh0V7MlzOPm.jpg"
+                              },
+                              "variantEditLink": {
+                                "type": "string",
+                                "example": "https://instant.sivi.ai/#/variant/sh0V7MlzOPm/independent-design-editor?type=edited"
+                              },
+                              "variantId": {
+                                "type": "string",
+                                "example": "sh0V7MlzOPm"
+                              }
+                            }
+                          }
+                        },
+                        "cursor": {
+                          "type": "string",
+                          "example": "rbvri3b2enocklnewfiv3"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid Input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InputError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "sivi-api-key",
+        "description": "API key authentication"
+      }
+    },
+    "schemas": {
+      "DesignsFromContentRequest": {
+        "type": "object",
+        "required": [
+          "name",
+          "type",
+          "subtype",
+          "content",
+          "numOfVariants"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Summer campaign 2025",
+            "description": "Name of the design project"
+          },
+          "type": {
+            "type": "string",
+            "example": "displayAds",
+            "description": "Primary design type"
+          },
+          "subtype": {
+            "type": "string",
+            "example": "displayAds-half-page-ad",
+            "description": "Specific format within the type"
+          },
+          "dimension": {
+            "type": "object",
+            "description": "Width and height in pixels (required if type/subtype is 'custom')",
+            "properties": {
+              "width": {
+                "type": "integer",
+                "example": 300
+              },
+              "height": {
+                "type": "integer",
+                "example": 600
+              }
+            }
+          },
+          "content": {
+            "type": "object",
+            "description": "Textual content to include in the design",
+            "properties": {
+              "title": {
+                "type": "string",
+                "example": "T-shirts for summer"
+              },
+              "offer": {
+                "type": "string",
+                "example": "Limited Time: Up to 20% Off"
+              },
+              "bulletlist": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "example": ["100% cotton", "Easy wash", "Double stitch"]
+              }
+            }
+          },
+          "assets": {
+            "type": "object",
+            "description": "Images, logos, and other visual assets",
+            "properties": {
+              "images": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "url": {
+                      "type": "string",
+                      "example": "https://images.hellosivi.com/fit-in/800x800/photos/sKN0gtrFJn4.jpg"
+                    },
+                    "imagePreference": {
+                      "type": "object",
+                      "properties": {
+                        "crop": {
+                          "type": "boolean",
+                          "example": true
+                        },
+                        "removeBg": {
+                          "type": "boolean",
+                          "example": false
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "logos": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "url": {
+                      "type": "string",
+                      "example": "https://images.hellosivi.com/fit-in/200x200/logos/sLkA1TkxN67.png"
+                    },
+                    "logoStyles": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "example": ["direct", "outline"]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "language": {
+            "type": "string",
+            "default": "english",
+            "example": "english",
+            "description": "Language of content"
+          },
+          "colors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": ["#5662EC", "#EF9AB2"],
+            "description": "Preferred color hex codes"
+          },
+          "fonts": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": [],
+            "description": "Font preferences (coming soon)"
+          },
+          "numOfVariants": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 4,
+            "example": 4,
+            "description": "Number of design variations to generate (1-4)"
+          },
+          "outputFormat": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "default": ["jpg"],
+            "example": ["jpg", "png"],
+            "description": "Output formats for the generated designs"
+          }
+        }
+      },
+      "DesignsFromPromptRequest": {
+        "type": "object",
+        "required": [
+          "type",
+          "subtype",
+          "prompt"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "example": "displayAds",
+            "description": "Primary design type"
+          },
+          "subtype": {
+            "type": "string",
+            "example": "displayAds-half-page-ad",
+            "description": "Specific format within the type"
+          },
+          "dimension": {
+            "type": "object",
+            "description": "Width and height in pixels (required if type/subtype is 'custom')",
+            "properties": {
+              "width": {
+                "type": "integer",
+                "example": 300
+              },
+              "height": {
+                "type": "integer",
+                "example": 600
+              }
+            }
+          },
+          "prompt": {
+            "type": "string",
+            "example": "Create a summer t-shirt ad with a beach theme for our new clothing line",
+            "description": "Natural language prompt describing your design"
+          },
+          "assets": {
+            "type": "object",
+            "properties": {
+              "images": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "url": {
+                      "type": "string",
+                      "example": "https://images.hellosivi.com/fit-in/800x800/photos/sKN0gtrFJn4.jpg"
+                    },
+                    "imagePreference": {
+                      "type": "object",
+                      "properties": {
+                        "crop": {
+                          "type": "boolean",
+                          "example": true
+                        },
+                        "removeBg": {
+                          "type": "boolean",
+                          "example": false
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "logos": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "url": {
+                      "type": "string",
+                      "example": "https://images.hellosivi.com/fit-in/200x200/logos/sLkA1TkxN67.png"
+                    },
+                    "logoStyles": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "example": ["direct", "outline"]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "colors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": ["#5662EC", "#EF9AB2"],
+            "description": "Preferred color hex codes"
+          },
+          "fonts": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": [],
+            "description": "Font preferences (coming soon)"
+          },
+          "language": {
+            "type": "string",
+            "default": "english",
+            "example": "english",
+            "description": "Language for the generated content"
+          },
+          "numOfVariants": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 4,
+            "default": 4,
+            "example": 4,
+            "description": "Number of design variations to generate (1-4)"
+          },
+          "outputFormat": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "default": ["jpg"],
+            "example": ["jpg", "png"],
+            "description": "Output formats for the generated designs"
+          }
+        }
+      },
+      "ContentFromPromptRequest": {
+        "type": "object",
+        "required": [
+          "prompt"
+        ],
+        "properties": {
+          "prompt": {
+            "type": "string",
+            "example": "Generate content for summer t-shirt promotion",
+            "description": "Natural language prompt describing the content you need"
+          },
+          "language": {
+            "type": "string",
+            "default": "english",
+            "example": "english",
+            "description": "Language for the generated content"
+          }
+        }
+      },
+      "RequestStatusRequest": {
+        "type": "object",
+        "required": [
+          "requestId"
+        ],
+        "properties": {
+          "requestId": {
+            "type": "string",
+            "example": "sbhMkIZKCPp",
+            "description": "The request ID returned when the generation request was submitted"
+          }
+        }
+      },
+      "DesignVariantsRequest": {
+        "type": "object",
+        "required": [
+          "designId"
+        ],
+        "properties": {
+          "designId": {
+            "type": "string",
+            "example": "97026520-1f1b-11f0-ada0-01392001fe46",
+            "description": "The design ID returned from the generation API"
+          },
+          "workspaceId": {
+            "type": "string",
+            "example": "845df4t-rtfd-11f0-a4r4j5934k44432",
+            "description": "Unique identifier for a workspace"
+          },
+          "userId": {
+            "type": "string",
+            "example": "3eda4jjsdf-5ffd-42d4-23a0-013dflgk3fffq",
+            "description": "Unique identifier for a user"
+          },
+          "outputFormat": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": ["jpg", "png"],
+            "description": "Output formats to return"
+          }
+        }
+      },
+      "AuthError": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "example": 401
+          },
+          "body": {
+            "type": "object",
+            "properties": {
+              "message": {
+                "type": "string",
+                "example": "Failed to authenticate request. Please add sivi-api-key header in request"
+              }
+            }
+          }
+        }
+      },
+      "CreditError": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "example": 402
+          },
+          "body": {
+            "type": "object",
+            "properties": {
+              "message": {
+                "type": "string",
+                "example": "Not enough credits to complete the transaction"
+              }
+            }
+          }
+        }
+      },
+      "InputError": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "example": 422
+          },
+          "body": {
+            "type": "object",
+            "properties": {
+              "message": {
+                "type": "string",
+                "example": "Invalid input"
+              }
+            }
+          }
+        }
+      },
+      "ServerError": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "example": 500
+          },
+          "body": {
+            "type": "object",
+            "properties": {
+              "message": {
+                "type": "string",
+                "example": "Server internal error"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

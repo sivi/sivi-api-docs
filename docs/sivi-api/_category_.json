@@ -1,0 +1,8 @@
+{
+  "label": "SIVI - API",
+  "position": 2,
+  "link": {
+    "type": "generated-index",
+    "description": "Steps to integrate Sivi API"
+  }
+}

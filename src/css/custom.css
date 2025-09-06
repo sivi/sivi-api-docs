@@ -1,0 +1,75 @@
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+/* ========================================
+   DOCUSAURUS THEME VARIABLES
+   ======================================== */
+
+/* Light theme variables */
+:root {
+  --ifm-color-primary: #1882d0;
+  --ifm-color-primary-dark: #116eaf;
+  --ifm-color-primary-darker: #0e5384;
+  --ifm-color-primary-darkest: #1a547c;
+  --ifm-color-primary-light: #2894e0;
+  --ifm-color-primary-lighter: #45a4e7;
+  --ifm-color-primary-lightest: #61b0e8;
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+}
+
+/* Dark theme variables */
+[data-theme='dark'] {
+  --ifm-color-primary: #50adef;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
+
+/* ========================================
+   NAVIGATION COMPONENTS
+   ======================================== */
+
+/* Add spacing between navbar items */
+.navbar__items .navbar__item {
+  margin-right: 20px;
+}
+
+/* ========================================
+   SWAGGER UI CUSTOMIZATION
+   ======================================== */
+
+/* Hide URL display in Swagger UI info section */
+.swagger-ui .info .url {
+  display: none;
+}
+
+/* ========================================
+   FOOTER CUSTOMIZATION
+   ======================================== */
+
+/* Footer background to match dark theme */
+.footer {
+  background: linear-gradient(125deg, #000, #190137) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer__copyright {
+  color: rgba(255, 255, 255, 0.8) !important;
+  text-align: center;
+  padding: 1rem 0;
+}
+
+.footer__links {
+  margin-bottom: 1rem;
+}
+
+.footer__link-item {
+  color: rgba(255, 255, 255, 0.7) !important;
+  transition: color 0.3s ease;
+}
+
+.footer__link-item:hover {
+  color: #25c2a0 !important;
+}

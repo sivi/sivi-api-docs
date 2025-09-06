@@ -1,0 +1,4 @@
+User-agent: *
+DisAllow:
+
+Sitemap: https://developer.sivi.ai/sitemap.xml
