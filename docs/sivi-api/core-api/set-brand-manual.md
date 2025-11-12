@@ -1,38 +1,31 @@
 ---
-id: set-brand
-title: set-brand
+id: set-brand-manual
+title: set-brand-manual
 description: Configure brand settings for a user or workspace
 sidebar_position: 9
 ---
 
 # Set Brand
 
-This endpoint allows Enterprise administrators to configure and set brand identity settings for a specific user or workspace, including brand colors, fonts, logo.
+This endpoint allows set brand identity settings for a specific user or workspace, including brand colors, fonts, logo.
 
 ## Endpoint
 
 ```
-POST super/set-brand
+POST general/set-brand
 ```
 
 ## Authentication
 
-Include your Enterprise API credentials in the request headers:
-
 ```http
 sivi-api-key: YOUR_SUPER_API_KEY
 ```
-
-:::caution SuperUser Access Required
-This endpoint can only be accessed using an SuperUser API key. Regular API keys do not have sufficient privileges.
-:::
 
 
 ### Request Body Example
 
 ```json
 {
-  "abstractUserId": "281743-2322-34i44sd3-dkfjgdkjf292",
   "brandName": "Sivi",
   "brandDescription": "AI design generator for brands and layered vector based design generation",
   "brandUrl": "https://sivi.ai",
@@ -52,7 +45,6 @@ This endpoint can only be accessed using an SuperUser API key. Regular API keys 
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
-| `abstractUserId` | String | Yes | Unique identifier for the user |
 | `brandName` | String | Yes | Name of the brand |
 | `brandDescription` | String | Yes | Description or tagline of the brand |
 | `brandUrl` | String | No | Website URL of the brand |
@@ -133,5 +125,4 @@ Note:: See all available options for each parameter in the [Brand Persona Detail
 - Brand logo should be a direct URL to an image file
 - For best results retrieve brand details automatically using the [Extract Brand API](./extract-brand) from website to setting them manually
 - After setting brand details, all new designs created by the user will incorporate these brand elements automatically
-- This API is restricted to Enterprise plan customers with administrative access
 - For best results, provide at least the brand name, brand description, logo, and primary colors
