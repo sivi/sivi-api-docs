@@ -20,7 +20,7 @@ GET general/get-brands
 Include your Enterprise API credentials in the request headers:
 
 ```http
-sivi-api-key: YOUR_SUPER_API_KEY
+sivi-api-key: YOUR_API_KEY
 ```
 
 

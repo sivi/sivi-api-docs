@@ -18,7 +18,7 @@ POST general/set-brand
 ## Authentication
 
 ```http
-sivi-api-key: YOUR_SUPER_API_KEY
+sivi-api-key: YOUR_API_KEY
 ```
 
 

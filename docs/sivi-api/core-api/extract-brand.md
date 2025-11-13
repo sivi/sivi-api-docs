@@ -19,7 +19,7 @@ POST general/extract-brand
 
 
 ```http
-sivi-api-key: YOUR_SUPER_API_KEY
+sivi-api-key: YOUR_API_KEY
 ```
 
 ## Request Parameters
