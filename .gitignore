@@ -1,7 +1,0 @@
-node_modules
-.docusaurus
-.npm
-**/build/**
-.env
-build
-.DS_Store
