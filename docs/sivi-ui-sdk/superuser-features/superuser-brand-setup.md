@@ -59,9 +59,9 @@ You can include brand details directly in the login user API payload. This appro
 
 The User Management API provides dedicated APIs for managing brand details separately from user authentication. 
 
-[Set Brand API](../../sivi-api/user-management-api/set-brand)
+[Set Brand API](../../sivi-api/core-api/set-brand-manual.md)
 
-[Extract Brand API](../../sivi-api/user-management-api/extract-brand)
+[Extract Brand API](../../sivi-api/core-api/extract-brand)
 
 ## Benefits of Brand Management
 

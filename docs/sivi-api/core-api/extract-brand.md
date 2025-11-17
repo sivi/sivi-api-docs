@@ -160,4 +160,4 @@ Note:: See all available options for each parameter in the [Brand Persona Detail
 - The extraction process uses AI to identify logos, colors, and other brand elements
 - Extraction quality depends on the website's structure and accessibility
 - For best results, provide the homepage or brand guidelines page of the website
-- After extracting brand information, consider using the [Set Brand API](./set-brand) to apply or modify the extracted brand settings
+- After extracting brand information, consider using the [Set Brand API](./set-brand-manual.md) to apply or modify the extracted brand settings

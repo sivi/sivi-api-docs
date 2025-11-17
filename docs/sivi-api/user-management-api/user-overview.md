@@ -27,8 +27,8 @@ The User Management API provides access to all low-level Sivi user management ca
 ### User Endpoints
 
 - **[Login User](./login-user)**: Login user to Sivi
-- **[Extract Brand](./extract-brand)**: Extract brand details from user
-- **[Set Brand](./set-brand)**: Set brand details for user
+- **[Extract Brand](../core-api/extract-brand)**: Extract brand details from user
+- **[Set Brand](../core-api/set-brand-manual)**: Set brand details for user
 - **[Update User Plan](./update-user-plan)**: Update user plan
 - **[Delete User](./delete-user)**: Delete user
 <!-- - **[Reactivate User](./reactivate-user)**: Reactivate user -->

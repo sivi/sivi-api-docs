@@ -23,8 +23,8 @@ const config = {
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'hellosivi', // Usually your GitHub org/user name.
-  projectName: 'sivi-api', // Usually your repo name.
+  organizationName: 'sivi', // Usually your GitHub org/user name.
+  projectName: 'sivi-api-docs', // Usually your repo name.
 
   trailingSlash: false, // this will create direct htmls and fetch the same in next try
   onBrokenLinks: 'throw',
