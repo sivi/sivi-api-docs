@@ -49,10 +49,20 @@ sivi-api-key: YOUR_API_KEY
     }]
   },
   "language": "english",
-  "colors": ["#5662EC", "#EF9AB2"],
   "fonts": [],
   "numOfVariants": 4,
-  "outputFormat": ["jpg", "png"]
+  "outputFormat": ["jpg", "png"],
+  "settings": {
+    "mode": "brand",
+    "currentbId": "b_s87vFxpfM0R",
+    "colors": [],
+    "fontGroups": [],
+    "theme": [],
+    "frameStyle": [],
+    "backdropStyle": [],
+    "focus": [],
+    "imageStyle": [],
+  }
 }
 ```
 
@@ -80,6 +90,7 @@ The `queryParams` should be URL-encoded and contain a valid JSON object with all
 | colors | array | No | Preferred color hex codes |
 | fonts | array | No | Font preferences (coming soon) |
 | outputFormat | array | No | Output format for the generated designs. Currently only supports ["jpg"]. PNG support coming soon. |
+| settings | object | No | Preferences for the design generation request. See [Settings Reference](../common/settings) for all available options. |
 
 ## Response
 

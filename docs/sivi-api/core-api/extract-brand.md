@@ -7,38 +7,31 @@ sidebar_position: 8
 
 # Extract Brand
 
-This endpoint allows Enterprise administrators to automatically extract brand assets, colors, and other brand identity elements from a website URL for a specific user. This is a queue-based API - it returns a requestId that can be used to check the status and retrieve results using the [get-request-status](../core-api/get-request-status.md) API.
+This endpoint allows extract brand assets, colors, and other brand identity elements from a website URL for a specific user. This is a queue-based API - it returns a requestId that can be used to check the status and retrieve results using the [get-request-status](../core-api/get-request-status.md) API.
 
 ## Endpoint
 
 ```
-POST super/extract-brand
+POST general/extract-brand
 ```
 
 ## Authentication
 
-Include your Enterprise API credentials in the request headers:
 
 ```http
-sivi-api-key: YOUR_SUPER_API_KEY
+sivi-api-key: YOUR_API_KEY
 ```
-
-:::caution SuperUser Access Required
-This endpoint can only be accessed using an SuperUser API key. Regular API keys do not have sufficient privileges.
-:::
 
 ## Request Parameters
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
-| `abstractUserId` | String | Yes | Unique identifier for the user |
 | `brandUrl` | String | Yes | URL of the website to extract brand information from |
 
 ### Request Body Example
 
 ```json
 {
-  "abstractUserId": "281743-2322-34i44sd3-dkfjgdkjf292",
   "brandUrl": "https://sivi.ai"
 }
 ```
@@ -167,5 +160,4 @@ Note:: See all available options for each parameter in the [Brand Persona Detail
 - The extraction process uses AI to identify logos, colors, and other brand elements
 - Extraction quality depends on the website's structure and accessibility
 - For best results, provide the homepage or brand guidelines page of the website
-- This API is restricted to Enterprise plan customers with administrative access
 - After extracting brand information, consider using the [Set Brand API](./set-brand) to apply or modify the extracted brand settings
