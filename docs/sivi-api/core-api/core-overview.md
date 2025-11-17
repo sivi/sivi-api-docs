@@ -33,6 +33,9 @@ The Core API provides access to all low-level Sivi design generation capabilitie
 - **[Content from Prompt](./content-from-prompt)**: Create content suggestions using natural language prompts
 - **[Get Design Variants](./get-design-variants)**: Retrieving design variants from your account
 - **[Request Status](./get-request-status)**: Monitor the status of design generation requests
+- **[Extract Brand](./extract-brand)**: Extract brand details from website URL
+- **[Set Brand Manual](./set-brand-manual)**: Set brand details for user
+- **[Get Brands](./get-brands.md)**: Get list of brands from user account
 
 ### Common Reference
 
