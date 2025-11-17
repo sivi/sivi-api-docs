@@ -12,7 +12,7 @@ This endpoint allows set brand identity settings for a specific user or workspac
 ## Endpoint
 
 ```
-POST general/set-brand
+POST general/set-brand-manual
 ```
 
 ## Authentication
