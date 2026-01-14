@@ -53,13 +53,9 @@ Preferred frame style. It is required only in mode custom.
 
 | ID | Display Name |
 |------|-------------|
-| Plain Fill | Plain Fill |
-| Inset Frame | Inset Frame |
-| Inset Outline | Inset Outline |
-| Patterned Boundary | Patterned Boundary |
-| Stroked Outline | Stroked Outline |
-| Corner Accent | Corner Accent |
-| Bar Accent | Bar Accent |
+| plain | Plain |
+| box | Box |
+| bar-accent | Bar Accent |
 
 ## backdropStyle
 
@@ -109,7 +105,7 @@ Here's a comprehensive example showing how to use the brand persona parameters:
     "mode": "custom",
     "colors": ["#5662EC", "#EF9AB2"],
     "theme": ["light"],
-    "frameStyle": ["Plain Fill"],
+    "frameStyle": ["plain"],
     "backdropStyle": ["minimalist"],
     "focus": ["text"],
     "imageStyle": ["cover"]
