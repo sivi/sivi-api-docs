@@ -49,14 +49,12 @@ sivi-api-key: YOUR_API_KEY
     }]
   },
   "language": "english",
-  "fonts": [],
   "numOfVariants": 4,
   "outputFormat": ["jpg", "png"],
   "settings": {
     "mode": "brand",
-    "currentbId": "b_s87vFxpfM0R",
+    "currentbId": "brandId",
     "colors": [],
-    "fontGroups": [],
     "theme": [],
     "frameStyle": [],
     "backdropStyle": [],
