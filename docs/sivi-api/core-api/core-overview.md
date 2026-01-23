@@ -78,7 +78,7 @@ For higher rate limits, consider upgrading to the Enterprise Plan
 -->
 ## Super / Enterprise API
 For higher rate limits, consider upgrading to the Super & Enterprise Plan
-> **Note:** They have exclusively endpoints. And require an Super/Enterprise account API key.
+> **Note:** They have exclusively endpoints. And require an Super/Enterprise account API key. You need to provision a Super/Enterprise account API key from Sivi.
 
 ```http
 POST enterprise/<API_ENDPOINT>
@@ -93,6 +93,7 @@ Additionally. Super/Enterprise API can call these apis on behalf of your end-use
 ```json
 "abstractUserId": "281743-2322-34i44sd3-dkfjgdkjf292"
 ```
-| abstractUserId | string | No | Unique identifier for the user to generate design. If provided, designs will be generated for the specified user. If not provided, designs will be generated for the authenticated API_KEY user. |
+
+"abstractUserId" a Unique identifier for the user to generate design. If provided, designs will be generated for the specified user. If not provided, designs will be generated for the authenticated API_KEY user.
 
 <!-- Check out [Enterprise API](../enterprise-api/overview) for more details. -->
