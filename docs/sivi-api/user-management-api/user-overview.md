@@ -7,7 +7,7 @@ sidebar_position: 1
 
 # Sivi User Management API
 
-> **Note:** User Management API is available for users with Superpower plan. Please refer the Sivi [pricing plan](https://sivi.ai/pricing)
+> **Note:** User Management API is available for users with Superpower plan. Please refer the Sivi [pricing plan](https://sivi.ai/pricing). 
 
 The Sivi User Management API provides powerful user management capabilities for businesses. It offers a cost-effective way to integrate your end-user accounts with your workflows. This helps you abstract user details from Sivi.
 
@@ -24,10 +24,12 @@ The Sivi User Management API provides powerful user management capabilities for 
 
 The User Management API provides access to all low-level Sivi user management capabilities.
 
+> **Note:** End-user's usage credits will be debited from the master user's credits. Once the master user's credits is exhausted, all the end-users will not be able to generate designs or content until the next billing cycle. API's will start throwing error with 429 status code.
+
 ### User Endpoints
 
 - **[Login User](./login-user)**: Login user to Sivi
-- **[Update User Plan](./update-user-plan)**: Update user plan
+- **[Set Credit Limit](./set-user-credit-limit)**: Set credit limit for user
 - **[Delete User](./delete-user)**: Delete user
 <!-- - **[Reactivate User](./reactivate-user)**: Reactivate user -->
 
