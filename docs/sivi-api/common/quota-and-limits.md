@@ -30,7 +30,16 @@ Rate limits help ensure fair usage and maintain API stability for all users.
 | Super (End-User) | 2 | 6 | Premium |
 | Enterprise | Custom | Custom | Premium |
 
-> **Note:** Higher queue and concurrency limits are available upon request.
+> **Note:** Higher queue and concurrency limits are available upon request.  Contact support for custom requirements. Concurrency limits are set based on concurrent GPU usage. After concurrency request will go into queue limit
+
+## User Limits
+
+| Plan | Included Users | Additional User Cost |
+|------|----------------|----------------------|
+| Super | 100 | $2/user/billing cycle |
+| Enterprise | Custom | Custom |
+
+> **Note:** Super plan billing = Plan amount + (100 included users × $2/user). Additional users beyond the included limit will be charged at $2 per user per billing cycle.
 
 ## User Credit Limits
 
@@ -39,7 +48,7 @@ SuperUsers / Enterprise Users can set credit limits for their end-users using th
 - **Default**: `-1` (no limit)
 - **Custom**: Any positive integer value
 
-> **Note:** End-user's usage credits are debited from the master user's credits. Once the master user's credits are exhausted, all end-users will not be able to generate designs or content until the next billing cycle.
+> **Note:** End-user's usage credits are debited from the master (super / enterprise) user's credits. Once the master user's credits are exhausted, all end-users will not be able to generate designs or content until the next billing cycle.
 
 ## Error Responses
 
