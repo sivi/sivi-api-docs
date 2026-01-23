@@ -1,7 +1,7 @@
 ---
 id: login-user
 title: login-user
-description: Enterprise API for user login or creation
+description: Enterprise / Superuser API for user login or creation
 sidebar_position: 2
 ---
 
@@ -32,7 +32,6 @@ This endpoint can only be accessed using an SuperUser API key. Regular API keys 
 ```json
 {
   "abstractUserId": "281743-2322-34i44sd3-dkfjgdkjf292",
-  "planId": "sp-01",
   "brand": {
     "brandName": "Sivi",
     "brandDescription": "AI design generator for brands and layered vector based design generation",
@@ -55,7 +54,6 @@ This endpoint can only be accessed using an SuperUser API key. Regular API keys 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
 | abstractUserId | string | Yes | Unique identifier for the user |
-| planId | string | No | Plan identifier to assign to the user |
 | brand | Object | No | Brand details |
 | brand.brandName | string | Conditional | Brand name |
 | brand.brandDescription | string | Conditional | Brand description |
