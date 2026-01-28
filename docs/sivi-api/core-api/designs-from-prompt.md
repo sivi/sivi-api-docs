@@ -60,6 +60,29 @@ sivi-api-key: YOUR_API_KEY
     "backdropStyle": [],
     "focus": [],
     "imageStyle": [],
+    "fontGroups": [
+      {
+        "id": "cr9HpZiN7XA",
+        "name": "FiraSans Condensed Black",
+        "type": "heading",
+        "status": "enabled",
+        "addedBy": "system"
+      },
+      {
+        "id": "crOvkYkeiiE",
+        "name": "Raleway Bold",
+        "type": "subHeading",
+        "status": "enabled",
+        "addedBy": "system"
+      },
+      {
+        "id": "cJqSe7mFuRu",
+        "name": "Raleway Light",
+        "type": "body",
+        "status": "enabled",
+        "addedBy": "system"
+      }
+    ]
   }
 }
 ```
