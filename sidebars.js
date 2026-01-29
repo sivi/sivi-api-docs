@@ -64,7 +64,7 @@ const sidebars = {
                 'sivi-api/core-api/set-brand-manual',
                 'sivi-api/core-api/extract-brand',
                 'sivi-api/core-api/get-brands',
-                // 'sivi-api/swagger/core-api',
+                'sivi-api/core-api/get-fonts',
               ],
             },
           ],
@@ -79,8 +79,8 @@ const sidebars = {
               label: 'Endpoints',
               items: [
                 'sivi-api/user-management-api/login-user',
-                // 'sivi-api/user-management-api/update-user-plan',
                 'sivi-api/user-management-api/delete-user',
+                // 'sivi-api/user-management-api/update-user-plan',
                 // 'sivi-api/user-management-api/set-brand',
                 // 'sivi-api/user-management-api/extract-brand',
                 // 'sivi-api/user-management-api/reactivate-user',
@@ -90,22 +90,10 @@ const sidebars = {
             },
           ],
         },
-        // {
-        //   type: 'category',
-        //   label: 'Enterprise API',
-        //   items: [
-        //     'sivi-api/enterprise-api/enterprise-overview',
-        //     {
-        //       type: 'category',
-        //       label: 'Enterprise Only APIs',
-        //       items: ['sivi-api/enterprise-api/endpoints/export-data', 'sivi-api/enterprise-api/endpoints/account-analysis', 'sivi-api/swagger/enterprise-endpoints'],
-        //     },
-        //   ],
-        // },
         {
           type: 'category',
           label: 'Common Reference',
-          items: ['sivi-api/common/design-types', 'sivi-api/common/supported-languages', 'sivi-api/common/asset-types', 'sivi-api/common/content-block-types', 'sivi-api/common/brand-persona-details', 'sivi-api/common/settings'],
+          items: ['sivi-api/common/design-types', 'sivi-api/common/supported-languages', 'sivi-api/common/asset-types', 'sivi-api/common/content-block-types', 'sivi-api/common/brand-persona-details', 'sivi-api/common/settings', 'sivi-api/common/quota-and-limits'],
         },
       ],
     },

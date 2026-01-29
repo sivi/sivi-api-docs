@@ -35,7 +35,45 @@ Preferred color hex codes. It is required only in mode custom.
 
 ## fontGroups
 
-Preferred font groups. It is required only in mode custom.
+Preferred font groups for typography. It is required only in mode custom. Must contain exactly 3 font entries, one for each type: `heading`, `subHeading`, and `body`.
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `id` | String | Yes | Font ID from the [get-fonts](../core-api/get-fonts) endpoint |
+| `name` | String | Yes | Display name of the font |
+| `type` | String | Yes | Font usage type. Must be one of: `heading`, `subHeading`, `body` |
+| `status` | String | Yes | Status of the font. Allowed values: `enabled`, `disabled` |
+| `addedBy` | String | Yes | Source of the font. Allowed values: `system`, `user` |
+
+```json
+"fontGroups": [
+  {
+    "id": "cr9HpZiN7XA",
+    "name": "FiraSans Condensed Black",
+    "type": "heading",
+    "status": "enabled",
+    "addedBy": "system"
+  },
+  {
+    "id": "crOvkYkeiiE",
+    "name": "Raleway Bold",
+    "type": "subHeading",
+    "status": "enabled",
+    "addedBy": "system"
+  },
+  {
+    "id": "cJqSe7mFuRu",
+    "name": "Raleway Light",
+    "type": "body",
+    "status": "enabled",
+    "addedBy": "system"
+  }
+]
+```
+
+:::note
+All three font types (`heading`, `subHeading`, `body`) are mandatory. Maximum of 3 font entries allowed.
+:::
 
 ## theme
 
