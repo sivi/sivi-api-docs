@@ -53,15 +53,35 @@ sivi-api-key: YOUR_API_KEY
     }]
   },
   "language": "english",
-  "colors": ["#5662EC", "#EF9AB2"],
-  "fonts": [],
   "numOfVariants": 4,
   "outputFormat": ["jpg"],
   "settings": {
     "mode": "brand",
     "currentbId": "b_s87vFxpfM0R",
     "colors": [],
-    "fontGroups": [],
+    "fontGroups": [
+      {
+        "id": "cr9HpZiN7XA",
+        "name": "FiraSans Condensed Black",
+        "type": "heading",
+        "status": "enabled",
+        "addedBy": "system"
+      },
+      {
+        "id": "crOvkYkeiiE",
+        "name": "Raleway Bold",
+        "type": "subHeading",
+        "status": "enabled",
+        "addedBy": "system"
+      },
+      {
+        "id": "cJqSe7mFuRu",
+        "name": "Raleway Light",
+        "type": "body",
+        "status": "enabled",
+        "addedBy": "system"
+      }
+    ],
     "theme": [],
     "frameStyle": [],
     "backdropStyle": [],
@@ -77,7 +97,7 @@ sivi-api-key: YOUR_API_KEY
 For GET requests, you can pass the same parameters as in the POST request using a JSON object in the `queryParams` parameter:
 
 ```http
-GET general/designs-from-content?queryParams={"name":"Summer campaign 2025","type":"displayAds","subtype":"displayAds-half-page-ad","dimension":{"width":300,"height":600},"content":{"title":"T-shirts for summer","offer":"Limited Time: Up to 20% Off","bulletlist":["100% cotton","Easy wash","Double stitch"]},"assets":{"images":[{"url":"https://images.hellosivi.com/fit-in/800x800/photos/sKN0gtrFJn4.jpg","imagePreference":{"crop":true,"removeBg":false}}],"logos":[{"url":"https://images.hellosivi.com/fit-in/200x200/logos/sLkA1TkxN67.png","logoStyles":["direct","outline"]}]},"language":"english","colors":["#5662EC","#EF9AB2"],"fonts":[],"numOfVariants":4,"outputFormat":["jpg"]}
+GET general/designs-from-content?queryParams={"name":"Summer campaign 2025","type":"displayAds","subtype":"displayAds-half-page-ad","dimension":{"width":300,"height":600},"content":{"title":"T-shirts for summer","offer":"Limited Time: Up to 20% Off","bulletlist":["100% cotton","Easy wash","Double stitch"]},"assets":{"images":[{"url":"https://images.hellosivi.com/fit-in/800x800/photos/sKN0gtrFJn4.jpg","imagePreference":{"crop":true,"removeBg":false}}],"logos":[{"url":"https://images.hellosivi.com/fit-in/200x200/logos/sLkA1TkxN67.png","logoStyles":["direct","outline"]}]},"language":"english","numOfVariants":4}
 ```
 
 The `queryParams` should be URL-encoded and contain a valid JSON object with all your request parameters.
@@ -95,13 +115,12 @@ The `queryParams` should be URL-encoded and contain a valid JSON object with all
 | assets | object | No | Images, logos, and other visual assets. See [Asset Types Reference](../common/asset-types) for supported asset types and options. |
 | language | string | No | Language of content (default: "english"). See [Supported Languages](../common/supported-languages) for all available options. |
 | colors | array | No | Preferred color hex code or rgba css string format |
-| fonts | array | No | Font preferences (coming soon) |
+| fontGroups | array | No | Preferred fonts. See [Font API Reference](../core-api/get-fonts) and [FontGroup Reference](../common/settings#fontgroups) |
 | outputFormat | array | No | Output format for the generated designs. Currently only supports ["jpg"]. PNG support coming soon. |
 | settings | object | No | Preferences for the design generation request. See [Settings Reference](../common/settings) for all available options. |
 
 | Coming soon |
 |-------|
-| Custom font support and API for custom upload. |
 | Content groups and sections. |
 | Other image types like illustrations and vectors. |
 
@@ -187,7 +206,7 @@ requestId status can be queried or received as webhook updates [Coming Soon]. Re
 ### GET Example
 
 ```bash
-curl -X GET "https://connect.sivi.ai/api/prod/v2/general/designs-from-content?queryParams=%7B%22name%22%3A%22Summer%20campaign%202025%22%2C%22type%22%3A%22displayAds%22%2C%22subtype%22%3A%22displayAds-half-page-ad%22%2C%22dimension%22%3A%7B%22width%22%3A300%2C%22height%22%3A600%7D%2C%22content%22%3A%7B%22title%22%3A%22T-shirts%20for%20summer%22%2C%22offer%22%3A%22Limited%20Time%3A%20Up%20to%2020%25%20Off%22%2C%22bulletList%22%3A%5B%22100%25%20cotton%22%2C%22Easy%20wash%22%2C%22Double%20stitch%22%5D%7D%2C%22assets%22%3A%7B%22images%22%3A%5B%7B%22url%22%3A%22https%3A%2F%2Fimages.hellosivi.com%2Ffit-in%2F800x800%2Fphotos%2FsKN0gtrFJn4.jpg%22%2C%22imagePreference%22%3A%7B%22crop%22%3Atrue%2C%22removeBg%22%3Afalse%7D%7D%5D%2C%22logos%22%3A%5B%7B%22url%22%3A%22https%3A%2F%2Fimages.hellosivi.com%2Ffit-in%2F200x200%2Flogos%2FsLkA1TkxN67.png%22%2C%22logoStyles%22%3A%5B%22direct%22%2C%22outline%22%5D%7D%5D%7D%2C%22language%22%3A%22english%22%2C%22colors%22%3A%5B%22%235662EC%22%2C%22%23EF9AB2%22%5D%2C%22fonts%22%3A%5B%5D%2C%22numOfVariants%22%3A4%2C%22outputFormat%22%3A%5B%22jpg%22%2C%22png%22%5D%7D" \
+curl -X GET "https://connect.sivi.ai/api/prod/v2/general/designs-from-content?queryParams%3D%7B%22name%22%3A%22Summer%20campaign%202025%22%2C%22type%22%3A%22displayAds%22%2C%22subtype%22%3A%22displayAds-half-page-ad%22%2C%22dimension%22%3A%7B%22width%22%3A300%2C%22height%22%3A600%7D%2C%22content%22%3A%7B%22title%22%3A%22T-shirts%20for%20summer%22%2C%22offer%22%3A%22Limited%20Time%3A%20Up%20to%2020%25%20Off%22%2C%22bulletList%22%3A%5B%22100%25%20cotton%22%2C%22Easy%20wash%22%2C%22Double%20stitch%22%5D%7D%2C%22assets%22%3A%7B%22images%22%3A%5B%7B%22url%22%3A%22https%3A%2F%2Fimages.hellosivi.com%2Ffit-in%2F800x800%2Fphotos%2FsKN0gtrFJn4.jpg%22%2C%22imagePreference%22%3A%7B%22crop%22%3Atrue%2C%22removeBg%22%3Afalse%7D%7D%5D%2C%22logos%22%3A%5B%7B%22url%22%3A%22https%3A%2F%2Fimages.hellosivi.com%2Ffit-in%2F200x200%2Flogos%2FsLkA1TkxN67.png%22%2C%22logoStyles%22%3A%5B%22direct%22%2C%22outline%22%5D%7D%5D%7D%2C%22language%22%3A%22english%22%2C%22numOfVariants%22%3A4%7D" \
   -H "sivi-api-key: YOUR_PUBLIC_API_KEY"
 ```
 
@@ -223,8 +242,6 @@ curl -X POST "https://connect.sivi.ai/api/prod/v2/general/designs-from-content" 
     }]
   },
   "language": "english",
-  "colors": ["#5662EC", "#EF9AB2"],
-  "numOfVariants": 4,
-  "outputFormat": ["jpg"]
+  "numOfVariants": 4
 }'
 ```
