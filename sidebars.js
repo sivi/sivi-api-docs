@@ -65,6 +65,7 @@ const sidebars = {
                 'sivi-api/core-api/extract-brand',
                 'sivi-api/core-api/get-brands',
                 'sivi-api/core-api/get-fonts',
+                'sivi-api/core-api/update-webhook',
               ],
             },
           ],
