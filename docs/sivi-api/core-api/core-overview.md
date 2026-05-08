@@ -33,9 +33,46 @@ The Core API provides access to all low-level Sivi design generation capabilitie
 - **[Content from Prompt](./content-from-prompt)**: Create content suggestions using natural language prompts
 - **[Get Design Variants](./get-design-variants)**: Retrieving design variants from your account
 - **[Request Status](./get-request-status)**: Monitor the status of design generation requests
-- **[Extract Brand](./extract-brand)**: Extract brand details from website URL
-- **[Set Brand Manual](./set-brand-manual)**: Set brand details for user
-- **[Get Brands](./get-brands.md)**: Get list of brands from user account
+
+### Brand Endpoints
+
+- **[Get Brands](./brand/get-brands)**: Get list of brands from workspace
+- **[Create Brand](./brand/create-brand)**: Create a new brand identity
+- **[Extract Brand](./brand/extract-brand)**: Extract brand details from website URL
+- **[Set Default Brand](./brand/set-default-brand)**: Set a brand as default for workspace
+- **[Archive Brand](./brand/archive-brand)**: Archive a brand from workspace
+- **[Update Brand](./brand/update-brand)**: Update an existing brand identity
+
+### Media Endpoints
+
+- **[Get Media](./media/get-media)**: Retrieve media assets from workspace
+- **[Create Media](./media/create-media)**: Upload a new media asset
+- **[Update Media](./media/update-media)**: Update metadata of a media asset
+- **[Delete Media](./media/delete-media)**: Delete media assets from workspace
+- **[Generate Media](./media/generate-media)**: Generate or enhance images using AI
+
+### Files Endpoints
+
+- **[Get Presigned URL](./files/get-presigned-url)**: Get a presigned upload URL for direct file upload
+
+### Fonts Endpoints
+
+- **[Get Fonts](./fonts/get-fonts)**: Get list of available fonts
+- **[Upload Fonts](./fonts/upload-fonts)**: Upload custom fonts to workspace
+
+:::caution Deprecated APIs
+
+The following legacy endpoints are **deprecated** and will be **removed on May 30, 2025**:
+
+| Deprecated Endpoint | Replacement |
+|---|---|
+| `general/set-brand-manual` | [brand/create](./brand/create-brand) |
+| `general/extract-brand` | [brand/extract](./brand/extract-brand) |
+| `general/get-brands` | [brand/get](./brand/get-brands) |
+| `general/get-fonts` | [font/get](./fonts/get-fonts) |
+
+Please migrate to the new entity-based endpoints before May 30, 2025.
+:::
 
 ### Common Reference
 

@@ -1,38 +1,27 @@
 ---
 id: extract-brand
-title: extract-brand
+title: Extract Brand
 description: Extract brand information from a website URL
-sidebar_position: 8
+sidebar_position: 3
 ---
 
 # Extract Brand
 
-:::caution Deprecated
-
-This endpoint (`general/extract-brand`) is **deprecated** and will be **removed on May 30, 2025**. Please use the new [brand/extract](./brand/extract-brand) endpoint instead.
-
-:::
-
-This endpoint allows extract brand assets, colors, and other brand identity elements from a website URL for a specific user. This is a queue-based API - it returns a requestId that can be used to check the status and retrieve results using the [get-request-status](../core-api/get-request-status.md) API.
+Extract brand assets, colors, and other brand identity elements from a website URL. This is a queue-based API — it returns a `requestId` that can be used to check the status and retrieve results using the [get-request-status](../get-request-status.md) API.
 
 ## Endpoint
 
-```
-POST general/extract-brand
+```http
+POST brand/extract
 ```
 
 ## Authentication
 
+Include your Enterprise API credentials in the request headers:
 
 ```http
 sivi-api-key: YOUR_API_KEY
 ```
-
-## Request Parameters
-
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `brandUrl` | String | Yes | URL of the website to extract brand information from |
 
 ### Request Body Example
 
@@ -42,6 +31,12 @@ sivi-api-key: YOUR_API_KEY
 }
 ```
 
+## Request Parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `brandUrl` | String | Yes | URL of the website to extract brand information from |
+
 ## Response
 
 The API returns a requestId that can be used to check the status and retrieve results:
@@ -50,18 +45,17 @@ The API returns a requestId that can be used to check the status and retrieve re
 {
   "status": 200,
   "body": {
-    "requestId": "sbhMkIZKCPp",
+    "requestId": "sbhMkIZKCPp"
   }
 }
 ```
 
 ### Checking Request Status
 
-Use the [get-request-status](../core-api/get-request-status.md) API with the requestId to check the status and get the results:
+Use the [get-request-status](../get-request-status.md) API with the requestId to check the status and get the results:
 
 ```http
 GET general/get-request-status?queryParams={"requestId":"sbhMkIZKCPp"}
-```
 ```
 
 ### Final Response Format
@@ -86,7 +80,7 @@ Once the request is complete, the get-request-status API will return the followi
           "emotions": ["happy"],
           "industry": "games",
           "audience": ["working mom", "working dad"],
-          "designTags": ["minimal", "time management", "productivity", "health"],
+          "designTags": ["minimal", "time management", "productivity", "health"]
         }
       }
     }
@@ -110,21 +104,9 @@ Once the request is complete, the get-request-status API will return the followi
 | `brandPersona.audience` | Array | List of detected target audience |
 | `brandPersona.designTags` | Array | List of detected design tags |
 
-Note:: See all available options for each parameter in the [Brand Persona Details](../common/brand-persona-details) section.
-
+Note:: See all available options for each parameter in the [Brand Persona Details](../../common/brand-persona-details) section.
 
 ### Error Responses
-
-#### User Not Found (400 Bad Request)
-
-```json
-{
-  "status": 400,
-  "body": {
-    "message": "User does not exist"
-  }
-}
-```
 
 #### Authentication Error (401 Unauthorized)
 
@@ -162,8 +144,7 @@ Note:: See all available options for each parameter in the [Brand Persona Detail
 ## Usage Notes
 
 - This API analyzes a website to extract brand elements automatically
-- The extracted brand information can be used to set the brand identity for a user or workspace
+- The extracted brand information can be used to create a brand identity using the [Create Brand](./create-brand) API
 - The extraction process uses AI to identify logos, colors, and other brand elements
 - Extraction quality depends on the website's structure and accessibility
 - For best results, provide the homepage or brand guidelines page of the website
-- After extracting brand information, consider using the [Set Brand API](./set-brand-manual.md) to apply or modify the extracted brand settings

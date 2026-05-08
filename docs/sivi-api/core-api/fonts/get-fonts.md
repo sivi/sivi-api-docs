@@ -1,24 +1,18 @@
 ---
 id: get-fonts
-title: get-fonts
+title: Get Fonts
 description: Get list of available fonts
-sidebar_position: 11
+sidebar_position: 1
 ---
 
 # Get Fonts
 
-:::caution Deprecated
-
-This endpoint (`general/get-fonts`) is **deprecated** and will be **removed on May 30, 2025**. Please use the new [font/get](./fonts/get-fonts) endpoint instead.
-
-:::
-
-This endpoint allows you to retrieve a list of available fonts, with optional filtering by classification, name, and source.
+Retrieve a list of available fonts, with optional filtering by classification, name, and source.
 
 ## Endpoint
 
-```
-GET general/get-fonts
+```http
+POST font/get
 ```
 
 ## Authentication
@@ -28,7 +22,6 @@ Include your Enterprise API credentials in the request headers:
 ```http
 sivi-api-key: YOUR_API_KEY
 ```
-
 
 ### Request Body Example
 
@@ -51,6 +44,7 @@ sivi-api-key: YOUR_API_KEY
 | `source` | String | No | Filter by font source. Allowed values: `system`, `user` |
 | `limit` | Number | No | Number of items to return (1-100) |
 | `cursor` | String | No | Cursor for pagination |
+| `abstractUserId` | String | No | Unique identifier for the user (Enterprise/Super API only) |
 
 ## Response
 
@@ -60,30 +54,31 @@ sivi-api-key: YOUR_API_KEY
 {
   "status": 200,
   "body": {
-    "fonts": [
+    "data": [
       {
         "id": "f_abc123",
         "name": "Roboto",
-        "classification": "sans-serif",
+        "classification": "sans-serif"
       }
     ],
-    "cursor": "691443e27209a0eab5771a1b"
+    "meta": {
+      "cursor": "691443e27209a0eab5771a1b"
+    }
   }
 }
 ```
+
+### Response Body Parameters
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `data` | Array | List of font objects |
+| `data[].id` | String | Font identifier |
+| `data[].name` | String | Font name |
+| `data[].classification` | String | Font classification |
+| `meta.cursor` | String | Cursor for fetching the next page of results |
 
 ### Error Responses
-
-#### User Not Found (400 Bad Request)
-
-```json
-{
-  "status": 400,
-  "body": {
-    "message": "Something went wrong"
-  }
-}
-```
 
 #### Authentication Error (401 Unauthorized)
 
@@ -113,7 +108,7 @@ sivi-api-key: YOUR_API_KEY
 {
   "status": 500,
   "body": {
-    "message": "Server internal error"
+    "message": "Failed to fetch fonts."
   }
 }
 ```
@@ -122,4 +117,6 @@ sivi-api-key: YOUR_API_KEY
 
 - Use `classification` to filter fonts by type (e.g., `sans-serif` for clean modern fonts, `handwriting` for script-style fonts)
 - The `source` parameter distinguishes between built-in system fonts and user-uploaded custom fonts
+- `source: "system"` returns Google Fonts available in Sivi (free, enabled fonts)
+- `source: "user"` returns fonts uploaded by the authenticated user
 - Results are paginated; use the returned `cursor` value in subsequent requests to fetch more results

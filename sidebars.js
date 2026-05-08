@@ -61,11 +61,45 @@ const sidebars = {
                 'sivi-api/core-api/content-from-prompt',
                 'sivi-api/core-api/get-request-status',
                 'sivi-api/core-api/get-design-variants',
-                'sivi-api/core-api/set-brand-manual',
-                'sivi-api/core-api/extract-brand',
-                'sivi-api/core-api/get-brands',
-                'sivi-api/core-api/get-fonts',
                 'sivi-api/core-api/update-webhook',
+                {
+                  type: 'category',
+                  label: 'Brand',
+                  items: [
+                    'sivi-api/core-api/brand/get-brands',
+                    'sivi-api/core-api/brand/create-brand',
+                    'sivi-api/core-api/brand/extract-brand',
+                    'sivi-api/core-api/brand/set-default-brand',
+                    'sivi-api/core-api/brand/archive-brand',
+                    'sivi-api/core-api/brand/update-brand',
+                  ],
+                },
+                {
+                  type: 'category',
+                  label: 'Media',
+                  items: [
+                    'sivi-api/core-api/media/get-media',
+                    'sivi-api/core-api/media/create-media',
+                    'sivi-api/core-api/media/update-media',
+                    'sivi-api/core-api/media/delete-media',
+                    'sivi-api/core-api/media/generate-media',
+                  ],
+                },
+                {
+                  type: 'category',
+                  label: 'Files',
+                  items: [
+                    'sivi-api/core-api/files/get-presigned-url',
+                  ],
+                },
+                {
+                  type: 'category',
+                  label: 'Fonts',
+                  items: [
+                    'sivi-api/core-api/fonts/get-fonts',
+                    'sivi-api/core-api/fonts/upload-fonts',
+                  ],
+                },
               ],
             },
           ],
@@ -94,7 +128,7 @@ const sidebars = {
         {
           type: 'category',
           label: 'Common Reference',
-          items: ['sivi-api/common/design-types', 'sivi-api/common/supported-languages', 'sivi-api/common/asset-types', 'sivi-api/common/content-block-types', 'sivi-api/common/brand-persona-details', 'sivi-api/common/settings', 'sivi-api/common/quota-and-limits'],
+          items: ['sivi-api/common/design-types', 'sivi-api/common/supported-languages', 'sivi-api/common/asset-types', 'sivi-api/common/content-block-types', 'sivi-api/common/brand-persona-details', 'sivi-api/common/media-types', 'sivi-api/common/supported-models', 'sivi-api/common/settings', 'sivi-api/common/quota-and-limits'],
         },
       ],
     },

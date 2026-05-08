@@ -7,6 +7,12 @@ sidebar_position: 9
 
 # Set Brand
 
+:::caution Deprecated
+
+This endpoint (`general/set-brand-manual`) is **deprecated** and will be **removed on May 30, 2025**. Please use the new [brand/create](./brand/create-brand) endpoint instead.
+
+:::
+
 This endpoint allows set brand identity settings for a specific user or workspace, including brand colors, fonts, logo.
 
 ## Endpoint
