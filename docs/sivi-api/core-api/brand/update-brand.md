@@ -44,13 +44,6 @@ sivi-api-key: YOUR_API_KEY
   "textGenPreference": {
     "model": "gpt-4o"
   },
-  "genModePreference": {
-    "compose": {
-      "type": "design",
-      "model": "auto",
-      "sizeType": "instagram-post"
-    }
-  }
 }
 ```
 
@@ -74,14 +67,14 @@ sivi-api-key: YOUR_API_KEY
 | `imageGenPreference.model` | String | No | Image generation model. See [Supported Models](../../common/supported-models#image-generation-models) for allowed values |
 | `textGenPreference` | Object | No | Text generation model preferences |
 | `textGenPreference.model` | String | No | Text generation model. See [Supported Models](../../common/supported-models#text-generation-models) for allowed values |
-| `genModePreference` | Object | No | Generation mode preferences per mode |
+<!-- | `genModePreference` | Object | No | Generation mode preferences per mode |
 | `genModePreference.compose` | Object/Array | No | Compose mode preferences |
 | `genModePreference.decompose` | Object/Array | No | Decompose mode preferences |
-| `genModePreference.imagine` | Object/Array | No | Imagine mode preferences |
+| `genModePreference.imagine` | Object/Array | No | Imagine mode preferences | -->
 
 Note:: See all available options for each parameter in the [Brand Persona Details](../../common/brand-persona-details) section.
 
-### Gen Mode Preference Items
+<!-- ### Gen Mode Preference Items
 
 Each gen mode preference item supports:
 
@@ -92,7 +85,7 @@ Each gen mode preference item supports:
 | `sizeType` | String | No | Named size type (e.g., `instagram-post`). Resolves to a dimension automatically |
 | `dimension` | Object | No | Manual dimension override `{ width, height }` |
 | `medium` | String | No | Medium override (used with `dimension`) |
-| `sizeMode` | String | No | Size mode (default: `manual`) |
+| `sizeMode` | String | No | Size mode (default: `manual`) | -->
 
 ## Response
 
