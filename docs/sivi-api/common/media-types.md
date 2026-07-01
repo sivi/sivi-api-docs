@@ -18,6 +18,8 @@ This reference lists all supported media `type` and `subType` values used across
 | `illustration` | `illustration` | `illustration` |
 | `screenshot` | `iphone`, `ipad`, `macbook`, `imac`, `laptop`, `desktop`, `tablet`, `smartphone` | `iphone` |
 | `backdrop` | `backgroundImage`, `pattern`, `texture` | `backgroundImage` |
+| `icon` | `icon` | `icon` |
+| `inspiration` | `design` | `design` |
 
 ## Usage
 
@@ -37,3 +39,5 @@ This reference lists all supported media `type` and `subType` values used across
 | `screenshot` | `jpg`, `jpeg`, `png`, `webp` |
 | `backdrop` | `jpg`, `jpeg`, `png` |
 | `font` | `ttf` |
+| `inspiration` | `jpg`, `jpeg`, `png`, `webp` |
+| `icon` | `svg` |
