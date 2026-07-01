@@ -133,6 +133,9 @@ Preferred image style. It is required only in mode custom.
 | cutout-with-vectors | Cutout with vectors |
 | content-free-form | Content Free Form |
 
+## designModel
+
+Model to use for design generation. See [Supported Models](../common/supported-models) for compose and image generation mode allowed models.
 
 ## Example Usage
 

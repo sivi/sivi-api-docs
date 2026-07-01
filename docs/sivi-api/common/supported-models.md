@@ -11,21 +11,37 @@ This reference lists all supported AI models across Sivi's design, image, and te
 
 ## Design Generation Models
 
-Used in the [Update Brand](../core-api/brand/update-brand) `genModePreference` field and design generation endpoints.
+### Sivi Models
 
-| Name | Value | Credits | Label | Premium |
-|------|-------|---------|-------|---------|
-| Auto Model | `auto` | 1–3 | per design | No |
-| Sivi Gen-2.7 | `sivi-gen-27` | 1 | per design | No |
-| Sivi Gen-3 | `sivi-gen-3` | 1.5 | per design | No |
+| Name | Value | Credits | Label |
+|------|-------|---------|-------|
+| Auto Model | `auto` | 1–3 | per design |
+| Sivi Gen-2.8H Lite | `sivi-gen-28h-lite` | 1+ | per design |
+| Sivi Gen-2.8H Pro | `sivi-gen-28h-pro` | 2+ | per design |
+| Sivi Gen-2.8H Max | `sivi-gen-28h-max` | 5+ | per design |
+| Sivi Gen-2.7 | `sivi-gen-27` | 1 | per design |
 
-### Design Gen Mode Mapping
+### Other Models
 
-| Gen Mode | Allowed Models |
-|----------|---------------|
-| `compose` | `auto`, `sivi-gen-27`, `sivi-gen-3` |
-<!-- | `decompose` | `sivi-gen-27i` | -->
-| `imagine` | `auto`, `nano-banana:1k`, `nano-banana-2:1k`, `nano-banana-2:2k`, `nano-banana-2:4k`, `nano-banana-pro:1k`, `nano-banana-pro:2k`, `nano-banana-pro:4k`, `gpt-image-1:low`, `gpt-image-1:medium`, `gpt-image-1:high` |
+#### Nano Banana Models
+
+| Name | Value | Credits | Label |
+|------|-------|---------|-------|
+| Nano Banana | `nano-banana:1k` | 2 | per design |
+| Nano Banana 2 1k | `nano-banana-2:1k` | 2 | per design |
+| Nano Banana 2 2k | `nano-banana-2:2k` | 3 | per design |
+| Nano Banana 2 4k | `nano-banana-2:4k` | 4 | per design |
+| Nano Banana Pro 1k | `nano-banana-pro:1k` | 3 | per design |
+| Nano Banana Pro 2k | `nano-banana-pro:2k` | 4 | per design |
+| Nano Banana Pro 4k | `nano-banana-pro:4k` | 5 | per design |
+
+#### GPT Models
+
+| Name | Value | Credits | Label |
+|------|-------|---------|-------|
+| GPT Image 1 Low | `gpt-image-1:low` | 0.5 | per design |
+| GPT Image 1 Medium | `gpt-image-1:medium` | 1 | per design |
+| GPT Image 1 High | `gpt-image-1:high` | 3 | per design |
 
 ## Image Generation Models
 
