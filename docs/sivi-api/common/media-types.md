@@ -38,6 +38,6 @@ This reference lists all supported media `type` and `subType` values used across
 | `illustration` | `svg` |
 | `screenshot` | `jpg`, `jpeg`, `png`, `webp` |
 | `backdrop` | `jpg`, `jpeg`, `png` |
-| `font` | `ttf` |
-| `inspiration` | `jpg`, `jpeg`, `png`, `webp` |
 | `icon` | `svg` |
+| `inspiration` | `jpg`, `jpeg`, `png`, `webp` |
+| `font` | `ttf` |

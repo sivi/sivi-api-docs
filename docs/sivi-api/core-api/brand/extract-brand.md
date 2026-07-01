@@ -55,7 +55,7 @@ The API returns a requestId that can be used to check the status and retrieve re
 Use the [get-request-status](../get-request-status.md) API with the requestId to check the status and get the results:
 
 ```http
-GET general/get-request-status?queryParams={"requestId":"sbhMkIZKCPp"}
+GET get-request-status?queryParams={"requestId":"sbhMkIZKCPp"}
 ```
 
 ### Final Response Format

@@ -7,26 +7,26 @@ sidebar_position: 5
 
 # Set Credit Limit
 
-Set the credit limit for a user for the current billing cycle. This endpoint allows superusers to set the credit limit for their end-user. By default, the credit limit is set to -1, which means no limit. You can set it to any positive value to set a limit.
+Set the credit limit for a user for the current billing cycle. This endpoint allows superusers/enterprise to set the credit limit for their end-user. By default, the credit limit is set to -1, which means no limit. You can set it to any positive value to set a limit.
 
 > **Note:** End-user's usage credits will be debited from the master user's credits. This API helps to control the credit usage for end-users.
 
 ## API Endpoint
 
 ```http
-POST super/set-user-credit-limit
+POST set-user-credit-limit
 ```
 
 ## Authentication
 
-This endpoint requires SuperUser API key authentication. Include your API key in the request headers:
+This endpoint requires SuperUser/Enterprise API key authentication. Include your API key in the request headers:
 
 ```http
-sivi-api-key: YOUR_SUPER_API_KEY
+sivi-api-key: YOUR_API_KEY
 ```
 
-:::caution SuperUser Access Required
-This endpoint can only be accessed using an SuperUser API key. Regular API keys do not have sufficient privileges.
+:::caution SuperUser/Enterprise Access Required
+This endpoint can only be accessed using an SuperUser/Enterprise API key. Regular API keys do not have sufficient privileges.
 :::
 
 ## Request Body

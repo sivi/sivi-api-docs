@@ -12,10 +12,10 @@ Retrieve design variants created from a specific design, idea, or workspace. Thi
 ## API Endpoint
 
 ```http
-POST general/get-design-variants
+POST get-design-variants
 ```
 ```http
-GET general/get-design-variants
+GET get-design-variants
 ```
 
 ## Authentication
@@ -45,7 +45,7 @@ sivi-api-key: YOUR_API_KEY
 For GET requests, you can pass the same parameters as in the POST request using a JSON object in the `queryParams` parameter:
 
 ```http
-GET general/get-design-variants?queryParams={"designId":"97026520-1f1b-11f0-ada0-01392001fe46","workspaceId":"845df4t-rtfd-11f0-a4r4j5934k44432","userId":"3eda4jjsdf-5ffd-42d4-23a0-013dflgk3fffq","type":"all","cursor":"eyJpZCI6InNoMFY3TWx6T1BtIn0=","limit":30}
+GET get-design-variants?queryParams={"designId":"97026520-1f1b-11f0-ada0-01392001fe46","workspaceId":"845df4t-rtfd-11f0-a4r4j5934k44432","userId":"3eda4jjsdf-5ffd-42d4-23a0-013dflgk3fffq","type":"all","cursor":"eyJpZCI6InNoMFY3TWx6T1BtIn0=","limit":30}
 ```
 
 The `queryParams` should be URL-encoded and contain a valid JSON object with all your request parameters.

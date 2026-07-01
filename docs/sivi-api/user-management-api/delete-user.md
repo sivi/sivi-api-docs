@@ -7,24 +7,24 @@ sidebar_position: 4
 
 # Delete User
 
-Delete an existing user and their associated workspace from your super-user account. This endpoint allows superusers to remove user accounts when needed.
+Delete an existing user and their associated workspace from your super-user/enterprise account. This endpoint allows superusers/enterprise to remove user accounts when needed.
 
 ## API Endpoint
 
 ```http
-POST super/delete-user
+POST delete-user
 ```
 
 ## Authentication
 
-This endpoint requires SuperUser API key authentication. Include your API key in the request headers:
+This endpoint requires SuperUser/Enterprise API key authentication. Include your API key in the request headers:
 
 ```http
-sivi-api-key: YOUR_SUPER_API_KEY
+sivi-api-key: YOUR_API_KEY
 ```
 
-:::caution SuperUser Access Required
-This endpoint can only be accessed using an SuperUser API key. Regular API keys do not have sufficient privileges.
+:::caution SuperUser/Enterprise Access Required
+This endpoint can only be accessed using an SuperUser/Enterprise API key. Regular API keys do not have sufficient privileges.
 :::
 
 ## Request Body

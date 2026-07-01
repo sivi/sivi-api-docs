@@ -12,10 +12,10 @@ Generate designs directly from your structured content, including titles, descri
 ## API Endpoint
 
 ```http
-POST general/designs-from-content
+POST designs-from-content
 ```
 ```http
-GET general/designs-from-content
+GET designs-from-content
 ```
 
 ## Authentication
@@ -87,6 +87,8 @@ sivi-api-key: YOUR_API_KEY
     "backdropStyle": [],
     "focus": [],
     "imageStyle": [],
+    "genMode": "compose",
+    "designModel": "auto"
   }
 }
 ```
@@ -97,7 +99,7 @@ sivi-api-key: YOUR_API_KEY
 For GET requests, you can pass the same parameters as in the POST request using a JSON object in the `queryParams` parameter:
 
 ```http
-GET general/designs-from-content?queryParams={"name":"Summer campaign 2025","type":"displayAds","subtype":"displayAds-half-page-ad","dimension":{"width":300,"height":600},"content":{"title":"T-shirts for summer","offer":"Limited Time: Up to 20% Off","bulletlist":["100% cotton","Easy wash","Double stitch"]},"assets":{"images":[{"url":"https://images.hellosivi.com/fit-in/800x800/photos/sKN0gtrFJn4.jpg","imagePreference":{"crop":true,"removeBg":false}}],"logos":[{"url":"https://images.hellosivi.com/fit-in/200x200/logos/sLkA1TkxN67.png","logoStyles":["direct","outline"]}]},"language":"english","numOfVariants":4}
+GET designs-from-content?queryParams={"name":"Summer campaign 2025","type":"displayAds","subtype":"displayAds-half-page-ad","dimension":{"width":300,"height":600},"content":{"title":"T-shirts for summer","offer":"Limited Time: Up to 20% Off","bulletlist":["100% cotton","Easy wash","Double stitch"]},"assets":{"images":[{"url":"https://images.hellosivi.com/fit-in/800x800/photos/sKN0gtrFJn4.jpg","imagePreference":{"crop":true,"removeBg":false}}],"logos":[{"url":"https://images.hellosivi.com/fit-in/200x200/logos/sLkA1TkxN67.png","logoStyles":["direct","outline"]}]},"language":"english","numOfVariants":4}
 ```
 
 The `queryParams` should be URL-encoded and contain a valid JSON object with all your request parameters.
