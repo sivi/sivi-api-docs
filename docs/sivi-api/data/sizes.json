@@ -1,0 +1,31 @@
+{
+    "json": {
+        "linkedin": {
+            "status": "enable",
+            "sizes": [
+                {
+                    "status": "enable",
+                    "medium": "linkedin",
+                    "type": "linkedIn-ad",
+                    "dimension": {
+                        "width": 1080,
+                        "height": 1080
+                    },
+                    "name": "LinkedIn Ad", 
+                    "mediumName": "LinkedIn"
+                }
+            ]
+        },
+        "custom": {
+            "status": "enable",
+            "sizes": [
+                {
+                    "status": "enable",
+                    "medium": "custom",
+                    "type": "custom",
+                    "name": "Custom Design"
+                }
+            ]
+        }
+    }
+}
