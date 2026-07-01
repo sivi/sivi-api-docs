@@ -96,7 +96,26 @@ Each gen mode preference item supports:
   "status": 200,
   "body": {
     "message": "Brand updated successfully",
-    "bId": "b_s87vFxpfM0R"
+    "bId": "b_s87vFxpfM0R",
+    "brandDetail": {
+      "bId": "b_s87vFxpfM0R",
+      "brandName": "Sivi",
+      "brandDescription": "AI design generator for brands and layered vector based design generation",
+      "brandUrl": "https://sivi.ai",
+      "brandColors": [
+        { "color": "#5662EC", "addedBy": "user", "primary": false },
+        { "color": "#EF9AB2", "addedBy": "user", "primary": false }
+      ],
+      "brandFonts": [],
+      "brandPersona": {
+        "industry": "technology",
+        "emotions": ["excited"],
+        "audience": ["tech enthusiasts"],
+        "designTags": ["innovative solutions"]
+      },
+      "brandLogos": ["https://media.hellosivi.com/logo/abc.png"],
+      "brandImages": ["https://media.hellosivi.com/photo/xyz.jpg"]
+    }
   }
 }
 ```

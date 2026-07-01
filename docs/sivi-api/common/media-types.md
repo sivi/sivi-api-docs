@@ -41,3 +41,5 @@ This reference lists all supported media `type` and `subType` values used across
 | `icon` | `svg`, `png` |
 | `inspiration` | `jpg`, `jpeg`, `png`, `webp` |
 | `font` | `ttf` |
+| `inspiration` | `jpg`, `jpeg`, `png`, `webp` |
+| `icon` | `svg` |
