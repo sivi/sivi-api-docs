@@ -68,7 +68,7 @@ The following legacy endpoints are **deprecated** and will be **removed on May 3
 |---|---|
 | `general/set-brand-manual` | [brand/create](./brand/create-brand) |
 | `general/extract-brand` | [brand/extract](./brand/extract-brand) |
-| `general/get-brands` | [brand/get](./brand/get-brands) |
+| `general/get-brands` | [brand/get](./brand/get) |
 | `general/get-fonts` | [font/get](./fonts/get-fonts) |
 
 Please migrate to the new entity-based endpoints before May 30, 2025.

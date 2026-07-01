@@ -9,7 +9,7 @@ sidebar_position: 10
 
 :::caution Deprecated
 
-This endpoint (`general/get-brands`) is **deprecated** and will be **removed on May 30, 2025**. Please use the new [brand/get](./brand/get-brands) endpoint instead.
+This endpoint (`general/get-brands`) is **deprecated** and will be **removed on May 30, 2025**. Please use the new [brand/get](./brand/get) endpoint instead.
 
 :::
 
