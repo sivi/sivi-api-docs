@@ -60,6 +60,7 @@ sivi-api-key: YOUR_API_KEY
     "backdropStyle": [],
     "focus": [],
     "imageStyle": [],
+    "genMode": "compose",
     "designModel": "auto",
     "fontGroups": [
       {
