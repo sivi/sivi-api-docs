@@ -19,7 +19,7 @@ This reference lists all supported media `type` and `subType` values used across
 | `screenshot` | `iphone`, `ipad`, `macbook`, `imac`, `laptop`, `desktop`, `tablet`, `smartphone` | `iphone` |
 | `backdrop` | `backgroundImage`, `pattern`, `texture` | `backgroundImage` |
 | `icon` | `icon` | `icon` |
-| `inspiration` | `image`, `design` | `design` |
+| `inspiration` | `design` | `design` |
 
 ## Usage
 

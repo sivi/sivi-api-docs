@@ -111,6 +111,7 @@ The Sivi Core API is ideal for scenarios where you need:
 
 ![Sivi Designs](/img/sivi_designs.png)
 
+<a href="https://feed.sivi.ai" target="_blank" rel="noopener noreferrer">View more</a>
 
 ## Need Help?
 

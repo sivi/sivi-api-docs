@@ -15,6 +15,40 @@ This sample implements a simplified content editor with the following features:
 - Ability to select generated designs and place them in the template
 - Celebration animation when designs are selected. <span style={{fontSize: 20}} role="img" aria-label="confetti emoji">&#127882;</span>
 
+## GitHub Sample Repository
+
+For the complete, runnable source code, clone our official SDK examples repository:
+
+**[github.com/sivi/sivi-sdk-examples](https://github.com/sivi/sivi-sdk-examples)**
+
+This repository contains multiple implementation patterns. The sample below corresponds to the `client-only-sdk` example.
+
+## Folder Structure
+
+A typical `client-only-sdk` project is organized as follows:
+
+```
+client-only-sdk/
+├── public/
+│   └── assets/
+├── src/
+│   ├── components/
+│   │   ├── DesignSystemSelector.jsx
+│   │   └── Layout/
+│   │       ├── Layout.jsx
+│   │       ├── LayoutPreview.jsx
+│   │       └── LayoutSelector.jsx
+│   ├── hooks/
+│   │   └── useSiviSDK.js
+│   ├── App.css
+│   ├── App.jsx
+│   └── main.jsx
+├── .env.example
+├── index.html
+├── package.json
+└── vite.config.js
+```
+
 ## Implementation Breakdown
 
 ### 1. Setup and Constants
@@ -29,52 +63,173 @@ const IFRAME_CONTAINER_ID = 'sivi-container'
 
 This section imports the required dependencies and defines the container ID where the Sivi widget will be embedded.
 
-### 2. Template Logic Hook
+### 2. Main Application Component
+
+The `App` component is the top-level entry point. It orchestrates the Sivi widget lifecycle, manages global state, and renders the editor layout.
 
 ```javascript
-const useTemplateLogic = ({ imageUrl, handleVisualClick, shapes }) => {
-  const selectedVisual = React.useRef(null)
-  const [visualShapes, setVisualShapes] = React.useState(shapes)
+function App() {
+  let paramsRef = React.useRef(null)
+  const [isExploding, setIsExploding] = React.useState(false);
+  const [isVisualOpen, setIsVisualOpen] = React.useState(false)
+  const [imageUrl, setImageUrl] = React.useState(null)
+  const [currentTemplate, setCurrentTemplate] = React.useState(1)
 
-  const handleShapeClick = (event, id) => {
-    const width = event.target.offsetWidth
-    const height = event.target.offsetHeight
+  const handleVisualClick = ({ width, height }) => {
+    if (!isVisualOpen) {
+      setIsVisualOpen(true)
 
-    selectedVisual.current = id
+      paramsRef.current = {
+        width,
+        height
+      }
+    } else {
+      const params = {
+        type: "custom",
+        subtype: "custom",
+        dimension: {
+          width: paramsRef.current.width,
+          height: paramsRef.current.height
+        },
+      }
 
-    handleVisualClick && handleVisualClick({
-      width,
-      height
-    })
-  }
-
-  React.useEffect(() => {
-    if (imageUrl && selectedVisual.current) {
-      setVisualShapes(prev => {
-        return {
-          ...prev,
-          [selectedVisual.current]: {
-            imageUrl: imageUrl
-          }
-        }
-      })
+      window.SIVI.show(params, IFRAME_CONTAINER_ID)
     }
-  }, [imageUrl])
-
-  return {
-    visualShapes,
-    handleShapeClick
   }
-}
 ```
 
 **What This Does:**
-- Creates a custom hook to manage the template's design placement logic
-- Tracks which placeholder is currently selected using a React ref
-- Updates the appropriate placeholder when a new design is selected
-- Provides dimensions of the selected area to the Sivi widget for appropriate sizing
+- Sets up state management for the application
+- Handles clicks on template placeholders
+- Stores dimensions of clicked areas for the Sivi widget configuration
+
+#### 2.1 Sivi Widget Initialization
+
+```javascript
+  React.useEffect(() => {
+    if (isVisualOpen) {
+      if (paramsRef.current) {
+        const params = {
+          type: "custom",
+          subtype: "custom",
+          dimension: {
+            width: paramsRef.current.width,
+            height: paramsRef.current.height
+          },
+          prompt: "Create a modern social media post about sustainable fashion",
+          language: "english",
+          colors: ["#5662EC", "#EF9AB2"],
+          numOfVariants: 2,
+          outputFormat: "png",
+          config: {
+            enableDesignEditor: true,
+          }
+        }
+
+        window.SIVI.show(params, IFRAME_CONTAINER_ID)
+        paramsRef.current = null
+      } else {
+        window.SIVI.show(false, IFRAME_CONTAINER_ID)
+      }
+    }
+  }, [isVisualOpen])
+
+  const handleRemoveVisual = () => {
+    window.SIVI.hide()
+    setIsVisualOpen(false)
+  }
+```
+
+**What This Does:**
+- Initializes the Sivi widget when the visual editor should be opened
+- Configures the widget with appropriate dimensions and parameters
+- Sets up a default prompt and styling options
+- Provides a method to close the widget and return to the main interface
+
+#### 2.2 Event Handling
+
+```javascript
+  React.useEffect(() => {
+    window.SIVI.events(async (event, responseCallback) => {
+      switch (event.type) {
+        case 'SIVI_WIDGET_EVENT_DESIGN_VARIANT_SELECTED': {
+          const URL = event.data.variantImageUrl + '?timestamp=' + Date.now()
+          setIsExploding(true)
+          setTimeout(() => {
+            setIsExploding(false)
+          }, 2000)
+          setImageUrl(URL)
+          responseCallback("done")
+          break
+        }
+      }
+    })
+    return () => {
+      window.SIVI.removeEventsCallback()
+    }
+  }, [])
+```
+
+**What This Does:**
+- Sets up event listeners for the Sivi widget
+- Handles the 'SIVI_WIDGET_EVENT_DESIGN_VARIANT_SELECTED' event when a user selects a design
+- Updates the application state with the selected design URL
+- Triggers a confetti animation to celebrate design selection
+- Properly cleans up event listeners when the component unmounts
+
+#### 2.3 Application UI Rendering
+
+```javascript
+  const TemplateCmp = ({ 1: WebTemplate })[currentTemplate]
+
+  return (
+    <div className='h-full w-full'>
+      <div className='w-full h-16 border-b-2 border-indigo-500 flex flex-row justify-between items-center px-4'>
+        <span className='text-2xl font-bold text-indigo-500'>
+          Mail Editor
+        </span>
+        <div></div>
+      </div>
+      <div className='flex flex-row h-[calc(100%-4rem)] w-full'>
+        <div className='w-1/4 h-full border-r-2 border-indigo-500 p-4'>
+          {isVisualOpen ? (
+            <>
+              <div id={IFRAME_CONTAINER_ID} className='w-full h-5/6 bg-violet-500 rounded-md border-2 border-indigo-200 overflow-hidden'>
+                {/* Iframe placeholder */}
+              </div>
+              <button className='mt-4 w-full h-12 bg-white-500 text-black p-2 rounded-md transition-all duration-300' onClick={handleRemoveVisual}>
+                Back to Home
+              </button>
+            </>
+          ) : <div className='flex h-full w-full justify-center items-center'>
+            <button onClick={() => setIsVisualOpen(true)} className='h-12 w-1/2 bg-indigo-500 text-white p-2 rounded-md hover:bg-indigo-600 transition-all duration-300'>
+              AI Design Studio
+            </button>
+          </div>}
+        </div>
+        <div className='w-[calc(100%-36rem)] h-full flex justify-center items-center'>
+          <div className='w-full h-[calc(100%-5rem)] flex justify-center items-center flex-col'>
+            {isExploding && <ConfettiExplosion />}
+            <TemplateCmp handleVisualClick={handleVisualClick} imageUrl={imageUrl} />
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default App
+```
+
+**What This Does:**
+- Renders the complete application interface with a header and two-panel layout
+- Shows either the launch button or the Sivi widget in the left panel
+- Displays the content template in the main panel
+- Includes the confetti animation when designs are selected
 
 ### 3. Template Component
+
+`WebTemplate` is a mid-level component that renders the marketing template with placeholders for designs. It delegates state management to the `useTemplateLogic` hook.
 
 ```javascript
 const WebTemplate = ({ handleVisualClick, imageUrl }) => {
@@ -135,171 +290,54 @@ const WebTemplate = ({ handleVisualClick, imageUrl }) => {
 - Displays placeholders with "Click to add visuals" text when empty
 - Shows the selected designs when available
 
-### 4. Main Application Component
+### 4. Template Logic Hook
+
+`useTemplateLogic` is a low-level custom hook that manages the template's design placement logic. It tracks the currently selected placeholder and updates it when a new design is chosen.
 
 ```javascript
-function App() {
-  let paramsRef = React.useRef(null)
-  const [isExploding, setIsExploding] = React.useState(false);
-  const [isVisualOpen, setIsVisualOpen] = React.useState(false)
-  const [imageUrl, setImageUrl] = React.useState(null)
-  const [currentTemplate, setCurrentTemplate] = React.useState(1)
+const useTemplateLogic = ({ imageUrl, handleVisualClick, shapes }) => {
+  const selectedVisual = React.useRef(null)
+  const [visualShapes, setVisualShapes] = React.useState(shapes)
 
-  const handleVisualClick = ({ width, height }) => {
-    if (!isVisualOpen) {
-      setIsVisualOpen(true)
+  const handleShapeClick = (event, id) => {
+    const width = event.target.offsetWidth
+    const height = event.target.offsetHeight
 
-      paramsRef.current = {
-        width,
-        height
-      }
-    } else {
-      const params = {
-        type: "custom",
-        subtype: "custom",
-        dimension: {
-          width: paramsRef.current.width,
-          height: paramsRef.current.height
-        },
-      }
+    selectedVisual.current = id
 
-      window.SIVI.show(params, IFRAME_CONTAINER_ID)
-    }
+    handleVisualClick && handleVisualClick({
+      width,
+      height
+    })
   }
-```
 
-**What This Does:**
-- Sets up state management for the application
-- Handles clicks on template placeholders
-- Stores dimensions of clicked areas for the Sivi widget configuration
-
-### 5. Sivi Widget Initialization
-
-```javascript
   React.useEffect(() => {
-    if (isVisualOpen) {
-      if (paramsRef.current) {
-        const params = {
-          type: "custom",
-          subtype: "custom",
-          dimension: {
-            width: paramsRef.current.width,
-            height: paramsRef.current.height
-          },
-          prompt: "Create a modern social media post about sustainable fashion",
-          language: "english",
-          colors: ["#5662EC", "#EF9AB2"],
-          numOfVariants: 2,
-          outputFormat: "png",
-          config: {
-            enableDesignEditor: true,
+    if (imageUrl && selectedVisual.current) {
+      setVisualShapes(prev => {
+        return {
+          ...prev,
+          [selectedVisual.current]: {
+            imageUrl: imageUrl
           }
         }
-
-        window.SIVI.show(params, IFRAME_CONTAINER_ID)
-        paramsRef.current = null
-      } else {
-        window.SIVI.show(false, IFRAME_CONTAINER_ID)
-      }
+      })
     }
-  }, [isVisualOpen])
+  }, [imageUrl])
 
-  const handleRemoveVisual = () => {
-    window.SIVI.hide()
-    setIsVisualOpen(false)
+  return {
+    visualShapes,
+    handleShapeClick
   }
-```
-
-**What This Does:**
-- Initializes the Sivi widget when the visual editor should be opened
-- Configures the widget with appropriate dimensions and parameters
-- Sets up a default prompt and styling options
-- Provides a method to close the widget and return to the main interface
-
-### 6. Event Handling
-
-```javascript
-  React.useEffect(() => {
-    window.SIVI.events(async (event, responseCallback) => {
-      switch (event.type) {
-        case 'SIVI_WIDGET_EVENT_DESIGN_VARIANT_SELECTED': {
-          const URL = event.data.variantImageUrl + '?timestamp=' + Date.now()
-          setIsExploding(true)
-          setTimeout(() => {
-            setIsExploding(false)
-          }, 2000)
-          setImageUrl(URL)
-          responseCallback("done")
-          break
-        }
-      }
-    })
-    return () => {
-      window.SIVI.removeEventsCallback()
-    }
-  }, [])
-```
-
-**What This Does:**
-- Sets up event listeners for the Sivi widget
-- Handles the 'SIVI_WIDGET_EVENT_DESIGN_VARIANT_SELECTED' event when a user selects a design
-- Updates the application state with the selected design URL
-- Triggers a confetti animation to celebrate design selection
-- Properly cleans up event listeners when the component unmounts
-
-### 7. Application UI Rendering
-
-```javascript
-  const TemplateCmp = ({ 1: WebTemplate })[currentTemplate]
-
-  return (
-    <div className='h-full w-full'>
-      <div className='w-full h-16 border-b-2 border-indigo-500 flex flex-row justify-between items-center px-4'>
-        <span className='text-2xl font-bold text-indigo-500'>
-          Mail Editor
-        </span>
-        <div></div>
-      </div>
-      <div className='flex flex-row h-[calc(100%-4rem)] w-full'>
-        <div className='w-1/4 h-full border-r-2 border-indigo-500 p-4'>
-          {isVisualOpen ? (
-            <>
-              <div id={IFRAME_CONTAINER_ID} className='w-full h-5/6 bg-violet-500 rounded-md border-2 border-indigo-200 overflow-hidden'>
-                {/* Iframe placeholder */}
-              </div>
-              <button className='mt-4 w-full h-12 bg-white-500 text-black p-2 rounded-md transition-all duration-300' onClick={handleRemoveVisual}>
-                Back to Home
-              </button>
-            </>
-          ) : <div className='flex h-full w-full justify-center items-center'>
-            <button onClick={() => setIsVisualOpen(true)} className='h-12 w-1/2 bg-indigo-500 text-white p-2 rounded-md hover:bg-indigo-600 transition-all duration-300'>
-              AI Design Studio
-            </button>
-          </div>}
-        </div>
-        <div className='w-[calc(100%-36rem)] h-full flex justify-center items-center'>
-          <div className='w-full h-[calc(100%-5rem)] flex justify-center items-center flex-col'>
-            {isExploding && <ConfettiExplosion />}
-            <TemplateCmp handleVisualClick={handleVisualClick} imageUrl={imageUrl} />
-          </div>
-        </div>
-      </div>
-    </div>
-  )
 }
-
-export default App
 ```
 
 **What This Does:**
-- Renders the complete application interface with a header and two-panel layout
-- Shows either the launch button or the Sivi widget in the left panel
-- Displays the content template in the main panel
-- Includes the confetti animation when designs are selected
-
+- Creates a custom hook to manage the template's design placement logic
+- Tracks which placeholder is currently selected using a React ref
+- Updates the appropriate placeholder when a new design is selected
+- Provides dimensions of the selected area to the Sivi widget for appropriate sizing
 
 <!-- Complete boilerplate can be [downloaded from here](/samples/sivi-ui-sdk-general-1.4.0.zip) -->
-
 
 ## Superuser Implementation
 
