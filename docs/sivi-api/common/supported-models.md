@@ -11,7 +11,7 @@ This reference lists all supported AI models across Sivi's design, image, and te
 
 ## Design Generation Models
 
-### Sivi Models
+### Compose Models
 
 | Name | Value | Credits | Label |
 |------|-------|---------|-------|
@@ -21,7 +21,7 @@ This reference lists all supported AI models across Sivi's design, image, and te
 | Sivi Gen-2.8H Max | `sivi-gen-28h-max` | 5+ | per design |
 | Sivi Gen-2.7 | `sivi-gen-27` | 1 | per design |
 
-### Other Models
+### Imagine Models
 
 #### Nano Banana Models
 
