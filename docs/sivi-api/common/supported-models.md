@@ -23,6 +23,10 @@ This reference lists all supported AI models across Sivi's design, image, and te
 
 ### Imagine Models
 
+:::note
+When using Imagine models, ensure you use the corresponding supported `type`, `subType`, and `dimension` combinations. See [Design Types](../common/design-types) for all valid size options.
+:::
+
 #### Nano Banana Models
 
 | Name | Value | Credits | Label |
