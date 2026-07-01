@@ -12,7 +12,7 @@ Retrieve a paginated list of brands for the authenticated workspace. You can opt
 ## Endpoint
 
 ```http
-POST brand/get
+POST get-brands
 ```
 
 ## Authentication

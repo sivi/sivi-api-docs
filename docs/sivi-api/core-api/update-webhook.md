@@ -12,7 +12,7 @@ This endpoint allows you to configure a webhook URL for your API key. Once set, 
 ## Endpoint
 
 ```
-POST general/update-webhook
+POST update-webhook
 ```
 
 ## Authentication

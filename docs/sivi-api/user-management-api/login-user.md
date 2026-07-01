@@ -7,24 +7,24 @@ sidebar_position: 2
 
 # Login User
 
-Create a new user or login an existing user for your application. This endpoint enables you to manage users through your superuser account.
+Create a new user or login an existing user for your application. This endpoint enables you to manage users through your superuser/enterprise account.
 
 ## API Endpoint
 
 ```http
-POST super/login-user
+POST login-user
 ```
 
 ## Authentication
 
-This endpoint requires SuperUser API key authentication. Include both your API key and API key ID in the request headers:
+This endpoint requires SuperUser/Enterprise API key authentication. Include both your API key and API key ID in the request headers:
 
 ```http
-sivi-api-key: YOUR_SUPER_API_KEY
+sivi-api-key: YOUR_API_KEY
 ```
 
-:::caution SuperUser Access Required
-This endpoint can only be accessed using an SuperUser API key. Regular API keys do not have sufficient privileges.
+:::caution SuperUser/Enterprise Access Required
+This endpoint can only be accessed using an SuperUser/Enterprise API key. Regular API keys do not have sufficient privileges.
 :::
 
 ## Request Body

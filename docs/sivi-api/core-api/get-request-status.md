@@ -12,7 +12,7 @@ Check the status of a design generation request and retrieve the generated desig
 ## API Endpoint
 
 ```http
-GET general/get-request-status
+GET get-request-status
 ```
 
 ## Authentication
@@ -27,7 +27,7 @@ sivi-api-key: YOUR_API_KEY
 For GET requests, you can pass the request using a JSON object in the `queryParams` parameter:
 
 ```http
-GET general/get-request-status?queryParams={"requestId":"sbhMkIZKCPp"}
+GET get-request-status?queryParams={"requestId":"sbhMkIZKCPp"}
 ```
 
 The `queryParams` should be URL-encoded and contain a valid JSON object with all your request parameters.

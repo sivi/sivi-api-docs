@@ -113,9 +113,13 @@ For higher rate limits, consider upgrading to the Enterprise Plan
 
 
 -->
-## Super / Enterprise API
+## General/ Super / Enterprise API
 For higher rate limits, consider upgrading to the Super & Enterprise Plan
 > **Note:** They have exclusively endpoints. And require an Super/Enterprise account API key. You need to provision a Super/Enterprise account API key from Sivi.
+
+```http
+POST general/<API_ENDPOINT>
+```
 
 ```http
 POST enterprise/<API_ENDPOINT>

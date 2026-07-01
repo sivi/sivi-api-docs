@@ -73,9 +73,13 @@ For higher rate limits, consider upgrading to the Enterprise Plan
 -->
 
 
-## Enterprise API
+## Super/Enterprise API
 For higher rate limits, consider upgrading to the Enterprise Plan
 > **Note:** They have exclusively endpoints. And require an Enterprise account API key.
+
+```http
+POST super/<API_ENDPOINT>
+```
 
 ```http
 POST enterprise/<API_ENDPOINT>

@@ -12,11 +12,11 @@ Create designs using natural language prompts that describe your design needs.
 ## API Endpoint
 
 ```http
-POST general/designs-from-prompt
+POST designs-from-prompt
 ```
 
 ```http
-GET general/designs-from-prompt
+GET designs-from-prompt
 ```
 
 ## Authentication
@@ -92,7 +92,7 @@ sivi-api-key: YOUR_API_KEY
 For GET requests, you can pass the same parameters as in the POST request using a JSON object in the `queryParams` parameter:
 
 ```http
-GET general/designs-from-prompt?queryParams={"type":"displayAds","subtype":"displayAds-half-page-ad","dimension":{"width":300,"height":600},"prompt":"generate a design for my t-shirt shop for summer campaign with 20% off","assets":{"images":[{"url":"https://images.hellosivi.com/fit-in/800x800/photos/sKN0gtrFJn4.jpg","imagePreference":{"crop":true,"removeBg":false}}],"logos":[{"url":"https://images.hellosivi.com/fit-in/200x200/logos/sLkA1TkxN67.png","logoStyles":["direct","outline"]}]},"language":"english","numOfVariants":4}
+GET designs-from-prompt?queryParams={"type":"displayAds","subtype":"displayAds-half-page-ad","dimension":{"width":300,"height":600},"prompt":"generate a design for my t-shirt shop for summer campaign with 20% off","assets":{"images":[{"url":"https://images.hellosivi.com/fit-in/800x800/photos/sKN0gtrFJn4.jpg","imagePreference":{"crop":true,"removeBg":false}}],"logos":[{"url":"https://images.hellosivi.com/fit-in/200x200/logos/sLkA1TkxN67.png","logoStyles":["direct","outline"]}]},"language":"english","numOfVariants":4}
 ```
 
 The `queryParams` should be URL-encoded and contain a valid JSON object with all your request parameters.

@@ -12,11 +12,11 @@ Generate content suggestions based on natural language prompts. This endpoint is
 ## API Endpoint
 
 ```http
-POST general/content-from-prompt
+POST content-from-prompt
 ```
 
 ```http
-GET general/content-from-prompt
+GET content-from-prompt
 ```
 
 ## Authentication
@@ -44,7 +44,7 @@ sivi-api-key: YOUR_API_KEY
 For GET requests, you can pass the same parameters as in the POST request using a JSON object in the `queryParams` parameter:
 
 ```http
-GET general/content-from-prompt?queryParams={"type":"displayAds","subtype":"displayAds-half-page-ad","dimension":{"width":300,"height":600},"prompt":"generate a design for my t-shirt shop for summer campaign with 20% off","language":"english"}
+GET content-from-prompt?queryParams={"type":"displayAds","subtype":"displayAds-half-page-ad","dimension":{"width":300,"height":600},"prompt":"generate a design for my t-shirt shop for summer campaign with 20% off","language":"english"}
 ```
 
 The `queryParams` should be URL-encoded and contain a valid JSON object with all your request parameters.
