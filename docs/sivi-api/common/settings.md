@@ -133,9 +133,9 @@ Preferred image style. It is required only in mode custom.
 | cutout-with-vectors | Cutout with vectors |
 | content-free-form | Content Free Form |
 
-## genMode
+<!-- ## genMode
 
-Generation mode for the design. Possible values: `compose`, `imagine`. Based on this mode, the corresponding `designModel` value should be selected from the supported models.
+Generation mode for the design. Possible values: `compose`, `imagine`. Based on this mode, the corresponding `designModel` value should be selected from the supported models. -->
 
 ## designModel
 

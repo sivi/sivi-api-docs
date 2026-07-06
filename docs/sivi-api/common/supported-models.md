@@ -11,16 +11,16 @@ This reference lists all supported AI models across Sivi's design, image, and te
 
 ## Design Generation Models
 
-### Compose Models
+<!-- ### Compose Models -->
 
 | Name | Value | Credits | Label |
 |------|-------|---------|-------|
 | Auto Model | `auto` | 1–3 | per design |
 | Sivi Gen-2.8H Lite | `sivi-gen-28h-lite` | 1+ | per design |
-| Sivi Gen-2.8H Pro | `sivi-gen-28h-pro` | 2+ | per design |
+| Sivi Gen-2.8H Pro | `sivi-gen-28h` | 2+ | per design |
 | Sivi Gen-2.8H Max | `sivi-gen-28h-max` | 5+ | per design |
 | Sivi Gen-2.7 | `sivi-gen-27` | 1 | per design |
-
+<!-- 
 ### Imagine Models
 
 :::note
@@ -45,7 +45,7 @@ When using Imagine models, ensure you use the corresponding supported `type`, `s
 |------|-------|---------|-------|
 | GPT Image 1 Low | `gpt-image-1:low` | 0.5 | per design |
 | GPT Image 1 Medium | `gpt-image-1:medium` | 1 | per design |
-| GPT Image 1 High | `gpt-image-1:high` | 3 | per design |
+| GPT Image 1 High | `gpt-image-1:high` | 3 | per design | -->
 
 ## Image Generation Models
 
