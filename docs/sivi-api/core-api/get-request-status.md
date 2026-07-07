@@ -96,7 +96,7 @@ curl -X GET "https://connect.sivi.ai/api/prod/v2/general/get-request-status?quer
   "status": 200,
   "body": {
     "queueWaitTime": 0,
-    "status": "complete",
+    "status": "completed",
     "requestId": "sbhMkIZKCPp",
     "designId": "97026520-1f1b-11f0-ada0-01392001fe46",
     "link": "https://instant.sivi.ai/#/design/97026520-1f1b-11f0-ada0-01392001fe46",
@@ -109,7 +109,17 @@ curl -X GET "https://connect.sivi.ai/api/prod/v2/general/get-request-status?quer
           "variantId": "sh0V7MlzOPm",
           "variantWidth": 1080,
           "variantHeight": 1080,
-          "variantType": "GENERATED"
+          "variantType": "GENERATED",
+          "options": [
+            {
+              "variantImageUrl": "https://resources.hellosivi.com/user-data/e5ef6aa0-8d6c-11ec-bd33-8d2f1bec7c21/generated/sg0yMSZzNnU--97026520-1f1b-11f0-ada0-01392001fe46--sh0V7MlzOPm.jpg",
+              "variantEditLink": "https://instant.sivi.ai/#/variant/sh0V7MlzOPm/independent-design-editor?type=edited",
+              "variantId": "sh0V7MlzOPm_1",
+              "variantWidth": 1080,
+              "variantHeight": 1080,
+              "variantType": "GENERATED"
+            }
+          ]
         }
       ]
     }
