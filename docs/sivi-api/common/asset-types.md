@@ -11,11 +11,12 @@ When generating designs with Sivi, you can include various types of assets such 
 
 ## Supported Asset Types
 
-Sivi supports three main asset types:
+Sivi supports four main asset types:
 
 1. **Images** - Photographs, illustrations, or any raster graphics
 2. **Logos** - Brand logos or identity marks
 3. **Icons** - Simple graphic elements or symbols
+4. **Inspiration** - Reference images or mood boards
 
 ## Asset Type Specifications
 
@@ -132,6 +133,26 @@ Use the `icons` array to include simple graphic elements or symbols in your desi
 | url | string | URL to the icon (must be publicly accessible) |
 | touchPosition | object | Control how the icon is positioned in the design |
 
+### Inspirations
+
+Use the `inspiration` array to include reference images or mood boards that guide the design style and aesthetic.
+
+```json
+"assets": {
+  "inspiration": [{
+    "url": "https://images.helosivi.com/fit-in/800x800/inspirations/iKN0gtrFJn4.jpg"
+  }]
+}
+```
+
+#### Inspiration Options
+
+| Option | Type | Description |
+|--------|------|-------------|
+| url | string | URL to the inspiration image (must be publicly accessible) |
+
+> **Note:** Inspirations do not support `imagePreference` or `touchPosition` options. They are used solely as style references and do not appear directly in the generated design.
+
 ## Best Practices
 
 1. **Image Quality** - Use high-resolution images for best results
@@ -158,6 +179,9 @@ Use the `icons` array to include simple graphic elements or symbols in your desi
   }],
   "icons": [{
     "url": "https://example.com/icon.png"
+  }],
+  "inspiration": [{
+    "url": "https://example.com/inspiration.jpg"
   }]
 }
 ```
