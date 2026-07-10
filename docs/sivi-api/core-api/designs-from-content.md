@@ -52,6 +52,9 @@ sivi-api-key: YOUR_API_KEY
          "logoStyles": ["direct", "outline"]
     }]
   },
+  "designInstructions": [
+    "Create a professional email banner for a skincare sale. Use the provided inspiration for layout and color cues, but adapt the content to the skincare theme. Ensure a clean, high-quality look with a focus on the product and the promotional message."
+  ],
   "language": "english",
   "numOfVariants": 4,
   "outputFormat": ["jpg"],
@@ -118,6 +121,7 @@ The `queryParams` should be URL-encoded and contain a valid JSON object with all
 | colors | array | No | Preferred color hex code or rgba css string format |
 | fontGroups | array | No | Preferred fonts. See [Font API Reference](../core-api/get-fonts) and [FontGroup Reference](../common/settings#fontgroups) |
 | outputFormat | array | No | Output format for the generated designs. Currently only supports ["jpg"]. PNG support coming soon. |
+| designInstructions | array | No | Array of instruction strings passed to the Sivi agent to guide the design generation process |
 | settings | object | No | Preferences for the design generation request. See [Settings Reference](../common/settings) for all available options. |
 
 | Coming soon |
@@ -242,6 +246,9 @@ curl -X POST "https://connect.sivi.ai/api/prod/v2/general/designs-from-content" 
          "logoStyles": ["direct", "outline"]
     }]
   },
+  "designInstructions": [
+    "Create a professional email banner for a skincare sale. Use the provided inspiration for layout and color cues, but adapt the content to the skincare theme. Ensure a clean, high-quality look with a focus on the product and the promotional message."
+  ],
   "language": "english",
   "numOfVariants": 4
 }'
