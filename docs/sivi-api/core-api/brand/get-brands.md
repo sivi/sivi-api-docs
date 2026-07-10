@@ -28,6 +28,7 @@ sivi-api-key: YOUR_API_KEY
 ```json
 {
   "bId": "b_s87vFxpfM0R",
+  "isDefault": false,
   "limit": 10,
   "cursor": null
 }
@@ -40,6 +41,7 @@ sivi-api-key: YOUR_API_KEY
 | `bId` | String | No | Filter by a specific brand ID |
 | `limit` | Number | No | Number of items to return (1-50, default: 10) |
 | `cursor` | String | No | Cursor for pagination |
+| `isDefault` | Boolean | No | If `true`, returns the default brand. If passed along with `bId`, the `bId` will be overridden by the default brand's ID |
 | `abstractUserId` | String | No | Unique identifier for the user (Enterprise/Super API only) |
 
 ## Response
@@ -136,3 +138,4 @@ sivi-api-key: YOUR_API_KEY
 - `brandLogos` and `brandImages` are direct URLs to the image files
 - Results are paginated; use the returned `cursor` value in subsequent requests
 - Archived brands are excluded from results by default
+- If `isDefault` is set to `true` along with a `bId`, the `bId` will be overridden by the default brand's ID
