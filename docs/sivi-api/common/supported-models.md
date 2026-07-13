@@ -16,10 +16,18 @@ This reference lists all supported AI models across Sivi's design, image, and te
 | Name | Value | Credits | Label |
 |------|-------|---------|-------|
 | Auto Model | `auto` | 1–3 | per design |
+| Sivi Gen-3 Preview | `sivi-gen-3-preview` | 1 | per design |
+| Sivi Gen-3 Pro Preview | `sivi-gen-3-pro-preview` | 2 | per design |
+| Sivi Gen-3 Pro Fast Preview | `sivi-gen-3-pro-fast-preview` | 4 | per design |
+| Sivi Gen-3H Lite Preview | `sivi-gen-3h-lite-preview` | 1.5+ | per design |
+| Sivi Gen-3H Preview | `sivi-gen-3h-preview` | 2+ | per design |
+| Sivi Gen-3H Max Preview | `sivi-gen-3h-max-preview` | 5+ | per design |
 | Sivi Gen-2.8H Lite | `sivi-gen-28h-lite` | 1+ | per design |
 | Sivi Gen-2.8H Pro | `sivi-gen-28h` | 2+ | per design |
 | Sivi Gen-2.8H Max | `sivi-gen-28h-max` | 5+ | per design |
+| Sivi Gen-2.8 VLG | `sivi-gen-28-vlg` | 3+ | per design |
 | Sivi Gen-2.7 | `sivi-gen-27` | 1 | per design |
+| Sivi Gen-2.7i | `sivi-gen-27i` | 1 | per design |
 <!-- 
 ### Imagine Models
 
