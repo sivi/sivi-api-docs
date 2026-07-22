@@ -84,10 +84,11 @@ Most image models support the following dimensions:
 | 960 | 1280 | 3:4 |
 | 768 | 1344 | 4:7 |
 
-**Nano Banana, Nano Banana 2, and Nano Banana Pro** additionally support:
+**Nano Banana, Nano Banana 2, and Nano Banana Pro** support:
 
 | Width | Height | Aspect Ratio |
 |-------|--------|-------------|
+| 1024 | 1024 | 1:1 |
 | 1264 | 848 | ~3:2 |
 | 848 | 1264 | ~2:3 |
 | 1200 | 896 | ~4:3 |
