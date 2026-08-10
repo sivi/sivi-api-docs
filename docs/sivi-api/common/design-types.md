@@ -200,7 +200,7 @@ Sivi supports a wide variety of design types and subtypes, each tailored for spe
 |------|---------|--------------------------|
 | twitch | twitch-banner | 1200 × 480 |
 
-
+<!-- 
 ## AI Image Generation
 
 ### GPT Image (Square)
@@ -304,7 +304,7 @@ Sivi supports a wide variety of design types and subtypes, each tailored for spe
 | nano-banana-pro | nano-banana-pro-5:4-4k | 3712 × 4608 |
 | nano-banana-pro | nano-banana-pro-16:9-4k | 5504 × 3072 |
 | nano-banana-pro | nano-banana-pro-9:16-4k | 3072 × 5504 |
-| nano-banana-pro | nano-banana-pro-21:9-4k | 6192 × 2688 |
+| nano-banana-pro | nano-banana-pro-21:9-4k | 6192 × 2688 | -->
 
 
 ## Custom Dimensions
