@@ -11,12 +11,13 @@ When generating designs with Sivi, you can include various types of assets such 
 
 ## Supported Asset Types
 
-Sivi supports four main asset types:
+Sivi supports five main asset types:
 
 1. **Images** - Photographs, illustrations, or any raster graphics
 2. **Logos** - Brand logos or identity marks
 3. **Icons** - Simple graphic elements or symbols
 4. **Inspiration** - Reference images or mood boards
+5. **Decors** - Decorative elements to enhance the design
 
 ## Asset Type Specifications
 
@@ -153,6 +154,24 @@ Use the `inspiration` array to include reference images or mood boards that guid
 
 > **Note:** Inspirations do not support `imagePreference` or `touchPosition` options. They are used solely as style references and do not appear directly in the generated design.
 
+### Decors
+
+Use the `decors` array to include decorative elements in your designs.
+
+```json
+"assets": {
+  "decors": [{
+    "url": "https://images.hellosivi.com/fit-in/800x800/decors/dKN0gtrFJn4.png"
+  }]
+}
+```
+
+#### Decor Options
+
+| Option | Type | Description |
+|--------|------|-------------|
+| url | string | URL to the decor (must be publicly accessible) |
+
 ## Best Practices
 
 1. **Image Quality** - Use high-resolution images for best results
@@ -182,6 +201,9 @@ Use the `inspiration` array to include reference images or mood boards that guid
   }],
   "inspiration": [{
     "url": "https://example.com/inspiration.jpg"
+  }],
+  "decors": [{
+    "url": "https://example.com/decor.png"
   }]
 }
 ```

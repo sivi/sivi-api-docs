@@ -20,6 +20,7 @@ This reference lists all supported media `type` and `subType` values used across
 | `backdrop` | `backgroundImage`, `pattern`, `texture` | `backgroundImage` |
 | `icon` | `icon` | `icon` |
 | `inspiration` | `design` | `design` |
+| `decor` | `decor` | `decor` |
 
 ## Usage
 
@@ -40,4 +41,5 @@ This reference lists all supported media `type` and `subType` values used across
 | `backdrop` | `jpg`, `jpeg`, `png` |
 | `icon` | `svg` |
 | `inspiration` | `jpg`, `jpeg`, `png`, `webp` |
+| `decor` | `jpg`, `jpeg`, `png`, `webp` |
 | `font` | `ttf` |
