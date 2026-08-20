@@ -120,6 +120,14 @@ const sidebars = {
                     'sivi-api/core-api/dimensionSet/delete-dimension-set',
                   ],
                 },
+                {
+                  type: 'category',
+                  label: 'Components',
+                  items: [
+                    'sivi-api/core-api/components/get-component-library',
+                    'sivi-api/core-api/components/get-components',
+                  ],
+                },
               ],
             },
           ],
