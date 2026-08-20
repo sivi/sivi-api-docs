@@ -9,57 +9,78 @@ sidebar_position: 9
 
 When generating designs with Sivi, you can include various types of assets such as images, logos, and icons. This reference guide explains the supported asset types and their configuration options.
 
-## Supported Asset Types
+## Medias (Unified Input)
 
-Sivi supports five main asset types:
+The `medias` field is the recommended way to provide assets. It is a single flat array that combines Sivi library media (referenced by `mId`) and external URL-based assets. It replaces the legacy `siviAssets` + `assets` pair, which is still supported for backward compatibility.
 
-1. **Images** - Photographs, illustrations, or any raster graphics
-2. **Logos** - Brand logos or identity marks
-3. **Icons** - Simple graphic elements or symbols
-4. **Inspiration** - Reference images or mood boards
-5. **Decors** - Decorative elements to enhance the design
-
-## Asset Type Specifications
-
-### Images
-
-Use the `images` array to include photographs and other visual content in your designs.
+### Medias Format
 
 ```json
-"assets": {
-  "images": [{
-    "url": "https://images.hellosivi.com/fit-in/800x800/photos/sKN0gtrFJn4.jpg",
-    "imagePreference": {
-      "crop": true,
-      "removeBg": false
-    },
-    "touchPosition": {
-      "left": false,
-      "right": false,
-      "bottom": false,
-      "top": false,
-      "center": false
-    }
-  }]
-}
+"medias": [
+  { "mId": "mediaId1", "type": "photo" },
+  { "url": "https://example.com/image1.png", "type": "photo" }
+]
 ```
 
-#### Image Options
+### Media Item Options
 
-| Option | Type | Description |
-|--------|------|-------------|
-| url | string | URL to the image (must be publicly accessible) |
-| imagePreference | object | Preferences for how the image would be processed |
-| touchPosition | object | Control how the image is positioned in the design |
+| Option | Type | Required | Description |
+|--------|------|----------|-------------|
+| `mId` | string | Conditional | Media ID of a Sivi library asset. Preferred identifier — when present, `url` is not required. |
+| `url` | string | Conditional | Publicly accessible remote URL (`http://` or `https://`). Required when `mId` is absent. |
+| `type` | string | No | Media type. See [Supported Media Types](#supported-media-types) below. If omitted, defaults to `photo`, or `icon` when the `url` ends with `.svg`. |
+| `imagePreference` | object | No | Preferences for how the media would be processed. See [Image Preference Options](#image-preference-options). Applies to `photo`/`logo`/`icon`/`illustration`/`backdrop`/`screenshot` types. |
+| `touchPositions` | object | No | Control how the media is positioned in the design. See [Touch Position Options](#touch-position-options). |
+| `hueRotations` | object | No | Hue rotation preferences (Sivi library media only, with `mId`). |
+| `logoStyles` | array | No | Array of styles to apply to the logo. See [Logo Style Options](#logo-style-options). Applies to `logo` type. |
 
-#### Image Preference Options
+### Supported Media Types
+
+The `type` field uses the media abstract type. Supported values:
+
+| Media Type | Description |
+|------------|-------------|
+| `photo` | Photographs, illustrations, or any raster graphics |
+| `logo` | Brand logos or identity marks |
+| `icon` | Simple graphic elements or symbols |
+| `illustration` | Illustration assets |
+| `backdrop` | Backdrop / background images |
+| `screenshot` | Screen captures (e.g., iPhone screenshots) |
+| `inspiration` | Reference images or mood boards |
+| `decor` | Decorative elements |
+
+### Type Inference
+
+When `type` is omitted from a media item:
+
+1. If the `url` ends with `.svg` (case-insensitive, ignoring query string), `type` is set to `icon`.
+2. Otherwise, `type` defaults to `photo`.
+
+For `mId`-based media, the type is resolved from the Sivi library record.
+
+### Example with Medias
+
+```json
+"medias": [
+  { "mId": "mediaId1", "type": "photo", "imagePreference": { "crop": true, "removeBg": false } },
+  { "url": "https://example.com/logo.png", "type": "logo", "logoStyles": ["direct", "outline"] },
+  { "url": "https://example.com/icon.svg" },
+  { "url": "https://example.com/inspiration.jpg", "type": "inspiration" }
+]
+```
+
+> Note: The third item has no `type` and its `url` ends with `.svg`, so it is inferred as `icon`.
+
+## Common Options
+
+### Image Preference Options
 
 | Option | Type | Description |
 |--------|------|-------------|
 | crop | boolean or null | If `true`, the image can be cropped to fit the design. If `null` or not specified, will be auto-detected. |
 | removeBg | boolean or null | If `true`, attempts to remove the background from the image. If `null` or not specified, will be auto-detected. |
 
-#### Touch Position Options
+### Touch Position Options
 
 | Option | Type | Description |
 |--------|------|-------------|
@@ -69,35 +90,7 @@ Use the `images` array to include photographs and other visual content in your d
 | bottom | boolean | If `true`, the image would touch the bottom edge of the design |
 | center | boolean | If `true`, the image would be centered in the design |
 
-### Logos
-
-Use the `logos` array to include brand logos in your designs.
-
-```json
-"assets": {
-  "logos": [{
-    "url": "https://images.hellosivi.com/fit-in/200x200/logos/sLkA1TkxN67.png",
-    "logoStyles": ["direct", "outline"],
-    "touchPosition": {
-      "left": false,
-      "right": false,
-      "bottom": false,
-      "top": false,
-      "center": false
-    }
-  }]
-}
-```
-
-#### Logo Options
-
-| Option | Type | Description |
-|--------|------|-------------|
-| url | string | URL to the logo (must be publicly accessible) |
-| logoStyles | array | Array of styles to apply to the logo |
-| touchPosition | object | Control how the logo is positioned in the design |
-
-#### Logo Style Options
+### Logo Style Options
 
 The following logo styles can be specified in the `logoStyles` array:
 
@@ -108,69 +101,62 @@ The following logo styles can be specified in the `logoStyles` array:
 
 If not specified, defaults to `["direct", "outline"]`.
 
-### Icons
+## Legacy Assets Format (Backward Compatible)
 
-Use the `icons` array to include simple graphic elements or symbols in your designs.
+The legacy `assets` object and `siviAssets` array are still accepted. When `medias` is provided, `siviAssets` and `assets` are ignored. When `medias` is absent, the API internally builds medias from `siviAssets` + `assets` so behavior is unchanged.
+
+### siviAssets
+
+Array of Sivi library media references. Each item requires an `mId`:
+
+```json
+"siviAssets": [
+  { "mId": "mediaId1", "type": "photo" }
+]
+```
+
+### assets
+
+Object grouping URL-based assets by asset bucket key:
 
 ```json
 "assets": {
+  "images": [{
+    "url": "https://images.hellosivi.com/fit-in/800x800/photos/sKN0gtrFJn4.jpg",
+    "imagePreference": { "crop": true, "removeBg": false },
+    "touchPosition": { "left": false, "right": false, "bottom": false, "top": false, "center": false }
+  }],
+  "logos": [{
+    "url": "https://images.hellosivi.com/fit-in/200x200/logos/sLkA1TkxN67.png",
+    "logoStyles": ["direct", "outline"],
+    "touchPosition": { "left": false, "right": false, "bottom": false, "top": false, "center": false }
+  }],
   "icons": [{
-    "url": "https://images.hellosivi.com/fit-in/100x100/icons/iKN0gtrFJn4.png",
-    "touchPosition": {
-      "left": false,
-      "right": false,
-      "bottom": false,
-      "top": false,
-      "center": false
-    }
-  }]
-}
-```
-
-#### Icon Options
-
-| Option | Type | Description |
-|--------|------|-------------|
-| url | string | URL to the icon (must be publicly accessible) |
-| touchPosition | object | Control how the icon is positioned in the design |
-
-### Inspirations
-
-Use the `inspiration` array to include reference images or mood boards that guide the design style and aesthetic.
-
-```json
-"assets": {
+    "url": "https://images.hellosivi.com/fit-in/100x100/icons/iKN0gtrFJn4.png"
+  }],
   "inspiration": [{
-    "url": "https://images.helosivi.com/fit-in/800x800/inspirations/iKN0gtrFJn4.jpg"
-  }]
-}
-```
-
-#### Inspiration Options
-
-| Option | Type | Description |
-|--------|------|-------------|
-| url | string | URL to the inspiration image (must be publicly accessible) |
-
-> **Note:** Inspirations do not support `imagePreference` or `touchPosition` options. They are used solely as style references and do not appear directly in the generated design.
-
-### Decors
-
-Use the `decors` array to include decorative elements in your designs.
-
-```json
-"assets": {
+    "url": "https://images.hellosivi.com/fit-in/800x800/inspirations/iKN0gtrFJn4.jpg"
+  }],
   "decors": [{
     "url": "https://images.hellosivi.com/fit-in/800x800/decors/dKN0gtrFJn4.png"
   }]
 }
 ```
 
-#### Decor Options
+#### Asset Bucket Keys
 
-| Option | Type | Description |
-|--------|------|-------------|
-| url | string | URL to the decor (must be publicly accessible) |
+| Asset Bucket | Media Type | Description |
+|--------------|------------|-------------|
+| `images` | `photo` | Photographs, illustrations, or any raster graphics |
+| `logos` | `logo` | Brand logos or identity marks |
+| `icons` | `icon` | Simple graphic elements or symbols |
+| `illustration` | `illustration` | Illustration assets |
+| `backdrop` | `backdrop` | Backdrop / background images |
+| `screenShot` | `screenshot` | Screen captures (e.g., iPhone screenshots) |
+| `inspiration` | `inspiration` | Reference images or mood boards |
+| `decors` | `decor` | Decorative elements |
+
+> **Note:** Inspirations do not support `imagePreference` or `touchPosition` options. They are used solely as style references and do not appear directly in the generated design.
 
 ## Best Practices
 
@@ -180,30 +166,4 @@ Use the `decors` array to include decorative elements in your designs.
 4. **Asset Access** - Ensure all asset URLs are publicly accessible
 5. **Auto-detection** - When not specifying options like `crop` or `removeBg`, Sivi will automatically detect the best settings
 6. **touchPosition** - Touch positions are not mandatory, keep this null, Sivi will automatically detect the best settings. Also touch position is not guaranteed to be considered.
-
-## Example with Multiple Asset Types
-
-```json
-"assets": {
-  "images": [{
-    "url": "https://example.com/product.jpg",
-    "imagePreference": {
-      "crop": true,
-      "removeBg": true
-    }
-  }],
-  "logos": [{
-    "url": "https://example.com/logo.png",
-    "logoStyles": ["direct", "outline"]
-  }],
-  "icons": [{
-    "url": "https://example.com/icon.png"
-  }],
-  "inspiration": [{
-    "url": "https://example.com/inspiration.jpg"
-  }],
-  "decors": [{
-    "url": "https://example.com/decor.png"
-  }]
-}
-```
+7. **Prefer `medias`** - Use the `medias` field for new integrations. The legacy `assets`/`siviAssets` fields are supported for backward compatibility only.

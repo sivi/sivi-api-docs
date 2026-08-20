@@ -63,11 +63,13 @@ The `queryParams` should be URL-encoded and contain a valid JSON object with all
 
 ```json
 {
-  "contentSuggestions": [{
-    "title": "T-shirts for summer",
-    "offer": "Limited Time: Up to 20% Off",
-    "bulletlist": ["100% cotton", "Easy wash", "Double stitch"]
-  }],
+  "contentSuggestions": [
+    [
+      { "type": "title", "value": "T-shirts for summer" },
+      { "type": "offer", "value": "Limited Time: Up to 20% Off" },
+      { "type": "bulletlist", "value": ["100% cotton", "Easy wash", "Double stitch"] }
+    ]
+  ],
   "assetSuggestions": {
     "images": [{
       "url": "https://images.hellosivi.com/fit-in/800x800/photos/sKN0gtrFJn4.jpg"
@@ -75,6 +77,8 @@ The `queryParams` should be URL-encoded and contain a valid JSON object with all
   }
 }
 ```
+
+> **Note:** `contentSuggestions` returns content in the v2 `orderedContent` structure (an array of pages, where each page is an array of `{type, value}` items). See [Content Block Types](../common/content-block-types) for the full list of supported block types. Older suggestions created with the v1 `content` object structure are automatically converted to v2 when returned.
 
 ## Examples
 
@@ -103,4 +107,4 @@ curl -X POST "https://connect.sivi.ai/api/prod/v2/general/content-from-prompt" \
 
 ## Using with Design Generation
 
-The content suggestions from this endpoint can be directly used with the [Designs from Content](./designs-from-content) endpoint to create designs based on the suggested content. This two-step process allows for more control over the final design output by reviewing and potentially modifying the content before generating designs.
+The content suggestions from this endpoint can be directly used with the [Designs from Content](./designs-from-content) endpoint to create designs based on the suggested content. Each entry in `contentSuggestions` is an `orderedContent` array (a page of content blocks) and can be passed directly as an item in the `orderedContent` array of the designs-from-content request. This two-step process allows for more control over the final design output by reviewing and potentially modifying the content before generating designs.

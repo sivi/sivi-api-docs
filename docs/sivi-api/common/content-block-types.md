@@ -7,7 +7,26 @@ sidebar_position: 5
 
 # Content Block Types
 
-When using the [Designs from Content](/docs/sivi-api/core-api/designs-from-content) API, you can specify various types of content blocks within the `content` object. This document provides details about all supported content block types and how to use them effectively.
+When using the [Designs from Content](/docs/sivi-api/core-api/designs-from-content) API, you can specify various types of content blocks within the `orderedContent` array. This document provides details about all supported content block types and how to use them effectively.
+
+## Content Structure
+
+Content is provided as an ordered array of blocks. Each block is an object with a `type` and a `value`:
+
+```json
+"orderedContent": [
+  { "type": "title", "value": "T-shirts for summer" },
+  { "type": "offer", "value": "Limited Time: Up to 20% Off" },
+  { "type": "bulletlist", "value": ["100% cotton", "Easy wash", "Double stitch"] }
+]
+```
+
+| Field | Type | Description |
+|-------|------|-------------|
+| type | string | The content block type (e.g., `title`, `offer`, `bulletlist`). See the tables below for all supported types. |
+| value | string \| array | The content value. For list types (`bulletlist`, `numberedlist`), this is an array of strings; for all other types, it is a string. |
+
+> **Deprecation Notice:** The v1 `content` object (key-value pairs such as `{"title": "...", "offer": "..."}`) is deprecated in favor of the v2 `orderedContent` array. The v1 structure is still accepted for backward compatibility and is automatically converted to `orderedContent` internally. New integrations should use `orderedContent`.
 
 ## Text-Based Content Blocks
 
@@ -87,7 +106,31 @@ For incorporating social media handles:
 
 ## Example Usage
 
-Here's a comprehensive example showing how various content blocks can be combined:
+Here's a comprehensive example showing how various content blocks can be combined using the `orderedContent` array:
+
+```json
+{
+  "orderedContent": [
+    { "type": "title", "value": "Summer Collection 2025" },
+    { "type": "supertext", "value": "New Arrival" },
+    { "type": "subtext", "value": "Premium quality at affordable prices" },
+    { "type": "offer", "value": "Limited Time: Up to 30% Off" },
+    { "type": "bulletlist", "value": [
+      "Ethically sourced materials",
+      "Free shipping on orders over $50",
+      "30-day money-back guarantee"
+    ] },
+    { "type": "button", "value": "Shop Now" },
+    { "type": "date_time", "value": "August 31, 2025" },
+    { "type": "website", "value": "www.example-store.com" },
+    { "type": "instagram", "value": "@example_fashion" }
+  ]
+}
+```
+
+### v1 `content` object (deprecated)
+
+For backward compatibility, the v1 `content` object is still accepted and automatically converted to `orderedContent`:
 
 ```json
 {

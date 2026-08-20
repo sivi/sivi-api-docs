@@ -35,19 +35,10 @@ sivi-api-key: YOUR_API_KEY
   "subtype": "displayAds-half-page-ad",
   "dimension": { "width": 300, "height": 600 },
   "prompt": "generate a design for my t-shirt shop for summer campaign with 20% off",
-  "assets": {
-    "images": [{
-      "url": "https://images.hellosivi.com/fit-in/800x800/photos/sKN0gtrFJn4.jpg",
-      "imagePreference": {
-        "crop": true,
-        "removeBg": false
-      }
-    }],
-    "logos": [{
-         "url": "https://images.hellosivi.com/fit-in/200x200/logos/sLkA1TkxN67.png",
-         "logoStyles": ["direct", "outline"]
-    }]
-  },
+  "medias": [
+    { "mId": "mediaId1", "type": "photo", "imagePreference": { "crop": true, "removeBg": false } },
+    { "url": "https://images.hellosivi.com/fit-in/200x200/logos/sLkA1TkxN67.png", "type": "logo", "logoStyles": ["direct", "outline"] }
+  ],
   "language": "english",
   "numOfVariants": 4,
   "outputFormat": ["jpg", "png"],
@@ -93,7 +84,7 @@ sivi-api-key: YOUR_API_KEY
 For GET requests, you can pass the same parameters as in the POST request using a JSON object in the `queryParams` parameter:
 
 ```http
-GET designs-from-prompt?queryParams={"type":"displayAds","subtype":"displayAds-half-page-ad","dimension":{"width":300,"height":600},"prompt":"generate a design for my t-shirt shop for summer campaign with 20% off","assets":{"images":[{"url":"https://images.hellosivi.com/fit-in/800x800/photos/sKN0gtrFJn4.jpg","imagePreference":{"crop":true,"removeBg":false}}],"logos":[{"url":"https://images.hellosivi.com/fit-in/200x200/logos/sLkA1TkxN67.png","logoStyles":["direct","outline"]}]},"language":"english","numOfVariants":4}
+GET designs-from-prompt?queryParams={"type":"displayAds","subtype":"displayAds-half-page-ad","dimension":{"width":300,"height":600},"prompt":"generate a design for my t-shirt shop for summer campaign with 20% off","medias":[{"mId":"mediaId1","type":"photo","imagePreference":{"crop":true,"removeBg":false}},{"url":"https://images.hellosivi.com/fit-in/200x200/logos/sLkA1TkxN67.png","type":"logo","logoStyles":["direct","outline"]}],"language":"english","numOfVariants":4}
 ```
 
 The `queryParams` should be URL-encoded and contain a valid JSON object with all your request parameters.
@@ -107,7 +98,8 @@ The `queryParams` should be URL-encoded and contain a valid JSON object with all
 | dimension | object | Conditional | Width and height in pixels (required if type and subtype is "custom") |
 | numOfVariants | number | Yes | Number of design variations to generate (1-4) |
 | prompt | string | Yes | Natural language description of the design you want to create |
-| assets | object | No | Images, logos, and other visual assets. See [Asset Types Reference](../common/asset-types) for supported asset types and options. |
+| medias | array | No | Unified media input combining Sivi library assets (`mId`) and URL-based assets. See [Medias](../common/asset-types#medias-unified-input) for the format. Preferred over `assets`/`siviAssets`. |
+| assets | object | No | Legacy: images, logos, and other visual assets grouped by type. See [Asset Types Reference](../common/asset-types) for supported asset types and options. Ignored when `medias` is provided. |
 | language | string | No | Language for text elements (default: "english"). See [Supported Languages](../common/supported-languages) for all available options. |
 | colors | array | No | Preferred color hex codes |
 | fontGroups | array | No | Preferred fonts. See [Font API Reference](../core-api/get-fonts) and [FontGroup Reference](../common/settings#fontgroups) |
@@ -192,7 +184,7 @@ requestId status can be queried or received as webhook updates [Coming Soon]. Re
 ### GET Example
 
 ```bash
-curl -X GET "https://connect.sivi.ai/api/prod/v2/general/designs-from-prompt?queryParams%3D%7B%22type%22%3A%22displayAds%22%2C%22subtype%22%3A%22displayAds-half-page-ad%22%2C%22dimension%22%3A%7B%22width%22%3A300%2C%22height%22%3A600%7D%2C%22prompt%22%3A%22generate%20a%20design%20for%20my%20t-shirt%20shop%20for%20summer%20campaign%20with%2020%25%20off%22%2C%22assets%22%3A%7B%22images%22%3A%5B%7B%22url%22%3A%22https%3A%2F%2Fimages.hellosivi.com%2Ffit-in%2F800x800%2Fphotos%2FsKN0gtrFJn4.jpg%22%2C%22imagePreference%22%3A%7B%22crop%22%3Atrue%2C%22removeBg%22%3Afalse%7D%7D%5D%2C%22logos%22%3A%5B%7B%22url%22%3A%22https%3A%2F%2Fimages.hellosivi.com%2Ffit-in%2F200x200%2Flogos%2FsLkA1TkxN67.png%22%2C%22logoStyles%22%3A%5B%22direct%22%2C%22outline%22%5D%7D%5D%7D%2C%22language%22%3A%22english%22%2C%22numOfVariants%22%3A4%7D" \
+curl -X GET "https://connect.sivi.ai/api/prod/v2/general/designs-from-prompt?queryParams%3D%7B%22type%22%3A%22displayAds%22%2C%22subtype%22%3A%22displayAds-half-page-ad%22%2C%22dimension%22%3A%7B%22width%22%3A300%2C%22height%22%3A600%7D%2C%22prompt%22%3A%22generate%20a%20design%20for%20my%20t-shirt%20shop%20for%20summer%20campaign%20with%2020%25%20off%22%2C%22medias%22%3A%5B%7B%22mId%22%3A%22mediaId1%22%2C%22type%22%3A%22photo%22%2C%22imagePreference%22%3A%7B%22crop%22%3Atrue%2C%22removeBg%22%3Afalse%7D%7D%2C%7B%22url%22%3A%22https%3A%2F%2Fimages.hellosivi.com%2Ffit-in%2F200x200%2Flogos%2FsLkA1TkxN67.png%22%2C%22type%22%3A%22logo%22%2C%22logoStyles%22%3A%5B%22direct%22%2C%22outline%22%5D%7D%5D%2C%22language%22%3A%22english%22%2C%22numOfVariants%22%3A4%7D" \
   -H "sivi-api-key: YOUR_PUBLIC_API_KEY"
 ```
 

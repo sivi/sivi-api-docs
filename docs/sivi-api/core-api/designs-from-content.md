@@ -34,24 +34,15 @@ sivi-api-key: YOUR_API_KEY
   "type": "displayAds",
   "subtype": "displayAds-half-page-ad",
   "dimension": { "width": 300, "height": 600 },
-  "content": {
-    "title": "T-shirts for summer",
-    "offer": "Limited Time: Up to 20% Off",
-    "bulletlist": ["100% cotton", "Easy wash", "Double stitch"]
-  },
-  "assets": {
-    "images": [{
-      "url": "https://images.hellosivi.com/fit-in/800x800/photos/sKN0gtrFJn4.jpg",
-      "imagePreference": {
-        "crop": true,
-        "removeBg": false
-      }
-    }],
-    "logos": [{
-         "url": "https://images.hellosivi.com/fit-in/200x200/logos/sLkA1TkxN67.png",
-         "logoStyles": ["direct", "outline"]
-    }]
-  },
+  "orderedContent": [
+    { "type": "title", "value": "T-shirts for summer" },
+    { "type": "offer", "value": "Limited Time: Up to 20% Off" },
+    { "type": "bulletlist", "value": ["100% cotton", "Easy wash", "Double stitch"] }
+  ],
+  "medias": [
+    { "mId": "mediaId1", "type": "photo", "imagePreference": { "crop": true, "removeBg": false } },
+    { "url": "https://images.hellosivi.com/fit-in/200x200/logos/sLkA1TkxN67.png", "type": "logo", "logoStyles": ["direct", "outline"] }
+  ],
   "designInstructions": [
     "Create a professional email banner for a skincare sale. Use the provided inspiration for layout and color cues, but adapt the content to the skincare theme. Ensure a clean, high-quality look with a focus on the product and the promotional message."
   ],
@@ -95,13 +86,15 @@ sivi-api-key: YOUR_API_KEY
 }
 ```
 
+> **Deprecation Notice:** The `content` object (v1) is deprecated in favor of `orderedContent` (v2). The v1 `content` object is still accepted for backward compatibility and is automatically converted to the v2 `orderedContent` structure internally. New integrations should use `orderedContent`. See [Content Block Types](../common/content-block-types) for the v2 structure and supported block types.
+
 
 ## GET Request Parameters
 
 For GET requests, you can pass the same parameters as in the POST request using a JSON object in the `queryParams` parameter:
 
 ```http
-GET designs-from-content?queryParams={"name":"Summer campaign 2025","type":"displayAds","subtype":"displayAds-half-page-ad","dimension":{"width":300,"height":600},"content":{"title":"T-shirts for summer","offer":"Limited Time: Up to 20% Off","bulletlist":["100% cotton","Easy wash","Double stitch"]},"assets":{"images":[{"url":"https://images.hellosivi.com/fit-in/800x800/photos/sKN0gtrFJn4.jpg","imagePreference":{"crop":true,"removeBg":false}}],"logos":[{"url":"https://images.hellosivi.com/fit-in/200x200/logos/sLkA1TkxN67.png","logoStyles":["direct","outline"]}]},"language":"english","numOfVariants":4}
+GET designs-from-content?queryParams={"name":"Summer campaign 2025","type":"displayAds","subtype":"displayAds-half-page-ad","dimension":{"width":300,"height":600},"orderedContent":[{"type":"title","value":"T-shirts for summer"},{"type":"offer","value":"Limited Time: Up to 20% Off"},{"type":"bulletlist","value":["100% cotton","Easy wash","Double stitch"]}],"medias":[{"mId":"mediaId1","type":"photo","imagePreference":{"crop":true,"removeBg":false}},{"url":"https://images.hellosivi.com/fit-in/200x200/logos/sLkA1TkxN67.png","type":"logo","logoStyles":["direct","outline"]}],"language":"english","numOfVariants":4}
 ```
 
 The `queryParams` should be URL-encoded and contain a valid JSON object with all your request parameters.
@@ -115,8 +108,10 @@ The `queryParams` should be URL-encoded and contain a valid JSON object with all
 | subtype | string | Yes | Specific format within the type (e.g., displayAds-half-page-ad) |
 | dimension | object | Conditional | Width and height in pixels (required if type and subtype is "custom") |
 | numOfVariants | number | Yes | Number of design variations to generate (1-4) |
-| content | object | Yes | Textual content to include in the design See [Supported Content Block Types](../common/content-block-types) for all available options. | 
-| assets | object | No | Images, logos, and other visual assets. See [Asset Types Reference](../common/asset-types) for supported asset types and options. |
+| orderedContent | array | Yes | Ordered content blocks to include in the design, as an array of `{type, value}` items. See [Supported Content Block Types](../common/content-block-types) for all available options. |
+| content | object | Deprecated | Textual content to include in the design (v1 structure). Deprecated in favor of `orderedContent`; automatically converted to v2 internally. See [Supported Content Block Types](../common/content-block-types) for all available options. |
+| medias | array | No | Unified media input combining Sivi library assets (`mId`) and URL-based assets. See [Medias](../common/asset-types#medias-unified-input) for the format. Preferred over `assets`/`siviAssets`. |
+| assets | object | No | Legacy: images, logos, and other visual assets grouped by type. See [Asset Types Reference](../common/asset-types) for supported asset types and options. Ignored when `medias` is provided. |
 | language | string | No | Language of content (default: "english"). See [Supported Languages](../common/supported-languages) for all available options. |
 | colors | array | No | Preferred color hex code or rgba css string format |
 | fontGroups | array | No | Preferred fonts. See [Font API Reference](../core-api/get-fonts) and [FontGroup Reference](../common/settings#fontgroups) |
@@ -211,7 +206,7 @@ requestId status can be queried or received as webhook updates [Coming Soon]. Re
 ### GET Example
 
 ```bash
-curl -X GET "https://connect.sivi.ai/api/prod/v2/general/designs-from-content?queryParams%3D%7B%22name%22%3A%22Summer%20campaign%202025%22%2C%22type%22%3A%22displayAds%22%2C%22subtype%22%3A%22displayAds-half-page-ad%22%2C%22dimension%22%3A%7B%22width%22%3A300%2C%22height%22%3A600%7D%2C%22content%22%3A%7B%22title%22%3A%22T-shirts%20for%20summer%22%2C%22offer%22%3A%22Limited%20Time%3A%20Up%20to%2020%25%20Off%22%2C%22bulletList%22%3A%5B%22100%25%20cotton%22%2C%22Easy%20wash%22%2C%22Double%20stitch%22%5D%7D%2C%22assets%22%3A%7B%22images%22%3A%5B%7B%22url%22%3A%22https%3A%2F%2Fimages.hellosivi.com%2Ffit-in%2F800x800%2Fphotos%2FsKN0gtrFJn4.jpg%22%2C%22imagePreference%22%3A%7B%22crop%22%3Atrue%2C%22removeBg%22%3Afalse%7D%7D%5D%2C%22logos%22%3A%5B%7B%22url%22%3A%22https%3A%2F%2Fimages.hellosivi.com%2Ffit-in%2F200x200%2Flogos%2FsLkA1TkxN67.png%22%2C%22logoStyles%22%3A%5B%22direct%22%2C%22outline%22%5D%7D%5D%7D%2C%22language%22%3A%22english%22%2C%22numOfVariants%22%3A4%7D" \
+curl -X GET "https://connect.sivi.ai/api/prod/v2/general/designs-from-content?queryParams%3D%7B%22name%22%3A%22Summer%20campaign%202025%22%2C%22type%22%3A%22displayAds%22%2C%22subtype%22%3A%22displayAds-half-page-ad%22%2C%22dimension%22%3A%7B%22width%22%3A300%2C%22height%22%3A600%7D%2C%22orderedContent%22%3A%5B%7B%22type%22%3A%22title%22%2C%22value%22%3A%22T-shirts%20for%20summer%22%7D%2C%7B%22type%22%3A%22offer%22%2C%22value%22%3A%22Limited%20Time%3A%20Up%20to%2020%25%20Off%22%7D%2C%7B%22type%22%3A%22bulletlist%22%2C%22value%22%3A%5B%22100%25%20cotton%22%2C%22Easy%20wash%22%2C%22Double%20stitch%22%5D%7D%5D%2C%22medias%22%3A%5B%7B%22mId%22%3A%22mediaId1%22%2C%22type%22%3A%22photo%22%2C%22imagePreference%22%3A%7B%22crop%22%3Atrue%2C%22removeBg%22%3Afalse%7D%7D%2C%7B%22url%22%3A%22https%3A%2F%2Fimages.hellosivi.com%2Ffit-in%2F200x200%2Flogos%2FsLkA1TkxN67.png%22%2C%22type%22%3A%22logo%22%2C%22logoStyles%22%3A%5B%22direct%22%2C%22outline%22%5D%7D%5D%2C%22language%22%3A%22english%22%2C%22numOfVariants%22%3A4%7D" \
   -H "sivi-api-key: YOUR_PUBLIC_API_KEY"
 ```
 
@@ -228,24 +223,15 @@ curl -X POST "https://connect.sivi.ai/api/prod/v2/general/designs-from-content" 
   "type": "displayAds",
   "subtype": "displayAds-half-page-ad",
   "dimension": { "width": 300, "height": 600 },
-  "content": {
-    "title": "Summer Sale",
-    "offer": "Up to 40% Off",
-    "bulletlist": ["Free shipping", "Limited time only", "All sizes available"]
-  },
-  "assets": {
-    "images": [{
-      "url": "https://images.hellosivi.com/fit-in/800x800/photos/sKN0gtrFJn4.jpg",
-      "imagePreference": {
-        "crop": true,
-        "removeBg": false
-      }
-    }],
-    "logos": [{
-         "url": "https://images.hellosivi.com/fit-in/200x200/logos/sLkA1TkxN67.png",
-         "logoStyles": ["direct", "outline"]
-    }]
-  },
+  "orderedContent": [
+    { "type": "title", "value": "Summer Sale" },
+    { "type": "offer", "value": "Up to 40% Off" },
+    { "type": "bulletlist", "value": ["Free shipping", "Limited time only", "All sizes available"] }
+  ],
+  "medias": [
+    { "mId": "mediaId1", "type": "photo", "imagePreference": { "crop": true, "removeBg": false } },
+    { "url": "https://images.hellosivi.com/fit-in/200x200/logos/sLkA1TkxN67.png", "type": "logo", "logoStyles": ["direct", "outline"] }
+  ],
   "designInstructions": [
     "Create a professional email banner for a skincare sale. Use the provided inspiration for layout and color cues, but adapt the content to the skincare theme. Ensure a clean, high-quality look with a focus on the product and the promotional message."
   ],

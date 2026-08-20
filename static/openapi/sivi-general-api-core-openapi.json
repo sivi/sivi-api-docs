@@ -3452,6 +3452,41 @@
               }
             }
           },
+          "medias": {
+            "type": "array",
+            "description": "Unified media input combining Sivi library assets (mId) and URL-based assets. Preferred over assets/siviAssets. See Asset Types Reference -> Medias.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "mId": {
+                  "type": "string",
+                  "description": "Media ID of a Sivi library asset. Preferred identifier; when present, url is not required."
+                },
+                "url": {
+                  "type": "string",
+                  "description": "Publicly accessible remote URL (http/https). Required when mId is absent.",
+                  "example": "https://images.hellosivi.com/fit-in/800x800/photos/sKN0gtrFJn4.jpg"
+                },
+                "type": {
+                  "type": "string",
+                  "description": "Media type (photo, logo, icon, illustration, backdrop, screenshot, inspiration, decor). Defaults to photo, or icon when url ends with .svg.",
+                  "example": "photo"
+                },
+                "imagePreference": {
+                  "type": "object",
+                  "properties": {
+                    "crop": { "type": "boolean", "example": true },
+                    "removeBg": { "type": "boolean", "example": false }
+                  }
+                },
+                "logoStyles": {
+                  "type": "array",
+                  "items": { "type": "string" },
+                  "example": ["direct", "outline"]
+                }
+              }
+            }
+          },
           "language": {
             "type": "string",
             "default": "english",
@@ -3574,6 +3609,41 @@
                       "example": ["direct", "outline"]
                     }
                   }
+                }
+              }
+            }
+          },
+          "medias": {
+            "type": "array",
+            "description": "Unified media input combining Sivi library assets (mId) and URL-based assets. Preferred over assets/siviAssets. See Asset Types Reference -> Medias.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "mId": {
+                  "type": "string",
+                  "description": "Media ID of a Sivi library asset. Preferred identifier; when present, url is not required."
+                },
+                "url": {
+                  "type": "string",
+                  "description": "Publicly accessible remote URL (http/https). Required when mId is absent.",
+                  "example": "https://images.helosivi.com/fit-in/800x800/photos/sKN0gtrFJn4.jpg"
+                },
+                "type": {
+                  "type": "string",
+                  "description": "Media type (photo, logo, icon, illustration, backdrop, screenshot, inspiration, decor). Defaults to photo, or icon when url ends with .svg.",
+                  "example": "photo"
+                },
+                "imagePreference": {
+                  "type": "object",
+                  "properties": {
+                    "crop": { "type": "boolean", "example": true },
+                    "removeBg": { "type": "boolean", "example": false }
+                  }
+                },
+                "logoStyles": {
+                  "type": "array",
+                  "items": { "type": "string" },
+                  "example": ["direct", "outline"]
                 }
               }
             }

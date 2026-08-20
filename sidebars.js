@@ -100,6 +100,26 @@ const sidebars = {
                     'sivi-api/core-api/fonts/upload-fonts',
                   ],
                 },
+                {
+                  type: 'category',
+                  label: 'Design Cues',
+                  items: [
+                    'sivi-api/core-api/designCues/get-design-cues',
+                    'sivi-api/core-api/designCues/create-design-cues',
+                    'sivi-api/core-api/designCues/update-design-cues',
+                    'sivi-api/core-api/designCues/delete-design-cues',
+                  ],
+                },
+                {
+                  type: 'category',
+                  label: 'Dimension Sets',
+                  items: [
+                    'sivi-api/core-api/dimensionSet/get-dimension-sets',
+                    'sivi-api/core-api/dimensionSet/create-dimension-set',
+                    'sivi-api/core-api/dimensionSet/update-dimension-set',
+                    'sivi-api/core-api/dimensionSet/delete-dimension-set',
+                  ],
+                },
               ],
             },
           ],
