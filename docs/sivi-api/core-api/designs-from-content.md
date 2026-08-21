@@ -86,8 +86,6 @@ sivi-api-key: YOUR_API_KEY
 }
 ```
 
-> **Deprecation Notice:** The `content` object (v1) is deprecated in favor of `documentJson` (v2). The v1 `content` object is still accepted for backward compatibility and is automatically converted to the v2 `documentJson` structure internally. New integrations should use `documentJson`. See [Content Block Types](../common/content-block-types) for the v2 structure and supported block types.
-
 
 ## GET Request Parameters
 
@@ -109,10 +107,8 @@ The `queryParams` should be URL-encoded and contain a valid JSON object with all
 | dimension | object | Conditional | Width and height in pixels (required if type and subtype is "custom") |
 | numOfVariants | number | Yes | Number of design variations to generate (1-4) |
 | documentJson | array | Yes | Ordered content blocks to include in the design, as an array of `{type, value}` items. See [Supported Content Block Types](../common/content-block-types) for all available options. |
-| orderedContent | array | Deprecated | Deprecated alias for `documentJson`. Automatically converted to `documentJson` internally. New integrations should use `documentJson`. |
 | content | object | Deprecated | Textual content to include in the design (v1 structure). Deprecated in favor of `documentJson`; automatically converted to v2 internally. See [Supported Content Block Types](../common/content-block-types) for all available options. |
 | medias | array | No | Unified media input combining Sivi library assets (`mId`) and URL-based assets. See [Medias](../common/asset-types#medias-unified-input) for the format. Preferred over `assets`/`siviAssets`. |
-| assets | object | No | Legacy: images, logos, and other visual assets grouped by type. See [Asset Types Reference](../common/asset-types) for supported asset types and options. Ignored when `medias` is provided. |
 | language | string | No | Language of content (default: "english"). See [Supported Languages](../common/supported-languages) for all available options. |
 | colors | array | No | Preferred color hex code or rgba css string format |
 | fontGroups | array | No | Preferred fonts. See [Font API Reference](../core-api/get-fonts) and [FontGroup Reference](../common/settings#fontgroups) |

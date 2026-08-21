@@ -99,7 +99,6 @@ The `queryParams` should be URL-encoded and contain a valid JSON object with all
 | numOfVariants | number | Yes | Number of design variations to generate (1-4) |
 | prompt | string | Yes | Natural language description of the design you want to create |
 | medias | array | No | Unified media input combining Sivi library assets (`mId`) and URL-based assets. See [Medias](../common/asset-types#medias-unified-input) for the format. Preferred over `assets`/`siviAssets`. |
-| assets | object | No | Legacy: images, logos, and other visual assets grouped by type. See [Asset Types Reference](../common/asset-types) for supported asset types and options. Ignored when `medias` is provided. |
 | language | string | No | Language for text elements (default: "english"). See [Supported Languages](../common/supported-languages) for all available options. |
 | colors | array | No | Preferred color hex codes |
 | fontGroups | array | No | Preferred fonts. See [Font API Reference](../core-api/get-fonts) and [FontGroup Reference](../common/settings#fontgroups) |
