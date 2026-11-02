@@ -79,6 +79,7 @@ For `mId`-based media, the type is resolved from the Sivi library record.
 |--------|------|-------------|
 | crop | boolean or null | If `true`, the image can be cropped to fit the design. If `null` or not specified, will be auto-detected. |
 | removeBg | boolean or null | If `true`, attempts to remove the background from the image. If `null` or not specified, will be auto-detected. |
+| enhancement | boolean or null | If `true`, the image is enhanced (quality and clarity) before it is used. Applied by [designs-from-prompt](../core-api/designs-from-prompt). Not applied by designs-from-content. |
 
 ### Touch Position Options
 

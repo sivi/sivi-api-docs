@@ -59,6 +59,7 @@ const sidebars = {
                 'sivi-api/core-api/designs-from-prompt',
                 'sivi-api/core-api/designs-from-content',
                 'sivi-api/core-api/content-from-prompt',
+                'sivi-api/core-api/extract-webpage',
                 'sivi-api/core-api/get-request-status',
                 'sivi-api/core-api/get-design-variants',
                 'sivi-api/core-api/update-webhook',

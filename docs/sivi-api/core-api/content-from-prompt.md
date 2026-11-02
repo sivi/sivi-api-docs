@@ -54,31 +54,49 @@ The `queryParams` should be URL-encoded and contain a valid JSON object with all
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
 | prompt | string | Yes | Natural language description of the content you need suggestions for | 
-| type | string | Yes | Primary design type (e.g., displayAds, socialMedia). See [Supported Types & Subtypes](../common/design-types) for all available options. | 
-| subtype | string | Yes | Specific format within the type (e.g., displayAds-half-page-ad) |
-| dimension | object | Conditional | Width and height in pixels (required if type and subtype is "custom") |
+| type | string | No | Primary design type (e.g., displayAds, socialMedia). See [Supported Types & Subtypes](../common/design-types) for all available options. |
+| subtype | string | Conditional | Specific format within the type (e.g., displayAds-half-page-ad). Provide `subtype` or `dimension`. |
+| dimension | object | Conditional | Width and height in pixels. Required if `type` or `subtype` is "custom"; otherwise an alternative to `subtype`. |
 | language | string | No | Language for generated content (default: "english"). See [Supported Languages](../common/supported-languages) for all available options. |
 
 ## Response
 
+The request is processed asynchronously. The POST returns a `requestId`:
+
 ```json
 {
-  "contentSuggestions": [
-    [
-      { "type": "title", "value": "T-shirts for summer" },
-      { "type": "offer", "value": "Limited Time: Up to 20% Off" },
-      { "type": "bulletlist", "value": ["100% cotton", "Easy wash", "Double stitch"] }
-    ]
-  ],
-  "assetSuggestions": {
-    "images": [{
-      "url": "https://images.hellosivi.com/fit-in/800x800/photos/sKN0gtrFJn4.jpg"
-    }]
+  "status": 200,
+  "body": {
+    "queueWaitTime": 0,
+    "requestId": "sbhMkIZKCPp"
   }
 }
 ```
 
-> **Note:** `contentSuggestions` returns content in the v2 `documentJson` structure (an array of pages, where each page is an array of `{type, value}` items). See [Content Block Types](../common/content-block-types) for the full list of supported block types. Older suggestions created with the v1 `content` object structure are automatically converted to v2 when returned.
+Poll [Get Request Status](./get-request-status) with the `requestId`. When the status is `completed`, the result contains the generated content:
+
+```json
+{
+  "status": 200,
+  "body": {
+    "status": "completed",
+    "requestId": "sbhMkIZKCPp",
+    "result": {
+      "documentJson": [
+        { "type": "title", "value": "T-shirts for summer" },
+        { "type": "offer", "value": "Limited Time: Up to 20% Off" },
+        { "type": "bulletlist", "value": ["100% cotton", "Easy wash", "Double stitch"] }
+      ]
+    }
+  }
+}
+```
+
+> **Note:** `documentJson` is a single page of `{type, value}` content blocks. See [Content Block Types](../common/content-block-types) for the full list of block types.
+
+### Error Responses
+
+Invalid or disallowed requests are rejected immediately with a `422` (see [Designs from Prompt](./designs-from-prompt#error-responses) for the `errors` format). Requests containing NSFW content, attempts to extract system instructions, or content unrelated to design creation are not processed.
 
 ## Examples
 
@@ -107,4 +125,4 @@ curl -X POST "https://connect.sivi.ai/api/prod/v2/general/content-from-prompt" \
 
 ## Using with Design Generation
 
-The content suggestions from this endpoint can be directly used with the [Designs from Content](./designs-from-content) endpoint to create designs based on the suggested content. Each entry in `contentSuggestions` is an `documentJson` array (a page of content blocks) and can be passed directly as an item in the `documentJson` array of the designs-from-content request. This two-step process allows for more control over the final design output by reviewing and potentially modifying the content before generating designs.
+The content suggestions from this endpoint can be directly used with the [Designs from Content](./designs-from-content) endpoint to create designs based on the suggested content. The returned `documentJson` can be passed directly as the `documentJson` of the designs-from-content request. This two-step process allows for more control over the final design output by reviewing and potentially modifying the content before generating designs.

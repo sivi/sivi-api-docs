@@ -31,11 +31,11 @@ currentbId parameter helps to identify the brand's preferences. It is required o
 
 ## colors
 
-Preferred color hex codes. It is required only in mode custom.
+Preferred colors as hex codes or rgba strings (max 10). When provided they are used as given. When omitted, Sivi uses the colors of the brand in `currentbId`, and if there is no brand, picks colors that suit the request.
 
 ## fontGroups
 
-Preferred font groups for typography. It is required only in mode custom. Must contain exactly 3 font entries, one for each type: `heading`, `subHeading`, and `body`.
+Preferred font groups for typography. When provided they are used as given. When omitted, Sivi uses the fonts of the brand in `currentbId`, and if the brand has none, picks fonts that suit the content. Must contain exactly 3 font entries, one for each type: `heading`, `subHeading`, and `body`.
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
@@ -137,6 +137,10 @@ Preferred image style. It is required only in mode custom.
 
 Generation mode for the design. Possible values: `compose`, `imagine`. Based on this mode, the corresponding `designModel` value should be selected from the supported models. -->
 
+## genPrimaryImages
+
+Boolean, default `false`. When `true`, [designs-from-prompt](../core-api/designs-from-prompt) generates a primary (hero) image for the design from your prompt. No image is generated if `medias` already contains a `photo`.
+
 ## designModel
 
 Model to use for design generation. See [Supported Models](../common/supported-models) for compose and image generation mode allowed models.
@@ -158,6 +162,12 @@ Here's a comprehensive example showing how to use the brand persona parameters:
 ```
 
 <!-- "tones": ["playful", "maximal"] -->
+
+## Mode and preferences
+
+- `auto`: Sivi chooses `theme`, `frameStyle`, `backdropStyle`, `focus` and `imageStyle` for the request.
+- `brand`: preferences come from the brand in `currentbId` and are used as given.
+- `custom`: the values you send in `settings` are used as given.
 
 ## Usage Notes
 

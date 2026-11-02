@@ -102,17 +102,17 @@ The `queryParams` should be URL-encoded and contain a valid JSON object with all
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
 | name | string | Yes | Name of the design project |
-| type | string | Yes | Primary design type (e.g., displayAds, socialMedia)  See [Supported Types & Subtypes](../common/design-types) for all available options. | 
-| subtype | string | Yes | Specific format within the type (e.g., displayAds-half-page-ad) |
-| dimension | object | Conditional | Width and height in pixels (required if type and subtype is "custom") |
-| numOfVariants | number | Yes | Number of design variations to generate (1-4) |
+| type | string | No | Primary design type (e.g., displayAds, socialMedia). See [Supported Types & Subtypes](../common/design-types) for all available options. |
+| subtype | string | Conditional | Specific format within the type (e.g., displayAds-half-page-ad). Provide `subtype` or `dimension`. |
+| dimension | object | Conditional | Width and height in pixels. Required if `type` or `subtype` is "custom"; otherwise an alternative to `subtype`. |
+| numOfVariants | number | No | Number of design variations to generate (1-4, default 1) |
 | documentJson | array | Yes | Ordered content blocks to include in the design, as an array of `{type, value}` items. See [Supported Content Block Types](../common/content-block-types) for all available options. |
 | content | object | Deprecated | Textual content to include in the design (v1 structure). Deprecated in favor of `documentJson`; automatically converted to v2 internally. See [Supported Content Block Types](../common/content-block-types) for all available options. |
-| medias | array | No | Unified media input combining Sivi library assets (`mId`) and URL-based assets. See [Medias](../common/asset-types#medias-unified-input) for the format. Preferred over `assets`/`siviAssets`. |
+| medias | array | No | Unified media input combining Sivi library assets (`mId`) and URL-based assets. See [Medias](../common/asset-types#medias-unified-input). Medias are combined with `documentJson`; to control where a media appears, put it inside `documentJson` itself. No image generation, enhancement or extraction is performed by this endpoint. |
 | language | string | No | Language of content (default: "english"). See [Supported Languages](../common/supported-languages) for all available options. |
 | colors | array | No | Preferred color hex code or rgba css string format |
 | fontGroups | array | No | Preferred fonts. See [Font API Reference](../core-api/get-fonts) and [FontGroup Reference](../common/settings#fontgroups) |
-| outputFormat | array | No | Output format for the generated designs. Currently only supports ["jpg"]. PNG support coming soon. |
+| outputFormat | array | No | Output formats for the generated designs: `jpg`, `png`. |
 | designInstructions | array | No | Array of instruction strings passed to the Sivi agent to guide the design generation process |
 | settings | object | No | Preferences for the design generation request. See [Settings Reference](../common/settings) for all available options. |
 
@@ -178,11 +178,30 @@ requestId status can be queried or received as webhook updates [Coming Soon]. Re
 
 #### Invalid Input (422 Unprocessable Entity)
 
+Requests are validated strictly: unknown fields, wrong types and missing required fields are rejected. `message` summarises the first problem and `errors` lists every problem with the path of the offending field.
+
 ```json
 {
   "status": 422,
   "body": {
-    "message": "Invalid input"
+    "message": "settings.currentbId: \"currentbId\" is required when settings.mode is \"brand\"",
+    "errors": [
+      { "path": "settings.currentbId", "message": "\"currentbId\" is required when settings.mode is \"brand\"" },
+      { "path": "subtype", "message": "Provide \"subtype\" or \"dimension\"" }
+    ]
+  }
+}
+```
+
+#### Request Not Allowed (422 Unprocessable Entity)
+
+Every request is screened before it is queued. Requests containing NSFW content, attempts to extract system instructions, or content unrelated to design creation are rejected immediately. No request is created and no credits are used.
+
+```json
+{
+  "status": 422,
+  "body": {
+    "message": "This request cannot be processed. Please provide a valid design request."
   }
 }
 ```

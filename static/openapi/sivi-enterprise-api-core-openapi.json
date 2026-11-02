@@ -546,7 +546,7 @@
           "content-from-prompt"
         ],
         "summary": "Generate content suggestions (GET)",
-        "description": "Generate content suggestions based on natural language prompts",
+        "description": "Generate documentJson for a prompt. Asynchronous: poll get-request-status; the completed result contains documentJson.",
         "operationId": "getEnterpriseContentFromPrompt",
         "security": [
           {
@@ -576,43 +576,20 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "contentSuggestions": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "title": {
-                            "type": "string",
-                            "example": "T-shirts for summer"
-                          },
-                          "offer": {
-                            "type": "string",
-                            "example": "Limited Time: Up to 20% Off"
-                          },
-                          "bulletlist": {
-                            "type": "array",
-                            "items": {
-                              "type": "string"
-                            },
-                            "example": ["100% cotton", "Easy wash", "Double stitch"]
-                          }
-                        }
-                      }
+                    "status": {
+                      "type": "integer",
+                      "example": 200
                     },
-                    "assetSuggestions": {
+                    "body": {
                       "type": "object",
                       "properties": {
-                        "images": {
-                          "type": "array",
-                          "items": {
-                            "type": "object",
-                            "properties": {
-                              "url": {
-                                "type": "string",
-                                "example": "https://images.hellosivi.com/fit-in/800x800/photos/sKN0gtrFJn4.jpg"
-                              }
-                            }
-                          }
+                        "requestId": {
+                          "type": "string",
+                          "example": "sbhMkIZKCPp"
+                        },
+                        "queueWaitTime": {
+                          "type": "number",
+                          "example": 0
                         }
                       }
                     }
@@ -658,7 +635,7 @@
           "content-from-prompt"
         ],
         "summary": "Generate content suggestions (POST)",
-        "description": "Generate content suggestions based on natural language prompts",
+        "description": "Generate documentJson for a prompt. Asynchronous: poll get-request-status; the completed result contains documentJson.",
         "operationId": "postEnterpriseContentFromPrompt",
         "security": [
           {
@@ -684,43 +661,20 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "contentSuggestions": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "title": {
-                            "type": "string",
-                            "example": "T-shirts for summer"
-                          },
-                          "offer": {
-                            "type": "string",
-                            "example": "Limited Time: Up to 20% Off"
-                          },
-                          "bulletlist": {
-                            "type": "array",
-                            "items": {
-                              "type": "string"
-                            },
-                            "example": ["100% cotton", "Easy wash", "Double stitch"]
-                          }
-                        }
-                      }
+                    "status": {
+                      "type": "integer",
+                      "example": 200
                     },
-                    "assetSuggestions": {
+                    "body": {
                       "type": "object",
                       "properties": {
-                        "images": {
-                          "type": "array",
-                          "items": {
-                            "type": "object",
-                            "properties": {
-                              "url": {
-                                "type": "string",
-                                "example": "https://images.hellosivi.com/fit-in/800x800/photos/sKN0gtrFJn4.jpg"
-                              }
-                            }
-                          }
+                        "requestId": {
+                          "type": "string",
+                          "example": "sbhMkIZKCPp"
+                        },
+                        "queueWaitTime": {
+                          "type": "number",
+                          "example": 0
                         }
                       }
                     }
@@ -811,7 +765,12 @@
                         },
                         "status": {
                           "type": "string",
-                          "enum": ["pending", "processing", "complete", "failed"],
+                          "enum": [
+                            "pending",
+                            "processing",
+                            "complete",
+                            "failed"
+                          ],
                           "example": "complete"
                         },
                         "requestId": {
@@ -933,7 +892,11 @@
                 },
                 "type": {
                   "type": "string",
-                  "enum": ["all", "generated", "edited"],
+                  "enum": [
+                    "all",
+                    "generated",
+                    "edited"
+                  ],
                   "default": "all",
                   "example": "all",
                   "description": "Type of variants to retrieve"
@@ -1143,6 +1106,87 @@
           }
         }
       }
+    },
+    "/enterprise/extract-webpage": {
+      "post": {
+        "tags": [
+          "extract-webpage"
+        ],
+        "summary": "Extract content, colors and fonts from up to 3 webpages",
+        "description": "Asynchronous: poll get-request-status; the completed result contains documents[] with markdown content, fontGroups and colors per page. Charged per successfully extracted page.",
+        "operationId": "extractWebpage_enterprise",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExtractWebpageRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "body": {
+                      "type": "object",
+                      "properties": {
+                        "requestId": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid Input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InputError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerError"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -1157,32 +1201,27 @@
     "schemas": {
       "DesignsFromContentRequest": {
         "type": "object",
+        "additionalProperties": false,
         "required": [
-          "name",
-          "type",
-          "subtype",
-          "content",
-          "numOfVariants"
+          "documentJson"
         ],
         "properties": {
-          "name": {
-            "type": "string",
-            "example": "Summer campaign 2025",
-            "description": "Name of the design project"
-          },
           "type": {
             "type": "string",
-            "example": "displayAds",
-            "description": "Primary design type"
+            "example": "displayAds"
           },
           "subtype": {
             "type": "string",
             "example": "displayAds-half-page-ad",
-            "description": "Specific format within the type"
+            "description": "Provide subtype or dimension"
           },
           "dimension": {
             "type": "object",
-            "description": "Width and height in pixels (required if type/subtype is 'custom')",
+            "required": [
+              "width",
+              "height"
+            ],
+            "description": "Required when type or subtype is custom; otherwise an alternative to subtype",
             "properties": {
               "width": {
                 "type": "integer",
@@ -1194,173 +1233,86 @@
               }
             }
           },
-          "content": {
-            "type": "object",
-            "description": "Textual content to include in the design",
-            "properties": {
-              "title": {
-                "type": "string",
-                "example": "T-shirts for summer"
-              },
-              "offer": {
-                "type": "string",
-                "example": "Limited Time: Up to 20% Off"
-              },
-              "bulletlist": {
-                "type": "array",
-                "items": {
+          "name": {
+            "type": "string"
+          },
+          "documentJson": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": [
+                "type"
+              ],
+              "properties": {
+                "type": {
                   "type": "string"
                 },
-                "example": ["100% cotton", "Easy wash", "Double stitch"]
-              }
-            }
-          },
-          "assets": {
-            "type": "object",
-            "description": "Images, logos, and other visual assets",
-            "properties": {
-              "images": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "url": {
-                      "type": "string",
-                      "example": "https://images.hellosivi.com/fit-in/800x800/photos/sKN0gtrFJn4.jpg"
-                    },
-                    "imagePreference": {
-                      "type": "object",
-                      "properties": {
-                        "crop": {
-                          "type": "boolean",
-                          "example": true
-                        },
-                        "removeBg": {
-                          "type": "boolean",
-                          "example": false
-                        }
-                      }
-                    }
-                  }
-                }
-              },
-              "logos": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "url": {
-                      "type": "string",
-                      "example": "https://images.hellosivi.com/fit-in/200x200/logos/sLkA1TkxN67.png"
-                    },
-                    "logoStyles": {
-                      "type": "array",
-                      "items": {
-                        "type": "string"
-                      },
-                      "example": ["direct", "outline"]
-                    }
-                  }
-                }
+                "value": {}
               }
             }
           },
           "medias": {
             "type": "array",
-            "description": "Unified media input combining Sivi library assets (mId) and URL-based assets. Preferred over assets/siviAssets. See Asset Types Reference -> Medias.",
             "items": {
-              "type": "object",
-              "properties": {
-                "mId": {
-                  "type": "string",
-                  "description": "Media ID of a Sivi library asset. Preferred identifier; when present, url is not required."
-                },
-                "url": {
-                  "type": "string",
-                  "description": "Publicly accessible remote URL (http/https). Required when mId is absent.",
-                  "example": "https://images.helosivi.com/fit-in/800x800/photos/sKN0gtrFJn4.jpg"
-                },
-                "type": {
-                  "type": "string",
-                  "description": "Media type (photo, logo, icon, illustration, backdrop, screenshot, inspiration, decor). Defaults to photo, or icon when url ends with .svg.",
-                  "example": "photo"
-                },
-                "imagePreference": {
-                  "type": "object",
-                  "properties": {
-                    "crop": { "type": "boolean", "example": true },
-                    "removeBg": { "type": "boolean", "example": false }
-                  }
-                },
-                "logoStyles": {
-                  "type": "array",
-                  "items": { "type": "string" },
-                  "example": ["direct", "outline"]
-                }
-              }
+              "$ref": "#/components/schemas/Media"
             }
           },
           "language": {
             "type": "string",
-            "default": "english",
-            "example": "english",
-            "description": "Language of content"
-          },
-          "colors": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "example": ["#5662EC", "#EF9AB2"],
-            "description": "Preferred color hex codes"
-          },
-          "fonts": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "example": [],
-            "description": "Font preferences (coming soon)"
+            "default": "english"
           },
           "numOfVariants": {
             "type": "integer",
             "minimum": 1,
             "maximum": 4,
-            "example": 4,
-            "description": "Number of design variations to generate (1-4)"
+            "default": 1
           },
           "outputFormat": {
             "type": "array",
             "items": {
+              "type": "string",
+              "enum": [
+                "jpg",
+                "png"
+              ]
+            }
+          },
+          "designInstructions": {
+            "type": "array",
+            "maxItems": 10,
+            "items": {
               "type": "string"
-            },
-            "default": ["jpg"],
-            "example": ["jpg", "png"],
-            "description": "Output formats for the generated designs"
+            }
+          },
+          "settings": {
+            "$ref": "#/components/schemas/Settings"
           }
         }
       },
       "DesignsFromPromptRequest": {
         "type": "object",
+        "additionalProperties": false,
         "required": [
-          "type",
-          "subtype",
           "prompt"
         ],
         "properties": {
           "type": {
             "type": "string",
-            "example": "displayAds",
-            "description": "Primary design type"
+            "example": "displayAds"
           },
           "subtype": {
             "type": "string",
             "example": "displayAds-half-page-ad",
-            "description": "Specific format within the type"
+            "description": "Provide subtype or dimension"
           },
           "dimension": {
             "type": "object",
-            "description": "Width and height in pixels (required if type/subtype is 'custom')",
+            "required": [
+              "width",
+              "height"
+            ],
+            "description": "Required when type or subtype is custom; otherwise an alternative to subtype",
             "properties": {
               "width": {
                 "type": "integer",
@@ -1374,144 +1326,88 @@
           },
           "prompt": {
             "type": "string",
-            "example": "Create a summer t-shirt ad with a beach theme for our new clothing line",
-            "description": "Natural language prompt describing your design"
-          },
-          "assets": {
-            "type": "object",
-            "properties": {
-              "images": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "url": {
-                      "type": "string",
-                      "example": "https://images.hellosivi.com/fit-in/800x800/photos/sKN0gtrFJn4.jpg"
-                    },
-                    "imagePreference": {
-                      "type": "object",
-                      "properties": {
-                        "crop": {
-                          "type": "boolean",
-                          "example": true
-                        },
-                        "removeBg": {
-                          "type": "boolean",
-                          "example": false
-                        }
-                      }
-                    }
-                  }
-                }
-              },
-              "logos": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "url": {
-                      "type": "string",
-                      "example": "https://images.hellosivi.com/fit-in/200x200/logos/sLkA1TkxN67.png"
-                    },
-                    "logoStyles": {
-                      "type": "array",
-                      "items": {
-                        "type": "string"
-                      },
-                      "example": ["direct", "outline"]
-                    }
-                  }
-                }
-              }
-            }
+            "maxLength": 8000,
+            "description": "Natural language description of the design"
           },
           "medias": {
             "type": "array",
-            "description": "Unified media input combining Sivi library assets (mId) and URL-based assets. Preferred over assets/siviAssets. See Asset Types Reference -> Medias.",
             "items": {
-              "type": "object",
-              "properties": {
-                "mId": {
-                  "type": "string",
-                  "description": "Media ID of a Sivi library asset. Preferred identifier; when present, url is not required."
-                },
-                "url": {
-                  "type": "string",
-                  "description": "Publicly accessible remote URL (http/https). Required when mId is absent.",
-                  "example": "https://images.helosivi.com/fit-in/800x800/photos/sKN0gtrFJn4.jpg"
-                },
-                "type": {
-                  "type": "string",
-                  "description": "Media type (photo, logo, icon, illustration, backdrop, screenshot, inspiration, decor). Defaults to photo, or icon when url ends with .svg.",
-                  "example": "photo"
-                },
-                "imagePreference": {
-                  "type": "object",
-                  "properties": {
-                    "crop": { "type": "boolean", "example": true },
-                    "removeBg": { "type": "boolean", "example": false }
-                  }
-                },
-                "logoStyles": {
-                  "type": "array",
-                  "items": { "type": "string" },
-                  "example": ["direct", "outline"]
-                }
-              }
+              "$ref": "#/components/schemas/Media"
             }
           },
-          "colors": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "example": ["#5662EC", "#EF9AB2"],
-            "description": "Preferred color hex codes"
-          },
-          "fonts": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "example": [],
-            "description": "Font preferences (coming soon)"
+          "language": {
+            "type": "string",
+            "default": "english"
           },
           "numOfVariants": {
             "type": "integer",
             "minimum": 1,
             "maximum": 4,
-            "default": 4,
-            "example": 4,
-            "description": "Number of design variations to generate (1-4)"
+            "default": 1
           },
           "outputFormat": {
             "type": "array",
             "items": {
+              "type": "string",
+              "enum": [
+                "jpg",
+                "png"
+              ]
+            }
+          },
+          "designInstructions": {
+            "type": "array",
+            "maxItems": 10,
+            "items": {
               "type": "string"
-            },
-            "default": ["jpg"],
-            "example": ["jpg", "png"],
-            "description": "Output formats for the generated designs"
+            }
+          },
+          "settings": {
+            "$ref": "#/components/schemas/Settings"
           }
         }
       },
       "ContentFromPromptRequest": {
         "type": "object",
+        "additionalProperties": false,
         "required": [
           "prompt"
         ],
         "properties": {
+          "type": {
+            "type": "string",
+            "example": "displayAds"
+          },
+          "subtype": {
+            "type": "string",
+            "example": "displayAds-half-page-ad",
+            "description": "Provide subtype or dimension"
+          },
+          "dimension": {
+            "type": "object",
+            "required": [
+              "width",
+              "height"
+            ],
+            "description": "Required when type or subtype is custom; otherwise an alternative to subtype",
+            "properties": {
+              "width": {
+                "type": "integer",
+                "example": 300
+              },
+              "height": {
+                "type": "integer",
+                "example": 600
+              }
+            }
+          },
           "prompt": {
             "type": "string",
-            "example": "Generate content for summer t-shirt promotion",
-            "description": "Natural language prompt describing the content you need"
+            "maxLength": 8000
           },
           "language": {
             "type": "string",
-            "default": "english",
-            "example": "english",
-            "description": "Language for the generated content"
+            "default": "english"
           }
         }
       },
@@ -1544,7 +1440,10 @@
             "items": {
               "type": "string"
             },
-            "example": ["jpg", "png"],
+            "example": [
+              "jpg",
+              "png"
+            ],
             "description": "Output formats to return"
           }
         }
@@ -1597,7 +1496,23 @@
             "properties": {
               "message": {
                 "type": "string",
-                "example": "Invalid input"
+                "example": "subtype: Provide \"subtype\" or \"dimension\""
+              },
+              "errors": {
+                "type": "array",
+                "description": "Present for validation errors",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "path": {
+                      "type": "string",
+                      "example": "subtype"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
               }
             }
           }
@@ -1618,6 +1533,224 @@
                 "example": "Server internal error"
               }
             }
+          }
+        }
+      },
+      "ExtractWebpageRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "webpages"
+        ],
+        "properties": {
+          "webpages": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 3,
+            "items": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        }
+      },
+      "Media": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "Provide exactly one of mId or url.",
+        "properties": {
+          "mId": {
+            "type": "string",
+            "description": "Media ID of a Sivi library asset"
+          },
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "Publicly accessible http(s) URL"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "photo",
+              "logo",
+              "icon",
+              "illustration",
+              "backdrop",
+              "screenshot",
+              "inspiration",
+              "decor"
+            ]
+          },
+          "imagePreference": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "crop": {
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
+              "removeBg": {
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
+              "enhancement": {
+                "type": [
+                  "boolean",
+                  "null"
+                ],
+                "description": "Enhance the image before use. Applied by designs-from-prompt only."
+              }
+            }
+          },
+          "touchPositions": {
+            "type": "object",
+            "properties": {
+              "left": {
+                "type": "boolean"
+              },
+              "right": {
+                "type": "boolean"
+              },
+              "top": {
+                "type": "boolean"
+              },
+              "bottom": {
+                "type": "boolean"
+              },
+              "center": {
+                "type": "boolean"
+              }
+            }
+          },
+          "hueRotations": {
+            "type": "object"
+          },
+          "logoStyles": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "direct",
+                "neutral",
+                "colorful",
+                "outline"
+              ]
+            }
+          }
+        }
+      },
+      "FontGroup": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "type"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "heading",
+              "subHeading",
+              "body"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "enabled",
+              "disabled"
+            ]
+          },
+          "addedBy": {
+            "type": "string",
+            "enum": [
+              "system",
+              "user"
+            ]
+          }
+        }
+      },
+      "Settings": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "Preferences for the request. currentbId is required when mode is brand.",
+        "properties": {
+          "mode": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "brand",
+              "custom"
+            ]
+          },
+          "currentbId": {
+            "type": "string"
+          },
+          "colors": {
+            "type": "array",
+            "maxItems": 10,
+            "items": {
+              "type": "string"
+            },
+            "description": "Hex or rgba colors. Fallback when omitted: brand colors, then generated."
+          },
+          "fontGroups": {
+            "type": "array",
+            "minItems": 3,
+            "maxItems": 3,
+            "items": {
+              "$ref": "#/components/schemas/FontGroup"
+            },
+            "description": "Exactly one heading, subHeading and body. Fallback when omitted: brand fonts, then chosen from the content."
+          },
+          "theme": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "frameStyle": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "backdropStyle": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "focus": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "imageStyle": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "designModel": {
+            "type": "string"
+          },
+          "genPrimaryImages": {
+            "type": "boolean",
+            "default": false,
+            "description": "Generate a primary image from the prompt (designs-from-prompt). Skipped if medias already has a photo."
           }
         }
       }

@@ -93,16 +93,17 @@ The `queryParams` should be URL-encoded and contain a valid JSON object with all
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
-| type | string | Yes | Primary design type (e.g., displayAds, socialMedia)  See [Supported Types & Subtypes](../common/design-types) for all available options. | 
-| subtype | string | Yes | Specific format within the type (e.g., displayAds-half-page-ad) |
-| dimension | object | Conditional | Width and height in pixels (required if type and subtype is "custom") |
-| numOfVariants | number | Yes | Number of design variations to generate (1-4) |
-| prompt | string | Yes | Natural language description of the design you want to create |
+| prompt | string | Yes | Natural language description of the design you want to create (max 8000 characters) |
+| type | string | No | Primary design type (e.g., displayAds, socialMedia). See [Supported Types & Subtypes](../common/design-types) for all available options. |
+| subtype | string | Conditional | Specific format within the type (e.g., displayAds-half-page-ad). Provide `subtype` or `dimension`. |
+| dimension | object | Conditional | Width and height in pixels. Required if `type` or `subtype` is "custom"; otherwise an alternative to `subtype`. |
+| numOfVariants | number | No | Number of design variations to generate (1-4, default 1) |
 | medias | array | No | Unified media input combining Sivi library assets (`mId`) and URL-based assets. See [Medias](../common/asset-types#medias-unified-input) for the format. Preferred over `assets`/`siviAssets`. |
 | language | string | No | Language for text elements (default: "english"). See [Supported Languages](../common/supported-languages) for all available options. |
-| colors | array | No | Preferred color hex codes |
-| fontGroups | array | No | Preferred fonts. See [Font API Reference](../core-api/get-fonts) and [FontGroup Reference](../common/settings#fontgroups) |
-| outputFormat | array | No | Output format for the generated designs. Currently only supports ["jpg"]. PNG support coming soon. |
+| colors | array | No | Preferred colors (hex code or rgba string). Equivalent to `settings.colors`; see [Settings](../common/settings#colors) for the fallback order when omitted. |
+| fontGroups | array | No | Preferred fonts. Equivalent to `settings.fontGroups`; see [FontGroup Reference](../common/settings#fontgroups) for the fallback order when omitted. |
+| outputFormat | array | No | Output formats for the generated designs: `jpg`, `png`. |
+| designInstructions | array | No | Art-direction notes for the design. Sivi refines them automatically; if omitted, Sivi writes its own. |
 | settings | object | No | Preferences for the design generation request. See [Settings Reference](../common/settings) for all available options. |
 
 ## Response
@@ -158,11 +159,30 @@ requestId status can be queried or received as webhook updates [Coming Soon]. Re
 
 #### Invalid Input (422 Unprocessable Entity)
 
+Requests are validated strictly: unknown fields, wrong types and missing required fields are rejected. `message` summarises the first problem and `errors` lists every problem with the path of the offending field.
+
 ```json
 {
   "status": 422,
   "body": {
-    "message": "Invalid input"
+    "message": "settings.currentbId: \"currentbId\" is required when settings.mode is \"brand\"",
+    "errors": [
+      { "path": "settings.currentbId", "message": "\"currentbId\" is required when settings.mode is \"brand\"" },
+      { "path": "subtype", "message": "Provide \"subtype\" or \"dimension\"" }
+    ]
+  }
+}
+```
+
+#### Request Not Allowed (422 Unprocessable Entity)
+
+Every request is screened before it is queued. Requests containing NSFW content, attempts to extract system instructions, or content unrelated to design creation are rejected immediately. No request is created and no credits are used.
+
+```json
+{
+  "status": 422,
+  "body": {
+    "message": "This request cannot be processed. Please provide a valid design request."
   }
 }
 ```
