@@ -31,11 +31,11 @@ currentbId parameter helps to identify the brand's preferences. It is required o
 
 ## colors
 
-Preferred colors as hex codes or rgba strings (max 10). When provided they are used as given. When omitted, Sivi uses the colors of the brand in `currentbId`, and if there is no brand, picks colors that suit the request.
+Preferred colors as hex codes or rgba strings (max 10). Colors are resolved in this order: the colors you send (custom), then the colors of the brand in `currentbId` (when `mode` is `brand`), and when both are empty Sivi picks colors that suit the request (auto).
 
 ## fontGroups
 
-Preferred font groups for typography. When provided they are used as given. When omitted, Sivi uses the fonts of the brand in `currentbId`, and if the brand has none, picks fonts that suit the content. Must contain exactly 3 font entries, one for each type: `heading`, `subHeading`, and `body`.
+Preferred font groups for typography. Fonts are resolved in this order: the font groups you send (custom), then the fonts of the brand in `currentbId` (when `mode` is `brand`), and when both are empty Sivi picks one font group that suits the content (auto). Must contain exactly 3 font entries, one for each type: `heading`, `subHeading`, and `body`.
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
@@ -139,7 +139,7 @@ Generation mode for the design. Possible values: `compose`, `imagine`. Based on 
 
 ## genPrimaryImages
 
-Boolean, default `false`. When `true`, [designs-from-prompt](../core-api/designs-from-prompt) generates a primary (hero) image for the design from your prompt. No image is generated if `medias` already contains a `photo`.
+Boolean, default `false`. When `true`, [designs-from-prompt](../core-api/designs-from-prompt) generates a primary (hero) image for the design from your prompt, and [content-from-prompt](../core-api/content-from-prompt) generates an image next to the text (content-from-prompt generates an image unless you send `false`). No image is generated if `medias` already contains a primary asset (anything other than a `logo` or `backdrop`).
 
 ## designModel
 
@@ -180,7 +180,7 @@ Send only the fields you need. Sivi converts them into the full settings of the 
 
 ## Mode and preferences
 
-- `auto`: Sivi chooses `theme`, `frameStyle`, `backdropStyle`, `focus` and `imageStyle` for the request.
+- `auto`: Sivi chooses `theme`, `frameStyle`, `backdropStyle`, `focus` and `imageStyle` for the request. A `custom` or `brand` request whose `theme`, `frameStyle`, `focus` and `imageStyle` are all empty is treated as `auto`; once Sivi has chosen, the design is stored in `custom` mode.
 - `brand`: preferences come from the brand in `currentbId` and are used as given.
 - `custom`: the values you send in `settings` are used as given.
 

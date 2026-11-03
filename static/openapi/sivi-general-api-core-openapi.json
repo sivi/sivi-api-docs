@@ -3877,7 +3877,7 @@
                   "boolean",
                   "null"
                 ],
-                "description": "Enhance the image before use. Applied by designs-from-prompt only."
+                "description": "Default false. Enhance a photo before use; the enhanced image replaces the original. Applied by designs-from-prompt and designs-from-content, photo medias only."
               }
             }
           },

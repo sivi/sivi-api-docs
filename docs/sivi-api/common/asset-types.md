@@ -79,9 +79,9 @@ For `mId`-based media, the type is resolved from the Sivi library record.
 
 | Option | Type | Description |
 |--------|------|-------------|
-| crop | boolean or null | If `true`, the image can be cropped to fit the design. If `null` or not specified, will be auto-detected. |
-| removeBg | boolean or null | If `true`, attempts to remove the background from the image. If `null` or not specified, will be auto-detected. |
-| enhancement | boolean or null | If `true`, the image is enhanced (quality and clarity) before it is used. Applied by [designs-from-prompt](../core-api/designs-from-prompt). Not applied by designs-from-content. |
+| crop | boolean or null | Stored with the media and used by the design engine when placing the image. [designs-from-prompt](../core-api/designs-from-prompt) and [designs-from-content](../core-api/designs-from-content) do not run a separate crop step. |
+| removeBg | boolean or null | Stored with the media. These APIs do not run a separate background-removal step. |
+| enhancement | boolean or null | Default `false`. If `true`, a `photo` is enhanced (quality and clarity) before it is used and the enhanced image replaces the original in the design. Applied by [designs-from-prompt](../core-api/designs-from-prompt) and [designs-from-content](../core-api/designs-from-content). Other media types are never enhanced. |
 
 ### Touch Position Options
 
@@ -167,6 +167,6 @@ Object grouping URL-based assets by asset bucket key:
 2. **Logo Transparency** - For logos, use transparent PNG files when possible
 3. **Multiple Assets** - You can include multiple assets of each type (up to 4 total)
 4. **Asset Access** - Ensure all asset URLs are publicly accessible
-5. **Auto-detection** - When not specifying options like `crop` or `removeBg`, Sivi will automatically detect the best settings
+5. **Auto-detection** - When not specifying options like `crop` or `removeBg`, Sivi will automatically detect the best settings. Enhancement is opt-in: it only runs for a `photo` with `enhancement: true`
 6. **touchPosition** - Touch positions are not mandatory, keep this null, Sivi will automatically detect the best settings. Also touch position is not guaranteed to be considered.
 7. **Prefer `medias`** - Use the `medias` field for new integrations. The legacy `assets`/`siviAssets` fields are supported for backward compatibility only.

@@ -58,6 +58,7 @@ The `queryParams` should be URL-encoded and contain a valid JSON object with all
 | subtype | string | Conditional | Specific format within the type (e.g., displayAds-half-page-ad). Provide `subtype` or `dimension`. |
 | dimension | object | Conditional | Width and height in pixels. Required if `type` or `subtype` is "custom"; otherwise an alternative to `subtype`. |
 | language | string | No | Language for generated content (default: "english"). See [Supported Languages](../common/supported-languages) for all available options. |
+| settings.genPrimaryImages | boolean | No | An image is generated and merged into the `documentJson` next to the text. Send `false` to get text only. |
 
 ## Response
 
