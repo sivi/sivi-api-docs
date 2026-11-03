@@ -96,7 +96,7 @@ Poll [Get Request Status](./get-request-status) with the `requestId`. When the s
 
 ### Error Responses
 
-Invalid or disallowed requests are rejected immediately with a `422` (see [Designs from Prompt](./designs-from-prompt#error-responses) for the `errors` format). Requests containing NSFW content, attempts to extract system instructions, or content unrelated to design creation are not processed.
+Invalid input is rejected immediately with a `422` (see [Designs from Prompt](./designs-from-prompt#error-responses) for the `errors` format). Requests containing NSFW content, attempts to extract system instructions, or content unrelated to design creation are screened while the request is processed: the request ends with `status: "failed"` and a `reason` in [Get Request Status](./get-request-status), and only the screening is charged.
 
 ## Examples
 

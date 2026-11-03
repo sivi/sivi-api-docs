@@ -156,7 +156,17 @@ curl -X GET "https://connect.sivi.ai/api/prod/v2/general/get-request-status?quer
 | link | string | Link to view the design in the Sivi web application |
 | shareLink | string | Shareable link to the design results |
 | reason | string | Reason for failure (only present in failed responses) |
-| result | object | Contains generated design URLs and variants (null for pending/failed jobs) |
+| result | object | The outcome of the request (null for pending/failed jobs). Its content depends on the endpoint, see below. |
+
+### Result by endpoint
+
+| Request created by | `result` contains |
+|---|---|
+| [designs-from-prompt](./designs-from-prompt), [designs-from-content](./designs-from-content) | Generated design URLs and variants |
+| [content-from-prompt](./content-from-prompt) | `documentJson`: the generated content blocks |
+| [extract-webpage](./extract-webpage) | `documents`: markdown content, colors, fonts, images and logos per page |
+
+A request that was rejected by the input screening (NSFW content, attempts to extract system instructions, content unrelated to design) ends as `failed` with the rejection in `reason`. Only the screening is charged.
 
 
 ## Best Practices

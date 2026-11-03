@@ -35,6 +35,10 @@ sivi-api-key: YOUR_API_KEY
 |-----------|------|----------|-------------|
 | webpages | array | Yes | 1 to 3 public `http(s)` page URLs |
 
+## Content and images
+
+`content` is the page text as markdown. Images in the markdown are replaced with the uploaded copies from `images` and `logos`, so the links are stable and nothing is embedded: base64 images and images that could not be uploaded are removed from the markdown. The `mId` values can be used in `medias` of [designs-from-prompt](./designs-from-prompt) and [designs-from-content](./designs-from-content).
+
 ## Credits
 
 Credits are charged per webpage that is extracted successfully. A page that cannot be extracted is reported with an error and is not charged.
@@ -71,7 +75,9 @@ Poll [Get Request Status](./get-request-status) with the `requestId`. When the s
             { "id": "fs_ansajw", "name": "roboto semi bold", "type": "subHeading" },
             { "id": "fs_ansjwa", "name": "roboto regular", "type": "body" }
           ],
-          "colors": ["#f2f2f2"]
+          "colors": ["#f2f2f2"],
+          "images": [{ "mId": "w_123----b9c1d7.jpg", "url": "https://images.hellosivi.com/photos/b9c1d7.jpg" }],
+          "logos": [{ "mId": "w_123----4fa2e0.png", "url": "https://images.hellosivi.com/logos/4fa2e0.png" }]
         },
         {
           "webpage": "https://example.invalid",
@@ -89,8 +95,10 @@ Poll [Get Request Status](./get-request-status) with the `requestId`. When the s
 | webpage | string | The requested URL |
 | status | string | `success` or `failed` |
 | content | string | Page content as markdown (success only) |
-| fontGroups | array | Fonts found on the page (success only) |
-| colors | array | Brand colors as hex codes (success only) |
+| fontGroups | array | The page's fonts as a Sivi font group: one heading, one subHeading and one body font. Can be sent as `settings.fontGroups`. (success only) |
+| colors | array | Brand colors as hex codes. Can be sent as `settings.colors`. (success only) |
+| images | array | Images found on the page, uploaded to your workspace: `{ mId, url }` (success only) |
+| logos | array | Logos found on the page, uploaded to your workspace: `{ mId, url }` (success only) |
 | error | string | Reason the page could not be extracted (failed only) |
 
 ### Error Responses

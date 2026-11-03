@@ -49,6 +49,8 @@ The `type` field uses the media abstract type. Supported values:
 | `inspiration` | Reference images or mood boards |
 | `decor` | Decorative elements |
 
+> Media objects can carry additional attributes (for example `name`, `width`, `height`, `source`, `subType`). Sivi only reads the fields listed here; the rest are ignored.
+
 ### Type Inference
 
 When `type` is omitted from a media item:

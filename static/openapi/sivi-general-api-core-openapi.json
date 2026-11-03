@@ -46,7 +46,7 @@
           "designs-from-content"
         ],
         "summary": "Generate designs from content (GET)",
-        "description": "Generate designs directly from your structured content, including titles, descriptions, brand assets, and images",
+        "description": "Generate designs directly from your structured content, including titles, descriptions, brand assets, and images Requests are screened while processed: NSFW content, attempts to extract system instructions and non-design requests end as status failed with a reason in get-request-status; only the screening is charged.",
         "operationId": "getDesignsFromContent",
         "security": [
           {
@@ -157,7 +157,7 @@
           "designs-from-content"
         ],
         "summary": "Generate designs from content (POST)",
-        "description": "Generate designs directly from your structured content, including titles, descriptions, brand assets, and images",
+        "description": "Generate designs directly from your structured content, including titles, descriptions, brand assets, and images Requests are screened while processed: NSFW content, attempts to extract system instructions and non-design requests end as status failed with a reason in get-request-status; only the screening is charged.",
         "operationId": "postDesignsFromContent",
         "security": [
           {
@@ -266,7 +266,7 @@
           "designs-from-prompt"
         ],
         "summary": "Generate designs from prompt (GET)",
-        "description": "Create designs using natural language prompts that describe your design needs",
+        "description": "Create designs using natural language prompts that describe your design needs Requests are screened while processed: NSFW content, attempts to extract system instructions and non-design requests end as status failed with a reason in get-request-status; only the screening is charged.",
         "operationId": "getDesignsFromPrompt",
         "security": [
           {
@@ -437,7 +437,7 @@
           "designs-from-prompt"
         ],
         "summary": "Generate designs from prompt (POST)",
-        "description": "Create designs using natural language prompts that describe your design needs",
+        "description": "Create designs using natural language prompts that describe your design needs Requests are screened while processed: NSFW content, attempts to extract system instructions and non-design requests end as status failed with a reason in get-request-status; only the screening is charged.",
         "operationId": "postDesignsFromPrompt",
         "security": [
           {
@@ -546,7 +546,7 @@
           "content-from-prompt"
         ],
         "summary": "Generate content suggestions (GET)",
-        "description": "Generate documentJson for a prompt. Asynchronous: poll get-request-status; the completed result contains documentJson.",
+        "description": "Generate documentJson for a prompt. Asynchronous: poll get-request-status; the completed result contains documentJson. Requests are screened while processed: NSFW content, attempts to extract system instructions and non-design requests end as status failed with a reason in get-request-status; only the screening is charged.",
         "operationId": "getContentFromPrompt",
         "security": [
           {
@@ -635,7 +635,7 @@
           "content-from-prompt"
         ],
         "summary": "Generate content suggestions (POST)",
-        "description": "Generate documentJson for a prompt. Asynchronous: poll get-request-status; the completed result contains documentJson.",
+        "description": "Generate documentJson for a prompt. Asynchronous: poll get-request-status; the completed result contains documentJson. Requests are screened while processed: NSFW content, attempts to extract system instructions and non-design requests end as status failed with a reason in get-request-status; only the screening is charged.",
         "operationId": "postContentFromPrompt",
         "security": [
           {
@@ -1088,7 +1088,7 @@
           "designs-from-content"
         ],
         "summary": "Generate designs from content (GET)",
-        "description": "Generate designs directly from your structured content, including titles, descriptions, brand assets, and images",
+        "description": "Generate designs directly from your structured content, including titles, descriptions, brand assets, and images Requests are screened while processed: NSFW content, attempts to extract system instructions and non-design requests end as status failed with a reason in get-request-status; only the screening is charged.",
         "operationId": "getEnterpriseDesignsFromContent",
         "security": [
           {
@@ -1199,7 +1199,7 @@
           "designs-from-content"
         ],
         "summary": "Generate designs from content (POST)",
-        "description": "Generate designs directly from your structured content, including titles, descriptions, brand assets, and images",
+        "description": "Generate designs directly from your structured content, including titles, descriptions, brand assets, and images Requests are screened while processed: NSFW content, attempts to extract system instructions and non-design requests end as status failed with a reason in get-request-status; only the screening is charged.",
         "operationId": "postEnterpriseDesignsFromContent",
         "security": [
           {
@@ -1308,7 +1308,7 @@
           "designs-from-prompt"
         ],
         "summary": "Generate designs from prompt (GET)",
-        "description": "Create designs using natural language prompts that describe your design needs",
+        "description": "Create designs using natural language prompts that describe your design needs Requests are screened while processed: NSFW content, attempts to extract system instructions and non-design requests end as status failed with a reason in get-request-status; only the screening is charged.",
         "operationId": "getEnterpriseDesignsFromPrompt",
         "security": [
           {
@@ -1479,7 +1479,7 @@
           "designs-from-prompt"
         ],
         "summary": "Generate designs from prompt (POST)",
-        "description": "Create designs using natural language prompts that describe your design needs",
+        "description": "Create designs using natural language prompts that describe your design needs Requests are screened while processed: NSFW content, attempts to extract system instructions and non-design requests end as status failed with a reason in get-request-status; only the screening is charged.",
         "operationId": "postEnterpriseDesignsFromPrompt",
         "security": [
           {
@@ -1588,7 +1588,7 @@
           "content-from-prompt"
         ],
         "summary": "Generate content suggestions (GET)",
-        "description": "Generate documentJson for a prompt. Asynchronous: poll get-request-status; the completed result contains documentJson.",
+        "description": "Generate documentJson for a prompt. Asynchronous: poll get-request-status; the completed result contains documentJson. Requests are screened while processed: NSFW content, attempts to extract system instructions and non-design requests end as status failed with a reason in get-request-status; only the screening is charged.",
         "operationId": "getEnterpriseContentFromPrompt",
         "security": [
           {
@@ -1677,7 +1677,7 @@
           "content-from-prompt"
         ],
         "summary": "Generate content suggestions (POST)",
-        "description": "Generate documentJson for a prompt. Asynchronous: poll get-request-status; the completed result contains documentJson.",
+        "description": "Generate documentJson for a prompt. Asynchronous: poll get-request-status; the completed result contains documentJson. Requests are screened while processed: NSFW content, attempts to extract system instructions and non-design requests end as status failed with a reason in get-request-status; only the screening is charged.",
         "operationId": "postEnterpriseContentFromPrompt",
         "security": [
           {
@@ -2155,7 +2155,7 @@
           "designs-from-content"
         ],
         "summary": "Generate designs from content (GET)",
-        "description": "Generate designs directly from your structured content, including titles, descriptions, brand assets, and images",
+        "description": "Generate designs directly from your structured content, including titles, descriptions, brand assets, and images Requests are screened while processed: NSFW content, attempts to extract system instructions and non-design requests end as status failed with a reason in get-request-status; only the screening is charged.",
         "operationId": "getEnterpriseDesignsFromContent",
         "security": [
           {
@@ -2266,7 +2266,7 @@
           "designs-from-content"
         ],
         "summary": "Generate designs from content (POST)",
-        "description": "Generate designs directly from your structured content, including titles, descriptions, brand assets, and images",
+        "description": "Generate designs directly from your structured content, including titles, descriptions, brand assets, and images Requests are screened while processed: NSFW content, attempts to extract system instructions and non-design requests end as status failed with a reason in get-request-status; only the screening is charged.",
         "operationId": "postEnterpriseDesignsFromContent",
         "security": [
           {
@@ -2375,7 +2375,7 @@
           "designs-from-prompt"
         ],
         "summary": "Generate designs from prompt (GET)",
-        "description": "Create designs using natural language prompts that describe your design needs",
+        "description": "Create designs using natural language prompts that describe your design needs Requests are screened while processed: NSFW content, attempts to extract system instructions and non-design requests end as status failed with a reason in get-request-status; only the screening is charged.",
         "operationId": "getEnterpriseDesignsFromPrompt",
         "security": [
           {
@@ -2546,7 +2546,7 @@
           "designs-from-prompt"
         ],
         "summary": "Generate designs from prompt (POST)",
-        "description": "Create designs using natural language prompts that describe your design needs",
+        "description": "Create designs using natural language prompts that describe your design needs Requests are screened while processed: NSFW content, attempts to extract system instructions and non-design requests end as status failed with a reason in get-request-status; only the screening is charged.",
         "operationId": "postEnterpriseDesignsFromPrompt",
         "security": [
           {
@@ -2655,7 +2655,7 @@
           "content-from-prompt"
         ],
         "summary": "Generate content suggestions (GET)",
-        "description": "Generate documentJson for a prompt. Asynchronous: poll get-request-status; the completed result contains documentJson.",
+        "description": "Generate documentJson for a prompt. Asynchronous: poll get-request-status; the completed result contains documentJson. Requests are screened while processed: NSFW content, attempts to extract system instructions and non-design requests end as status failed with a reason in get-request-status; only the screening is charged.",
         "operationId": "getEnterpriseContentFromPrompt",
         "security": [
           {
@@ -2744,7 +2744,7 @@
           "content-from-prompt"
         ],
         "summary": "Generate content suggestions (POST)",
-        "description": "Generate documentJson for a prompt. Asynchronous: poll get-request-status; the completed result contains documentJson.",
+        "description": "Generate documentJson for a prompt. Asynchronous: poll get-request-status; the completed result contains documentJson. Requests are screened while processed: NSFW content, attempts to extract system instructions and non-design requests end as status failed with a reason in get-request-status; only the screening is charged.",
         "operationId": "postEnterpriseContentFromPrompt",
         "security": [
           {
@@ -3222,7 +3222,7 @@
           "extract-webpage"
         ],
         "summary": "Extract content, colors and fonts from up to 3 webpages",
-        "description": "Asynchronous: poll get-request-status; the completed result contains documents[] with markdown content, fontGroups and colors per page. Charged per successfully extracted page.",
+        "description": "Asynchronous: poll get-request-status; the completed result contains documents[] with, per page, markdown content (images replaced by uploaded copies), fontGroups, colors, images and logos. Charged per successfully extracted page.",
         "operationId": "extractWebpage_general",
         "security": [
           {
@@ -3303,7 +3303,7 @@
           "extract-webpage"
         ],
         "summary": "Extract content, colors and fonts from up to 3 webpages",
-        "description": "Asynchronous: poll get-request-status; the completed result contains documents[] with markdown content, fontGroups and colors per page. Charged per successfully extracted page.",
+        "description": "Asynchronous: poll get-request-status; the completed result contains documents[] with, per page, markdown content (images replaced by uploaded copies), fontGroups, colors, images and logos. Charged per successfully extracted page.",
         "operationId": "extractWebpage_enterprise",
         "security": [
           {
@@ -3384,7 +3384,7 @@
           "extract-webpage"
         ],
         "summary": "Extract content, colors and fonts from up to 3 webpages",
-        "description": "Asynchronous: poll get-request-status; the completed result contains documents[] with markdown content, fontGroups and colors per page. Charged per successfully extracted page.",
+        "description": "Asynchronous: poll get-request-status; the completed result contains documents[] with, per page, markdown content (images replaced by uploaded copies), fontGroups, colors, images and logos. Charged per successfully extracted page.",
         "operationId": "extractWebpage_super",
         "security": [
           {
@@ -3472,7 +3472,6 @@
     "schemas": {
       "DesignsFromContentRequest": {
         "type": "object",
-        "additionalProperties": false,
         "required": [
           "documentJson"
         ],
@@ -3563,7 +3562,6 @@
       },
       "DesignsFromPromptRequest": {
         "type": "object",
-        "additionalProperties": false,
         "required": [
           "prompt"
         ],
@@ -3640,7 +3638,6 @@
       },
       "ContentFromPromptRequest": {
         "type": "object",
-        "additionalProperties": false,
         "required": [
           "prompt"
         ],
@@ -3819,7 +3816,6 @@
       },
       "ExtractWebpageRequest": {
         "type": "object",
-        "additionalProperties": false,
         "required": [
           "webpages"
         ],
@@ -3837,8 +3833,7 @@
       },
       "Media": {
         "type": "object",
-        "additionalProperties": false,
-        "description": "Provide exactly one of mId or url.",
+        "description": "Provide mId or url. Additional attributes (name, width, height, source, subType, ...) are accepted and ignored.",
         "properties": {
           "mId": {
             "type": "string",
@@ -3864,7 +3859,6 @@
           },
           "imagePreference": {
             "type": "object",
-            "additionalProperties": false,
             "properties": {
               "crop": {
                 "type": [
@@ -3926,7 +3920,6 @@
       },
       "FontGroup": {
         "type": "object",
-        "additionalProperties": false,
         "required": [
           "id",
           "type"
@@ -3964,8 +3957,7 @@
       },
       "Settings": {
         "type": "object",
-        "additionalProperties": false,
-        "description": "Preferences for the request. currentbId is required when mode is brand.",
+        "description": "Send only what you need; Sivi converts it to the full design settings. App-shaped preference objects are accepted. Fields Sivi does not use are ignored.",
         "properties": {
           "mode": {
             "type": "string",
@@ -3976,7 +3968,8 @@
             ]
           },
           "currentbId": {
-            "type": "string"
+            "type": "string",
+            "description": "Brand to take preferences, colors and fonts from when mode is brand"
           },
           "colors": {
             "type": "array",

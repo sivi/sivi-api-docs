@@ -163,6 +163,21 @@ Here's a comprehensive example showing how to use the brand persona parameters:
 
 <!-- "tones": ["playful", "maximal"] -->
 
+## How settings are applied
+
+Send only the fields you need. Sivi converts them into the full settings of the design; every field you leave out keeps its default. Fields Sivi does not use are ignored.
+
+| API field | Applied as |
+|---|---|
+| `colors` | Custom color palette. Hex codes and rgb()/rgba() strings are accepted and stored as hex. |
+| `fontGroups` | Custom fonts: one heading, one subHeading and one body font. |
+| `mode`, `currentbId` | Where preferences come from, see below. `currentbId` selects the brand. |
+| `theme`, `frameStyle`, `backdropStyle`, `focus`, `imageStyle` | Design style preferences. |
+| `designModel`, `genPrimaryImages` | Generation model and primary image generation. |
+| `numOfVariants` (request field) | Number of design variants. |
+
+`colors` and `fontGroups` can also be sent at the top level of the request; `settings` takes precedence.
+
 ## Mode and preferences
 
 - `auto`: Sivi chooses `theme`, `frameStyle`, `backdropStyle`, `focus` and `imageStyle` for the request.

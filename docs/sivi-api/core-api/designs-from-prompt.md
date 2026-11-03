@@ -159,7 +159,7 @@ requestId status can be queried or received as webhook updates [Coming Soon]. Re
 
 #### Invalid Input (422 Unprocessable Entity)
 
-Requests are validated strictly: unknown fields, wrong types and missing required fields are rejected. `message` summarises the first problem and `errors` lists every problem with the path of the offending field.
+Wrong types, missing required fields and invalid values are rejected before the request is queued. Fields Sivi does not use are ignored. `message` summarises the first problem and `errors` lists every problem with the path of the offending field.
 
 ```json
 {
@@ -174,15 +174,17 @@ Requests are validated strictly: unknown fields, wrong types and missing require
 }
 ```
 
-#### Request Not Allowed (422 Unprocessable Entity)
+#### Request Rejected During Screening (job status `failed`)
 
-Every request is screened before it is queued. Requests containing NSFW content, attempts to extract system instructions, or content unrelated to design creation are rejected immediately. No request is created and no credits are used.
+Every request is screened when it is processed, not when it is submitted. A request with NSFW content, an attempt to extract system instructions, or content unrelated to design creation is accepted with a `requestId` like any other request, and then fails. [Get Request Status](./get-request-status) returns `status: "failed"` with the `reason`. Only the screening itself is charged for a rejected request.
 
 ```json
 {
-  "status": 422,
+  "status": 200,
   "body": {
-    "message": "This request cannot be processed. Please provide a valid design request."
+    "status": "failed",
+    "requestId": "sbhMkIZKCPp",
+    "reason": "This request cannot be processed. Please provide a valid design request."
   }
 }
 ```
